@@ -8,4 +8,6 @@ public class City extends DatabaseItem {
 	private List<Hotel> hotels = null;
 	
 	
+	
+	
 }
