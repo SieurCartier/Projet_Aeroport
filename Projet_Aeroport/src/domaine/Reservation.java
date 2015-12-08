@@ -1,79 +1,91 @@
 package domaine;
 
-import java.util.*;
-
 public class Reservation extends DatabaseItem {
 
-	private Customer c;
-	private Flight f;
-	private List<HotelRoom> rooms;
+	private Customer customer;
+	private Flight flight;
+	private HotelRoom room;
 
-	public Reservation(Customer c, Flight f, List<HotelRoom> rooms) {
-		super();
-		this.c = c;
-		this.f = f;
-		this.rooms = rooms;
+	public Reservation(int id, Customer customer, Flight flight, HotelRoom room) {
+		super(id);
+		this.customer = customer;
+		this.flight = flight;
+		this.room = room;
 	}
 
-	public Customer getC() {
-		return c;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setC(Customer c) {
-		this.c = c;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Flight getF() {
-		return f;
+	public Flight getFlight() {
+		return flight;
 	}
 
-	public void setF(Flight f) {
-		this.f = f;
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 
-	public List<HotelRoom> getRooms() {
-		return rooms;
+	public HotelRoom getRoom() {
+		return room;
 	}
 
-	public void setRooms(List<HotelRoom> rooms) {
-		this.rooms = rooms;
+	public void setRoom(HotelRoom room) {
+		this.room = room;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((c == null) ? 0 : c.hashCode());
-		result = prime * result + ((f == null) ? 0 : f.hashCode());
-		result = prime * result + ((rooms == null) ? 0 : rooms.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((flight == null) ? 0 : flight.hashCode());
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Reservation)) {
 			return false;
+		}
 		Reservation other = (Reservation) obj;
-		if (c == null) {
-			if (other.c != null)
+		if (customer == null) {
+			if (other.customer != null) {
 				return false;
-		} else if (!c.equals(other.c))
+			}
+		} else if (!customer.equals(other.customer)) {
 			return false;
-		if (f == null) {
-			if (other.f != null)
+		}
+		if (flight == null) {
+			if (other.flight != null) {
 				return false;
-		} else if (!f.equals(other.f))
+			}
+		} else if (!flight.equals(other.flight)) {
 			return false;
-		if (rooms == null) {
-			if (other.rooms != null)
+		}
+		if (room == null) {
+			if (other.room != null) {
 				return false;
-		} else if (!rooms.equals(other.rooms))
+			}
+		} else if (!room.equals(other.room)) {
 			return false;
+		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return customer.toString() + " : " + flight.toString() + " " + room.toString();
 	}
 
 }

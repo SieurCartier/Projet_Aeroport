@@ -3,7 +3,9 @@ package fabrics;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 
+import domaine.City;
 import domaine.Hotel;
 import utils.InexistantHotelException;
 import utils.NotCreatedHotelException;
@@ -48,6 +50,8 @@ public class HotelFabric {
 
 			ret = new Hotel();
 			lesHotels.put(idHotel, ret);
+			pr.close();
+			newIdResult.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -73,6 +77,10 @@ public class HotelFabric {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public List<Hotel> getHotelsOf(City city) {
+		return null;
 	}
 
 }
