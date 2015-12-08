@@ -1,5 +1,5 @@
 package domaine;
 
-public class Line {
+public class Line extends DatabaseItem{
 
 }
