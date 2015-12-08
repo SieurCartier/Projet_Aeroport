@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import domaine.Category;
+import domaine.City;
 import domaine.Hotel;
 import domaine.HotelRoom;
 
@@ -23,11 +24,8 @@ public class CityFabric {
 		return singleton;
 	}
 
-	public List<HotelRoom> getRoomsOf(Hotel h) {
+	public City getCity(int id) {
 		return null;
 	}
 
-	public List<Category> getCategoriesOf(Hotel h) {
-		return null;
-	}
 }

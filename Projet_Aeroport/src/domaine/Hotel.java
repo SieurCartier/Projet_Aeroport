@@ -2,6 +2,8 @@ package domaine;
 
 import java.util.List;
 import fabrics.CityFabric;
+import fabrics.HotelFabric;
+import fabrics.HotelRoomFabric;
 
 public class Hotel extends DatabaseItem {
 
@@ -103,13 +105,13 @@ public class Hotel extends DatabaseItem {
 
 	public List<HotelRoom> getRooms() {
 		if (rooms == null)
-			rooms = CityFabric.getInstanceOf().getRoomsOf(this);
+			rooms = HotelRoomFabric.getInstanceOf().getRoomsOf(this);
 		return rooms;
 	}
 
 	public List<Category> getCategories() {
 		if (categories == null)
-			categories = CityFabric.getInstanceOf().getCategoriesOf(this);
+			categories = HotelFabric.getInstanceOf().getCategoriesOf(this);
 		return categories;
 	}
 
