@@ -1,12 +1,8 @@
 package fabrics;
 
 import java.util.HashMap;
-import java.util.List;
-
-import domaine.Category;
 import domaine.City;
 import domaine.Hotel;
-import domaine.HotelRoom;
 
 public class CityFabric {
 	private static CityFabric singleton = null;
@@ -24,7 +20,8 @@ public class CityFabric {
 		return singleton;
 	}
 
-	public City getCity(int id) {
+	public City getCityById(int idCity) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

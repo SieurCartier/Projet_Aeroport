@@ -10,7 +10,7 @@ public class HotelRoomFabric {
 	private static HotelRoomFabric singleton = null;
 	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
-	private HashMap<Hotel, HashMap<String, HotelRoom>> lesChambres = new HashMap<Hotel, HashMap<String, HotelRoom>>();
+	private HashMap<Hotel, List<HotelRoom>> lesChambres = new HashMap<Hotel, List<HotelRoom>>();
 
 	private HotelRoomFabric() {
 
@@ -22,7 +22,7 @@ public class HotelRoomFabric {
 		return singleton;
 	}
 
-	public HotelRoom createHotelRoom(Hotel ownerHotel, String roomNumber, Category cat) {
+	public HotelRoom createHotelRoom(String roomNumber, int idCategory, int idOwnerHotel) {
 		HotelRoom ret = null;
 
 		try {
@@ -32,8 +32,8 @@ public class HotelRoomFabric {
 			PreparedStatement pr = co.prepareStatement(requete);
 
 			pr.setString(1, roomNumber);
-			pr.setInt(2, cat.getId());
-			pr.setInt(3, ownerHotel.getId());
+			pr.setInt(2, idCategory);
+			pr.setInt(3, idOwnerHotel);
 
 			pr.executeUpdate();
 			ResultSet newIdResult = pr.getGeneratedKeys();
@@ -42,8 +42,8 @@ public class HotelRoomFabric {
 
 			idHotelRoom = newIdResult.getInt(1);
 
-			ret = new HotelRoom(idHotelRoom, ownerHotel, roomNumber, cat);
-			lesChambres.get(ownerHotel).put(roomNumber, ret);
+			ret = new HotelRoom(idHotelRoom, roomNumber, idCategory, idOwnerHotel);
+			lesChambres.get(HotelFabric.getInstanceOf().getHotelById(idOwnerHotel)).add(ret);
 			pr.close();
 			newIdResult.close();
 		} catch (Exception e) {
@@ -75,15 +75,15 @@ public class HotelRoomFabric {
 
 			pr.setInt(1, h.getId());
 
-			lesChambres.put(h, new HashMap<String, HotelRoom>());
+			lesChambres.put(h, new LinkedList<HotelRoom>());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public HashMap<String, HotelRoom> getRoomsOf(Hotel hotel) {
+	public List<HotelRoom> getRoomsOf(Hotel hotel) {
 		if (!lesChambres.containsKey(hotel)) {
-			lesChambres.put(hotel, new HashMap<String, HotelRoom>());
+			lesChambres.put(hotel, new LinkedList<HotelRoom>());
 			try {
 				String requete = "SELECT * " + "FROM HotelRoom " + "WHERE fk_idHotel = ?";
 				PreparedStatement pr = co.prepareStatement(requete);
@@ -91,8 +91,8 @@ public class HotelRoomFabric {
 				ResultSet rooms = pr.executeQuery();
 
 				while (rooms.next()) {
-					lesChambres.get(hotel).put(rooms.getString("roomNumber"), new HotelRoom(rooms.getInt("idHotelRoom"), rooms.getString("roomNumber"), rooms.getInt("ResiliationDayNumber")));
-
+					lesChambres.get(hotel).add(new HotelRoom(rooms.getInt("idHotelRoom"), rooms.getString("roomNumber"),
+							rooms.getInt("idCategory"), rooms.getInt("idHotel")));
 				}
 				pr.close();
 				rooms.close();
@@ -102,6 +102,11 @@ public class HotelRoomFabric {
 		}
 
 		return lesChambres.get(hotel);
+	}
+
+	public HotelRoom getHotelRoomById(int idFlight) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

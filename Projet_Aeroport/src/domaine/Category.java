@@ -1,16 +1,60 @@
 package domaine;
 
+import fabrics.HotelFabric;
+
 public class Category extends DatabaseItem {
 
 	private String name;
 	private int capacity;
 	private float price;
+	private int idOwnerHotel;
+	private Hotel ownerHotel = null;
 
-	public Category(int id, String name, int capacity, float price) {
+	public Category(int id, String name, int capacity, float price, int idOwnerHotel) {
 		super(id);
 		this.name = name;
 		this.capacity = capacity;
 		this.price = price;
+		this.idOwnerHotel = idOwnerHotel;
+	}
+
+	public Category(int id, String name, int capacity, float price, Hotel ownerHotel) {
+		super(id);
+		this.name = name;
+		this.capacity = capacity;
+		this.price = price;
+		this.idOwnerHotel = ownerHotel.getId();
+		this.ownerHotel = ownerHotel;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public Hotel getOwnerHotel() {
+		if (ownerHotel == null)
+			ownerHotel = HotelFabric.getInstanceOf().getHotelById(idOwnerHotel);
+		return ownerHotel;
 	}
 
 	@Override

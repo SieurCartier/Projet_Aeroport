@@ -1,61 +1,51 @@
 package domaine;
 
+import fabrics.CategoryFabric;
+import fabrics.HotelFabric;
+
 public class HotelRoom extends DatabaseItem {
 
-	private Hotel ownerHotel;
 	private String roomNumber;
-	private Category cat;
+	private int idCategory;
+	private Category cat = null;
+	private int idOwnerHotel;
+	private Hotel ownerHotel = null;
 
-	public HotelRoom(int id, Hotel ownerHotel, String roomNumber, Category cat) {
+	public HotelRoom(int id, String roomNumber, int idCategory, int idOwnerHotel) {
 		super(id);
-		this.ownerHotel = ownerHotel;
 		this.roomNumber = roomNumber;
-		this.cat = cat;
+		this.idCategory = idCategory;
+		this.idOwnerHotel = idOwnerHotel;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((cat == null) ? 0 : cat.hashCode());
-		result = prime * result + ((ownerHotel == null) ? 0 : ownerHotel.hashCode());
+		result = prime * result + idCategory;
+		result = prime * result + idOwnerHotel;
 		result = prime * result + ((roomNumber == null) ? 0 : roomNumber.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof HotelRoom)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		HotelRoom other = (HotelRoom) obj;
-		if (cat == null) {
-			if (other.cat != null) {
-				return false;
-			}
-		} else if (!cat.equals(other.cat)) {
+		if (idCategory != other.idCategory)
 			return false;
-		}
-		if (ownerHotel == null) {
-			if (other.ownerHotel != null) {
-				return false;
-			}
-		} else if (!ownerHotel.equals(other.ownerHotel)) {
+		if (idOwnerHotel != other.idOwnerHotel)
 			return false;
-		}
 		if (roomNumber == null) {
-			if (other.roomNumber != null) {
+			if (other.roomNumber != null)
 				return false;
-			}
-		} else if (!roomNumber.equals(other.roomNumber)) {
+		} else if (!roomNumber.equals(other.roomNumber))
 			return false;
-		}
 		return true;
 	}
 
@@ -68,6 +58,8 @@ public class HotelRoom extends DatabaseItem {
 	}
 
 	public Category getCat() {
+		if (cat == null)
+			cat = CategoryFabric.getInstanceOf().getCategoryById(idCategory);
 		return cat;
 	}
 
@@ -76,6 +68,8 @@ public class HotelRoom extends DatabaseItem {
 	}
 
 	public Hotel getOwnerHotel() {
+		if (ownerHotel == null)
+			ownerHotel = HotelFabric.getInstanceOf().getHotelById(idOwnerHotel);
 		return ownerHotel;
 	}
 

@@ -1,9 +1,16 @@
 package domaine;
 
+import fabrics.CustomerFabric;
+import fabrics.FlightFabric;
+import fabrics.HotelRoomFabric;
+
 public class Reservation extends DatabaseItem {
 
+	private int idCustomer;
 	private Customer customer;
+	private int idFlight;
 	private Flight flight;
+	private int idHotelRoom;
 	private HotelRoom room;
 
 	public Reservation(int id, Customer customer, Flight flight, HotelRoom room) {
@@ -13,7 +20,16 @@ public class Reservation extends DatabaseItem {
 		this.room = room;
 	}
 
+	public Reservation(int id, int idCustomer, int idFlight, int idHotelRoom) {
+		super(id);
+		this.idCustomer = idCustomer;
+		this.idFlight = idFlight;
+		this.idHotelRoom = idHotelRoom;
+	}
+
 	public Customer getCustomer() {
+		if (customer == null)
+			customer = CustomerFabric.getInstanceOf().getCustomerById(idCustomer);
 		return customer;
 	}
 
@@ -22,6 +38,8 @@ public class Reservation extends DatabaseItem {
 	}
 
 	public Flight getFlight() {
+		if (flight == null)
+			flight = FlightFabric.getInstanceOf().getFlightById(idFlight);
 		return flight;
 	}
 
@@ -30,6 +48,8 @@ public class Reservation extends DatabaseItem {
 	}
 
 	public HotelRoom getRoom() {
+		if (room == null)
+			room = HotelRoomFabric.getInstanceOf().getHotelRoomById(idFlight);
 		return room;
 	}
 
@@ -41,45 +61,27 @@ public class Reservation extends DatabaseItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + ((flight == null) ? 0 : flight.hashCode());
-		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + idCustomer;
+		result = prime * result + idFlight;
+		result = prime * result + idHotelRoom;
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof Reservation)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Reservation other = (Reservation) obj;
-		if (customer == null) {
-			if (other.customer != null) {
-				return false;
-			}
-		} else if (!customer.equals(other.customer)) {
+		if (idCustomer != other.idCustomer)
 			return false;
-		}
-		if (flight == null) {
-			if (other.flight != null) {
-				return false;
-			}
-		} else if (!flight.equals(other.flight)) {
+		if (idFlight != other.idFlight)
 			return false;
-		}
-		if (room == null) {
-			if (other.room != null) {
-				return false;
-			}
-		} else if (!room.equals(other.room)) {
+		if (idHotelRoom != other.idHotelRoom)
 			return false;
-		}
 		return true;
 	}
 
