@@ -1,6 +1,7 @@
 package fabrics;
 
-import java.util.HashMap;
+import java.util.WeakHashMap;
+
 import domaine.City;
 import domaine.Hotel;
 
@@ -8,7 +9,7 @@ public class CityFabric {
 	private static CityFabric singleton = null;
 	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
-	private HashMap<Integer, Hotel> lesVilles = new HashMap<Integer, Hotel>();
+	private WeakHashMap<Integer, Hotel> lesVilles = new WeakHashMap<Integer, Hotel>();
 
 	private CityFabric() {
 

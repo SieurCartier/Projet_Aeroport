@@ -10,7 +10,7 @@ public class HotelRoomFabric {
 	private static HotelRoomFabric singleton = null;
 	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
-	private HashMap<Hotel, List<HotelRoom>> lesChambres = new HashMap<Hotel, List<HotelRoom>>();
+	private WeakHashMap<Hotel, List<HotelRoom>> lesChambres = new WeakHashMap<Hotel, List<HotelRoom>>();
 
 	private HotelRoomFabric() {
 

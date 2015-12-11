@@ -65,7 +65,7 @@ public class HotelFabric {
 			if (pr.executeUpdate() != 1)
 				throw new InexistantHotelException();
 
-			remove(h);
+			lesHotels.remove(h);
 			pr.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -75,6 +75,7 @@ public class HotelFabric {
 	public List<Hotel> getHotelsOf(City city) {
 		List<Hotel> ret = null;
 		try {
+			ret = new LinkedList<Hotel>();
 			String requete = "SELECT * " + "FROM Hotel " + "WHERE fk_idVille = ?";
 			PreparedStatement pr = co.prepareStatement(requete);
 			pr.setInt(1, city.getId());
@@ -114,11 +115,6 @@ public class HotelFabric {
 			}
 		}
 		return lesHotels.get(idHotel);
-	}
-
-	private void remove(Hotel h) {
-		lesHotels.remove(h);
-		hotelsByCity.get(h.getCity()).remove(h);
 	}
 
 }

@@ -1,10 +1,8 @@
 package domaine;
 
 import java.util.List;
-
 import fabrics.CategoryFabric;
 import fabrics.CityFabric;
-import fabrics.HotelFabric;
 import fabrics.HotelRoomFabric;
 
 public class Hotel extends DatabaseItem {
