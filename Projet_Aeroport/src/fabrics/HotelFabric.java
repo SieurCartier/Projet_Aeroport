@@ -5,15 +5,12 @@ import java.util.*;
 import domaine.*;
 import utils.*;
 
-public class HotelFabric {
+public class HotelFabric extends GenericFabric<Hotel> {
 
 	private static HotelFabric singleton = null;
-	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
-	private WeakHashMap<Integer, Hotel> lesHotels = new WeakHashMap<Integer, Hotel>();
-
-	private HotelFabric() {
-
+	public HotelFabric() {
+		super("Hotel", "idHotel");
 	}
 
 	public static HotelFabric getInstanceOf() {
@@ -23,9 +20,7 @@ public class HotelFabric {
 	}
 
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
-
 		Hotel ret = null;
-
 		try {
 			String requete = "INSERT INTO Hotel " + "VALUES (?, ?, ?)";
 
@@ -44,7 +39,7 @@ public class HotelFabric {
 			idHotel = newIdResult.getInt(1);
 
 			ret = new Hotel(idHotel, name, reservationDayNumber, c);
-			lesHotels.put(ret.getId(), ret);
+			objects.put(ret.getId(), ret);
 			pr.close();
 			newIdResult.close();
 		} catch (Exception e) {
@@ -53,23 +48,10 @@ public class HotelFabric {
 		return ret;
 	}
 
-	public void deleteHotel(Hotel h) {
-		try {
-			HotelRoomFabric.getInstanceOf().deleteAllRooms(h);
-
-			String requete = "DELETE FROM Hotel WHERE idHotel =?";
-			PreparedStatement pr = co.prepareStatement(requete);
-
-			pr.setInt(1, h.getId());
-
-			if (pr.executeUpdate() != 1)
-				throw new InexistantHotelException();
-
-			lesHotels.remove(h);
-			pr.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	@Override
+	public void delete(Hotel h) {
+		HotelRoomFabric.getInstanceOf().deleteAllRooms(h);
+		super.delete(h);
 	}
 
 	public List<Hotel> getHotelsOf(City city) {
@@ -84,8 +66,8 @@ public class HotelFabric {
 			while (hotels.next()) {
 				Hotel temp = new Hotel(hotels.getInt("idHotel"), hotels.getString("Name"),
 						hotels.getInt("ResiliationDayNumber"), city);
-				if (!lesHotels.containsKey(temp.getId()))
-					lesHotels.put(temp.getId(), temp);
+				if (!objects.containsKey(temp.getId()))
+					objects.put(temp.getId(), temp);
 				ret.add(temp);
 			}
 			pr.close();
@@ -96,25 +78,22 @@ public class HotelFabric {
 		return ret;
 	}
 
-	public Hotel getHotelById(int idHotel) {
-		if (!lesHotels.containsKey(idHotel)) {
-			try {
-				String requete = "SELECT * " + "FROM Hotel " + "WHERE idHotel = ?";
-				PreparedStatement pr = co.prepareStatement(requete);
-				pr.setInt(1, idHotel);
-				ResultSet hotel = pr.executeQuery();
+	@Override
+	public void SQLquerryById(int id) {
+		try {
+			String requete = "SELECT * " + "FROM Hotel " + "WHERE idHotel = ?";
+			PreparedStatement pr = co.prepareStatement(requete);
+			pr.setInt(1, id);
+			ResultSet hotel = pr.executeQuery();
 
-				if (hotel.next()) {
-					lesHotels.put(hotel.getInt("idHotel"), new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"),
-							hotel.getInt("ResiliationDayNumber"), hotel.getInt("idCity")));
-				}
-				pr.close();
-				hotel.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+			if (hotel.next()) {
+				objects.put(hotel.getInt("idHotel"), new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"),
+						hotel.getInt("ResiliationDayNumber"), hotel.getInt("idCity")));
 			}
+			pr.close();
+			hotel.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		return lesHotels.get(idHotel);
 	}
-
 }

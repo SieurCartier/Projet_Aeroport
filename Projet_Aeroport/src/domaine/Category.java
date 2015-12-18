@@ -53,7 +53,7 @@ public class Category extends DatabaseItem {
 
 	public Hotel getOwnerHotel() {
 		if (ownerHotel == null)
-			ownerHotel = HotelFabric.getInstanceOf().getHotelById(idOwnerHotel);
+			ownerHotel = HotelFabric.getInstanceOf().getById(idOwnerHotel);
 		return ownerHotel;
 	}
 

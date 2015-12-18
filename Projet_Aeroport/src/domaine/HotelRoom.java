@@ -59,7 +59,7 @@ public class HotelRoom extends DatabaseItem {
 
 	public Category getCat() {
 		if (cat == null)
-			cat = CategoryFabric.getInstanceOf().getCategoryById(idCategory);
+			cat = CategoryFabric.getInstanceOf().getById(idCategory);
 		return cat;
 	}
 
@@ -69,7 +69,7 @@ public class HotelRoom extends DatabaseItem {
 
 	public Hotel getOwnerHotel() {
 		if (ownerHotel == null)
-			ownerHotel = HotelFabric.getInstanceOf().getHotelById(idOwnerHotel);
+			ownerHotel = HotelFabric.getInstanceOf().getById(idOwnerHotel);
 		return ownerHotel;
 	}
 

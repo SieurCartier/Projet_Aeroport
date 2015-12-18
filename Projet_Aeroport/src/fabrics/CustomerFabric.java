@@ -2,16 +2,24 @@ package fabrics;
 
 import domaine.Customer;
 
-public class CustomerFabric {
+public class CustomerFabric extends GenericFabric<Customer> {
 
-	public static CustomerFabric getInstanceOf() {
-		// TODO Auto-generated method stub
-		return null;
+	private static CustomerFabric singleton = null;
+
+	public CustomerFabric() {
+		super("", "");
 	}
 
-	public Customer getCustomerById(int idCustomer) {
+	public static CustomerFabric getInstanceOf() {
+		if (singleton == null)
+			singleton = new CustomerFabric();
+		return singleton;
+	}
+
+	@Override
+	public void SQLquerryById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 }

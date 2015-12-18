@@ -1,18 +1,15 @@
 package fabrics;
 
-import java.util.WeakHashMap;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import domaine.City;
-import domaine.Hotel;
 
-public class CityFabric {
+public class CityFabric extends GenericFabric<City> {
+
 	private static CityFabric singleton = null;
-	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
-	private WeakHashMap<Integer, Hotel> lesVilles = new WeakHashMap<Integer, Hotel>();
-
-	private CityFabric() {
-
+	public CityFabric() {
+		super("City", "idVille");
 	}
 
 	public static CityFabric getInstanceOf() {
@@ -21,9 +18,23 @@ public class CityFabric {
 		return singleton;
 	}
 
-	public City getCityById(int idCity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public void SQLquerryById(int id) {
+		try {
+			String requete = "SELECT * " + "FROM City " + "WHERE idVille = ?";
+			PreparedStatement pr = co.prepareStatement(requete);
+			pr.setInt(1, id);
+			ResultSet city = pr.executeQuery();
+
+			if (city.next()) {
+				City temp = new City(city.getInt("idVille"), city.getString("name"));
+				objects.put(id, temp);
+			}
+			pr.close();
+			city.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

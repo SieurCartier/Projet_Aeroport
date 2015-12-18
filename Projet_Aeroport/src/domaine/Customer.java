@@ -58,7 +58,7 @@ public class Customer extends DatabaseItem {
 
 	public City getCity() {
 		if (city == null)
-			city = CityFabric.getInstanceOf().getCityById(idCity);
+			city = CityFabric.getInstanceOf().getById(idCity);
 		return city;
 	}
 

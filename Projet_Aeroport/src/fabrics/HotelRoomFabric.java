@@ -43,7 +43,7 @@ public class HotelRoomFabric {
 			idHotelRoom = newIdResult.getInt(1);
 
 			ret = new HotelRoom(idHotelRoom, roomNumber, idCategory, idOwnerHotel);
-			lesChambres.get(HotelFabric.getInstanceOf().getHotelById(idOwnerHotel)).add(ret);
+			lesChambres.get(HotelFabric.getInstanceOf().getById(idOwnerHotel)).add(ret);
 			pr.close();
 			newIdResult.close();
 		} catch (Exception e) {

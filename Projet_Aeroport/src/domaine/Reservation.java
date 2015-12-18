@@ -29,7 +29,7 @@ public class Reservation extends DatabaseItem {
 
 	public Customer getCustomer() {
 		if (customer == null)
-			customer = CustomerFabric.getInstanceOf().getCustomerById(idCustomer);
+			customer = CustomerFabric.getInstanceOf().getById(idCustomer);
 		return customer;
 	}
 
@@ -39,7 +39,7 @@ public class Reservation extends DatabaseItem {
 
 	public Flight getFlight() {
 		if (flight == null)
-			flight = FlightFabric.getInstanceOf().getFlightById(idFlight);
+			flight = FlightFabric.getInstanceOf().getById(idFlight);
 		return flight;
 	}
 
