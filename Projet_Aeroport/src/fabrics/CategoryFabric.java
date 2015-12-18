@@ -1,13 +1,10 @@
 package fabrics;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.LinkedList;
-import java.util.List;
-import domaine.Category;
-import domaine.Hotel;
+import java.sql.*;
+import java.util.*;
+import domaine.*;
 
-public class CategoryFabric extends GenericFabric<Category> {
+public class CategoryFabric extends AbstractFabric<Category> {
 
 	private static CategoryFabric singleton = null;
 
@@ -19,6 +16,12 @@ public class CategoryFabric extends GenericFabric<Category> {
 		if (singleton == null)
 			singleton = new CategoryFabric();
 		return singleton;
+	}
+
+	@Override
+	protected Category constructObject(ResultSet categ) throws SQLException {
+		return new Category(categ.getInt("idCategorie"), categ.getString("name"), categ.getInt("capacity"),
+				categ.getFloat("price"), categ.getInt("fk_idHotel"));
 	}
 
 	public List<Category> getCategoriesOf(Hotel hotel) {
@@ -44,25 +47,4 @@ public class CategoryFabric extends GenericFabric<Category> {
 		}
 		return ret;
 	}
-
-	@Override
-	public void SQLquerryById(int id) {
-		try {
-			String requete = "SELECT * " + "FROM Categorie " + "WHERE idCategorie = ?";
-			PreparedStatement pr = co.prepareStatement(requete);
-			pr.setInt(1, id);
-			ResultSet categ = pr.executeQuery();
-
-			if (categ.next()) {
-				Category temp = new Category(categ.getInt("idCategorie"), categ.getString("name"),
-						categ.getInt("capacity"), categ.getFloat("price"), categ.getInt("fk_idHotel"));
-				objects.put(id, temp);
-			}
-			pr.close();
-			categ.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
 }

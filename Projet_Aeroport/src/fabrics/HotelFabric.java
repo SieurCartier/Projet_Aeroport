@@ -5,9 +5,11 @@ import java.util.*;
 import domaine.*;
 import utils.*;
 
-public class HotelFabric extends GenericFabric<Hotel> {
+public class HotelFabric extends AbstractFabric<Hotel> {
 
 	private static HotelFabric singleton = null;
+
+	private WeakHashMap<City, List<Hotel>> lesHotels = new WeakHashMap<City, List<Hotel>>();
 
 	public HotelFabric() {
 		super("Hotel", "idHotel");
@@ -17,6 +19,34 @@ public class HotelFabric extends GenericFabric<Hotel> {
 		if (singleton == null)
 			singleton = new HotelFabric();
 		return singleton;
+	}
+
+	@Override
+	protected Hotel constructObject(ResultSet hotel) throws SQLException {
+		return new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"), hotel.getInt("ResiliationDayNumber"),
+				hotel.getInt("idCity"));
+	}
+
+	@Override
+	public void delete(Hotel h) {
+		HotelRoomFabric.getInstanceOf().deleteAllRooms(h);
+		super.delete(h);
+	}
+
+	@Override
+	protected void addItem(Hotel h) {
+		super.addItem(h);
+		if (!lesHotels.containsKey(h.getCity()))
+			lesHotels.put(h.getCity(), new LinkedList<Hotel>());
+
+		lesHotels.get(h.getCity()).add(h);
+	}
+
+	@Override
+	protected void removeItem(Hotel h) {
+		super.removeItem(h);
+		if (lesHotels.containsKey(h.getCity()))
+			lesHotels.get(h.getCity()).remove(h);
 	}
 
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
@@ -39,7 +69,7 @@ public class HotelFabric extends GenericFabric<Hotel> {
 			idHotel = newIdResult.getInt(1);
 
 			ret = new Hotel(idHotel, name, reservationDayNumber, c);
-			objects.put(ret.getId(), ret);
+			addItem(ret);
 			pr.close();
 			newIdResult.close();
 		} catch (Exception e) {
@@ -48,52 +78,24 @@ public class HotelFabric extends GenericFabric<Hotel> {
 		return ret;
 	}
 
-	@Override
-	public void delete(Hotel h) {
-		HotelRoomFabric.getInstanceOf().deleteAllRooms(h);
-		super.delete(h);
-	}
-
 	public List<Hotel> getHotelsOf(City city) {
-		List<Hotel> ret = null;
-		try {
-			ret = new LinkedList<Hotel>();
-			String requete = "SELECT * " + "FROM Hotel " + "WHERE fk_idVille = ?";
-			PreparedStatement pr = co.prepareStatement(requete);
-			pr.setInt(1, city.getId());
-			ResultSet hotels = pr.executeQuery();
+		if (!lesHotels.containsKey(city)) {
+			try {
+				String requete = "SELECT * " + "FROM Hotel " + "WHERE fk_idVille = ?";
+				PreparedStatement pr = co.prepareStatement(requete);
+				pr.setInt(1, city.getId());
+				ResultSet hotels = pr.executeQuery();
 
-			while (hotels.next()) {
-				Hotel temp = new Hotel(hotels.getInt("idHotel"), hotels.getString("Name"),
-						hotels.getInt("ResiliationDayNumber"), city);
-				if (!objects.containsKey(temp.getId()))
-					objects.put(temp.getId(), temp);
-				ret.add(temp);
+				while (hotels.next()) {
+					addItem(constructObject(hotels));
+				}
+				pr.close();
+				hotels.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-			pr.close();
-			hotels.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
-		return ret;
+		return lesHotels.get(city);
 	}
 
-	@Override
-	public void SQLquerryById(int id) {
-		try {
-			String requete = "SELECT * " + "FROM Hotel " + "WHERE idHotel = ?";
-			PreparedStatement pr = co.prepareStatement(requete);
-			pr.setInt(1, id);
-			ResultSet hotel = pr.executeQuery();
-
-			if (hotel.next()) {
-				objects.put(hotel.getInt("idHotel"), new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"),
-						hotel.getInt("ResiliationDayNumber"), hotel.getInt("idCity")));
-			}
-			pr.close();
-			hotel.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
 }

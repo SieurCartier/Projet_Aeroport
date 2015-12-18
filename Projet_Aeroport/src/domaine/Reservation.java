@@ -49,7 +49,7 @@ public class Reservation extends DatabaseItem {
 
 	public HotelRoom getRoom() {
 		if (room == null)
-			room = HotelRoomFabric.getInstanceOf().getHotelRoomById(idFlight);
+			room = HotelRoomFabric.getInstanceOf().getById(idFlight);
 		return room;
 	}
 

@@ -1,8 +1,10 @@
 package fabrics;
 
+import java.sql.*;
+
 import domaine.Flight;
 
-public class FlightFabric extends GenericFabric<Flight> {
+public class FlightFabric extends AbstractFabric<Flight> {
 
 	private static FlightFabric singleton = null;
 
@@ -17,9 +19,10 @@ public class FlightFabric extends GenericFabric<Flight> {
 	}
 
 	@Override
-	public void SQLquerryById(int id) {
-		// TODO Auto-generated method stub
-
+	protected Flight constructObject(ResultSet flight) throws SQLException {
+		return new Flight(flight.getInt(""), flight.getInt(""), flight.getInt(""), flight.getDate(""),
+				flight.getDate(""), flight.getInt(""), flight.getFloat(""), flight.getInt(""), flight.getFloat(""),
+				flight.getInt(""));
 	}
 
 }

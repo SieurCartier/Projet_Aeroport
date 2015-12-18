@@ -3,10 +3,14 @@ package domaine;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import fabrics.CityFabric;
+
 public class Flight extends DatabaseItem {
 
-	private City departure;
-	private City arrival;
+	private int idDeparture;
+	private City departure = null;
+	private int idArrival;
+	private City arrival = null;
 	private Date departureDate;
 	private Date arrivalDate;
 	private Timestamp flightDuration;
@@ -19,7 +23,9 @@ public class Flight extends DatabaseItem {
 	public Flight(int id, City departure, City arrival, Date departureDate, Date arrivalDate, int nbFirstClassSits,
 			float priceFirstClassSits, int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
 		super(id);
+		this.idDeparture = departure.getId();
 		this.departure = departure;
+		this.idArrival = arrival.getId();
 		this.arrival = arrival;
 		this.departureDate = departureDate;
 		this.arrivalDate = arrivalDate;
@@ -31,7 +37,23 @@ public class Flight extends DatabaseItem {
 		updateDuration();
 	}
 
+	public Flight(int id, int idDeparture, int idArrival, Date departureDate, Date arrivalDate, int nbFirstClassSits,
+			float priceFirstClassSits, int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
+		super(id);
+		this.idDeparture = idDeparture;
+		this.idArrival = idArrival;
+		this.departureDate = departureDate;
+		this.arrivalDate = arrivalDate;
+		this.nbFirstClassSits = nbFirstClassSits;
+		this.priceFirstClassSits = priceFirstClassSits;
+		this.nbSecondClassSits = nbSecondClassSits;
+		this.priceSecondClassSits = priceSecondClassSits;
+		this.nbDayCancelling = nbDayCancelling;
+	}
+
 	public City getDeparture() {
+		if (departure == null)
+			departure = CityFabric.getInstanceOf().getById(idDeparture);
 		return departure;
 	}
 
@@ -40,6 +62,8 @@ public class Flight extends DatabaseItem {
 	}
 
 	public City getArrival() {
+		if (arrival == null)
+			arrival = CityFabric.getInstanceOf().getById(idArrival);
 		return arrival;
 	}
 
@@ -109,15 +133,23 @@ public class Flight extends DatabaseItem {
 		this.nbDayCancelling = nbDayCancelling;
 	}
 
+	public int getIdDeparture() {
+		return idDeparture;
+	}
+
+	public int getIdArrival() {
+		return idArrival;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((arrival == null) ? 0 : arrival.hashCode());
+		int result = super.hashCode();
 		result = prime * result + ((arrivalDate == null) ? 0 : arrivalDate.hashCode());
-		result = prime * result + ((departure == null) ? 0 : departure.hashCode());
 		result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
 		result = prime * result + ((flightDuration == null) ? 0 : flightDuration.hashCode());
+		result = prime * result + idArrival;
+		result = prime * result + idDeparture;
 		result = prime * result + nbDayCancelling;
 		result = prime * result + nbFirstClassSits;
 		result = prime * result + nbSecondClassSits;
@@ -128,66 +160,42 @@ public class Flight extends DatabaseItem {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof Flight)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Flight other = (Flight) obj;
-		if (arrival == null) {
-			if (other.arrival != null) {
-				return false;
-			}
-		} else if (!arrival.equals(other.arrival)) {
-			return false;
-		}
 		if (arrivalDate == null) {
-			if (other.arrivalDate != null) {
+			if (other.arrivalDate != null)
 				return false;
-			}
-		} else if (!arrivalDate.equals(other.arrivalDate)) {
+		} else if (!arrivalDate.equals(other.arrivalDate))
 			return false;
-		}
-		if (departure == null) {
-			if (other.departure != null) {
-				return false;
-			}
-		} else if (!departure.equals(other.departure)) {
-			return false;
-		}
 		if (departureDate == null) {
-			if (other.departureDate != null) {
+			if (other.departureDate != null)
 				return false;
-			}
-		} else if (!departureDate.equals(other.departureDate)) {
+		} else if (!departureDate.equals(other.departureDate))
 			return false;
-		}
 		if (flightDuration == null) {
-			if (other.flightDuration != null) {
+			if (other.flightDuration != null)
 				return false;
-			}
-		} else if (!flightDuration.equals(other.flightDuration)) {
+		} else if (!flightDuration.equals(other.flightDuration))
 			return false;
-		}
-		if (nbDayCancelling != other.nbDayCancelling) {
+		if (idArrival != other.idArrival)
 			return false;
-		}
-		if (nbFirstClassSits != other.nbFirstClassSits) {
+		if (idDeparture != other.idDeparture)
 			return false;
-		}
-		if (nbSecondClassSits != other.nbSecondClassSits) {
+		if (nbDayCancelling != other.nbDayCancelling)
 			return false;
-		}
-		if (Float.floatToIntBits(priceFirstClassSits) != Float.floatToIntBits(other.priceFirstClassSits)) {
+		if (nbFirstClassSits != other.nbFirstClassSits)
 			return false;
-		}
-		if (Float.floatToIntBits(priceSecondClassSits) != Float.floatToIntBits(other.priceSecondClassSits)) {
+		if (nbSecondClassSits != other.nbSecondClassSits)
 			return false;
-		}
+		if (Float.floatToIntBits(priceFirstClassSits) != Float.floatToIntBits(other.priceFirstClassSits))
+			return false;
+		if (Float.floatToIntBits(priceSecondClassSits) != Float.floatToIntBits(other.priceSecondClassSits))
+			return false;
 		return true;
 	}
 
