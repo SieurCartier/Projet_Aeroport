@@ -10,7 +10,7 @@ public class FlightFabric extends AbstractFabric<Flight> {
 	private static FlightFabric singleton = null;
 
 	public FlightFabric() {
-		super("", "");
+		super("flight", "idFlight");
 	}
 
 	public static FlightFabric getInstanceOf() {
@@ -21,9 +21,10 @@ public class FlightFabric extends AbstractFabric<Flight> {
 
 	@Override
 	protected Flight constructObject(ResultSet flight) throws SQLException {
-		return new Flight(flight.getInt(""), flight.getInt(""), flight.getInt(""), flight.getDate(""),
-				flight.getDate(""), flight.getInt(""), flight.getFloat(""), flight.getInt(""), flight.getFloat(""),
-				flight.getInt(""));
+		return new Flight(flight.getInt("idFlight"), flight.getInt("departure"), flight.getInt("arrival"),
+				flight.getDate("departureDate"), flight.getDate("arrivalDate"), flight.getInt("nbFirstClassSits"),
+				flight.getFloat("priceFirstClassSits"), flight.getInt("nbSecondClassSits"),
+				flight.getFloat("priceSecondClassSits"), flight.getInt("nbDayCancelling"));
 	}
 
 	@Override
