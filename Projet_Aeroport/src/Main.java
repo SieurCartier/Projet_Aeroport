@@ -17,5 +17,11 @@ public class Main {
 		HotelRoom hr = HotelRoomFabric.getInstanceOf().createHotelRoom("B604", cat, h);
 		Customer cus = CustomerFabric.getInstanceOf().createCustomer("gaston", "lemaire", new Date(), c);
 
+		System.out.println(c);
+		System.out.println(h);
+		System.out.println(cat);
+		System.out.println(hr);
+		System.out.println(cus);
+
 	}
 }

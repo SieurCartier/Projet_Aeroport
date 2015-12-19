@@ -64,7 +64,7 @@ public class Customer extends DatabaseItem {
 
 	public List<Reservation> getReservations() {
 		if (reservations == null)
-			reservations = ReservationFabric.getInstanceOf().getReservationsByCustomerId(this.getId());
+			reservations = ReservationFabric.getInstanceOf().getReservationsByCustomerId(getId());
 		return reservations;
 	}
 
@@ -113,4 +113,8 @@ public class Customer extends DatabaseItem {
 		return new Date(new Date().getTime() - birthdate.getTime()).getYear();
 	}
 
+	@Override
+	public String toString() {
+		return lastname + " " + firstname;
+	}
 }
