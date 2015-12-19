@@ -7,6 +7,14 @@ import utils.*;
 
 public class HotelFabric extends AbstractFabric<Hotel> {
 
+	private enum ColumnNames {
+		name, resilationDayNumber, fk_idCity
+	}
+
+	private static final int NAME = ColumnNames.name.ordinal();
+	private static final int RESIALIATION_DAY_NUMBER = ColumnNames.resilationDayNumber.ordinal();
+	private static final int FK_ID_CITY = ColumnNames.fk_idCity.ordinal();
+
 	private static HotelFabric singleton = null;
 
 	private WeakHashMap<City, List<Hotel>> lesHotels = new WeakHashMap<City, List<Hotel>>();
@@ -25,6 +33,11 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	protected Hotel constructObject(ResultSet hotel) throws SQLException {
 		return new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"), hotel.getInt("ResiliationDayNumber"),
 				hotel.getInt("idCity"));
+	}
+
+	@Override
+	protected Hotel constructObject(int id, Object[] m) {
+		return new Hotel(id, (String) m[NAME], (int) m[RESIALIATION_DAY_NUMBER], (int) m[FK_ID_CITY]);
 	}
 
 	@Override
@@ -50,32 +63,13 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	}
 
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
-		Hotel ret = null;
-		try {
-			String requete = "INSERT INTO Hotel " + "VALUES (?, ?, ?)";
 
-			int idHotel;
-			PreparedStatement pr = co.prepareStatement(requete);
+		List<Object> parameters = new ArrayList<Object>();
+		parameters.add(name);
+		parameters.add(new Integer(reservationDayNumber));
+		parameters.add(new Integer(c.getId()));
 
-			pr.setInt(1, c.getId());
-			pr.setString(2, name);
-			pr.setInt(3, reservationDayNumber);
-
-			pr.executeUpdate();
-			ResultSet newIdResult = pr.getGeneratedKeys();
-			if (!newIdResult.next())
-				throw new NotCreatedHotelException();
-
-			idHotel = newIdResult.getInt(1);
-
-			ret = new Hotel(idHotel, name, reservationDayNumber, c);
-			addItem(ret);
-			pr.close();
-			newIdResult.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return ret;
+		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
 	}
 
 	public List<Hotel> getHotelsOf(City city) {

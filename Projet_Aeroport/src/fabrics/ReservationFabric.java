@@ -25,6 +25,12 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 	}
 
 	@Override
+	protected Reservation constructObject(int id, Object[] m) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	protected Reservation constructObject(ResultSet results) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;

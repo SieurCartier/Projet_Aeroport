@@ -7,13 +7,20 @@ import utils.*;
 
 public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 
+	private enum ColumnNames {
+		fk_idCategorie, fk_idHotel, roomNumber
+	}
+
+	private static final int FK_ID_CATEGORIE = ColumnNames.fk_idCategorie.ordinal();
+	private static final int FK_ID_HOTEL = ColumnNames.fk_idHotel.ordinal();
+	private static final int ROOM_NUMBER = ColumnNames.roomNumber.ordinal();
+
 	private static HotelRoomFabric singleton = null;
-	private MySQLConnection co = MySQLConnection.getInstanceOf();
 
 	private WeakHashMap<Hotel, List<HotelRoom>> lesChambres = new WeakHashMap<Hotel, List<HotelRoom>>();
 
 	private HotelRoomFabric() {
-		super("HotelRooms", "idHotelRoom");
+		super("HotelRoom", "idHotelRoom");
 	}
 
 	public static HotelRoomFabric getInstanceOf() {
@@ -26,6 +33,11 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	protected HotelRoom constructObject(ResultSet rooms) throws SQLException {
 		return new HotelRoom(rooms.getInt("idHotelRoom"), rooms.getString("roomNumber"), rooms.getInt("idCategory"),
 				rooms.getInt("idHotel"));
+	}
+
+	@Override
+	protected HotelRoom constructObject(int id, Object[] m) {
+		return new HotelRoom(id, (String) m[ROOM_NUMBER], (int) m[FK_ID_CATEGORIE], (int) m[FK_ID_HOTEL]);
 	}
 
 	@Override
@@ -44,35 +56,13 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 		lesChambres.get(h.getOwnerHotel()).add(h);
 	}
 
-	public HotelRoom createHotelRoom(String roomNumber, int idCategory, int idOwnerHotel) {
-		HotelRoom ret = null;
+	public HotelRoom createHotelRoom(String roomNumber, Category category, Hotel ownerHotel) {
+		List<Object> parameters = new ArrayList<Object>();
+		parameters.add(category.getId());
+		parameters.add(ownerHotel.getId());
+		parameters.add(roomNumber);
 
-		try {
-			String requete = "INSERT INTO HotelRooms " + "VALUES (?, ?, ?)";
-
-			int idHotelRoom;
-			PreparedStatement pr = co.prepareStatement(requete);
-
-			pr.setString(1, roomNumber);
-			pr.setInt(2, idCategory);
-			pr.setInt(3, idOwnerHotel);
-
-			pr.executeUpdate();
-			ResultSet newIdResult = pr.getGeneratedKeys();
-			
-			if (!newIdResult.next())
-				throw new NotCreatedHotelRoomException();
-
-			idHotelRoom = newIdResult.getInt(1);
-
-			ret = new HotelRoom(idHotelRoom, roomNumber, idCategory, idOwnerHotel);
-			addItem(ret);
-			pr.close();
-			newIdResult.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return ret;
+		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
 	}
 
 	public void deleteAllRooms(Hotel h) {

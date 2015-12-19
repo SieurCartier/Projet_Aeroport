@@ -75,7 +75,7 @@ public class HotelRoom extends DatabaseItem {
 
 	@Override
 	public String toString() {
-		return "Room number : " + roomNumber + " Category : " + cat.toString();
+		return "Room number : " + roomNumber;
 	}
 
 }
