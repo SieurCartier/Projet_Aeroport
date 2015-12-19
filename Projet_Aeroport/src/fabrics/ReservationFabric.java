@@ -1,8 +1,7 @@
 package fabrics;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 import domaine.Reservation;
 
@@ -10,7 +9,7 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 	private static ReservationFabric singleton = null;
 
 	public ReservationFabric() {
-		super("", "");
+		super("Reservation", "idReservation");
 	}
 
 	public static ReservationFabric getInstanceOf() {
@@ -25,13 +24,13 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 	}
 
 	@Override
-	protected Reservation constructObject(int id, Object[] m) {
+	protected Reservation constructObject(ResultSet results) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected Reservation constructObject(ResultSet results) throws SQLException {
+	protected Reservation constructObject(int id, HashMap<String, Object> m) {
 		// TODO Auto-generated method stub
 		return null;
 	}

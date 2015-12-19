@@ -7,14 +7,6 @@ import utils.*;
 
 public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 
-	private enum ColumnNames {
-		fk_idCategorie, fk_idHotel, roomNumber
-	}
-
-	private static final int FK_ID_CATEGORIE = ColumnNames.fk_idCategorie.ordinal();
-	private static final int FK_ID_HOTEL = ColumnNames.fk_idHotel.ordinal();
-	private static final int ROOM_NUMBER = ColumnNames.roomNumber.ordinal();
-
 	private static HotelRoomFabric singleton = null;
 
 	private WeakHashMap<Hotel, List<HotelRoom>> lesChambres = new WeakHashMap<Hotel, List<HotelRoom>>();
@@ -36,8 +28,9 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	}
 
 	@Override
-	protected HotelRoom constructObject(int id, Object[] m) {
-		return new HotelRoom(id, (String) m[ROOM_NUMBER], (int) m[FK_ID_CATEGORIE], (int) m[FK_ID_HOTEL]);
+	protected HotelRoom constructObject(int id, HashMap<String, Object> m) {
+		return new HotelRoom(id, (String) m.get("roomNumber"), (int) m.get("fk_idCategorie"),
+				(int) m.get("fk_idHotel"));
 	}
 
 	@Override
@@ -57,12 +50,12 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	}
 
 	public HotelRoom createHotelRoom(String roomNumber, Category category, Hotel ownerHotel) {
-		List<Object> parameters = new ArrayList<Object>();
-		parameters.add(category.getId());
-		parameters.add(ownerHotel.getId());
-		parameters.add(roomNumber);
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("fk_idCategorie", category.getId());
+		parameters.put("fk_idHotel", ownerHotel.getId());
+		parameters.put("roomNumber", roomNumber);
 
-		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
+		return super.create(parameters);
 	}
 
 	public void deleteAllRooms(Hotel h) {

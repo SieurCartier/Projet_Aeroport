@@ -3,17 +3,8 @@ package fabrics;
 import java.sql.*;
 import java.util.*;
 import domaine.*;
-import utils.*;
 
 public class HotelFabric extends AbstractFabric<Hotel> {
-
-	private enum ColumnNames {
-		name, resilationDayNumber, fk_idCity
-	}
-
-	private static final int NAME = ColumnNames.name.ordinal();
-	private static final int RESIALIATION_DAY_NUMBER = ColumnNames.resilationDayNumber.ordinal();
-	private static final int FK_ID_CITY = ColumnNames.fk_idCity.ordinal();
 
 	private static HotelFabric singleton = null;
 
@@ -36,8 +27,8 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	}
 
 	@Override
-	protected Hotel constructObject(int id, Object[] m) {
-		return new Hotel(id, (String) m[NAME], (int) m[RESIALIATION_DAY_NUMBER], (int) m[FK_ID_CITY]);
+	protected Hotel constructObject(int id, HashMap<String, Object> m) {
+		return new Hotel(id, (String) m.get("name"), (int) m.get("resilationDayNumber"), (int) m.get("fk_idCity"));
 	}
 
 	@Override
@@ -64,12 +55,12 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
 
-		List<Object> parameters = new ArrayList<Object>();
-		parameters.add(name);
-		parameters.add(new Integer(reservationDayNumber));
-		parameters.add(new Integer(c.getId()));
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("name", name);
+		parameters.put("resilationDayNumber", reservationDayNumber);
+		parameters.put("fk_idCity", c.getId());
 
-		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
+		return super.create(parameters);
 	}
 
 	public List<Hotel> getHotelsOf(City city) {

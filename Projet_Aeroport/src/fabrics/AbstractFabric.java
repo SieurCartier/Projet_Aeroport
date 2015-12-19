@@ -1,7 +1,7 @@
 package fabrics;
 
 import java.sql.*;
-import java.util.WeakHashMap;
+import java.util.*;
 import domaine.DatabaseItem;
 import utils.InexistantDatabaseItemException;
 import utils.NotCreatedItemException;
@@ -39,24 +39,25 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		return objects.get(id);
 	}
 
-	protected T create(String[] columnNames, Object[] parameters) {
+	protected T create(HashMap<String, Object> parameters) {
 		T ret = null;
 
 		try {
 			String requete = "INSERT INTO " + tableName + " (";
 
-			int taille = columnNames.length;
-			for (int i = 0; i < taille; i++) {
-				requete += columnNames[i];
-				if (i < taille - 1)
+			int i = 0;
+			for (String s : parameters.keySet()) {
+				requete += s;
+				if (i < parameters.size() - 1)
 					requete += ", ";
+				i++;
 			}
 			requete += ") VALUES (";
 
-			taille = parameters.length;
-			for (int j = 0; j < taille; j++) {
+			i = 0;
+			for (int j = 0; j < parameters.size(); j++) {
 				requete += "?";
-				if (j < taille - 1)
+				if (j < parameters.size() - 1)
 					requete += ", ";
 			}
 			requete += ")";
@@ -65,8 +66,9 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 			PreparedStatement pr = co.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 
 			int k = 1;
-			for (Object param : parameters) {
-				pr.setObject(k++, param);
+			for (Object param : parameters.values()) {
+				pr.setObject(k, param);
+				k++;
 			}
 
 			pr.executeUpdate();
@@ -113,6 +115,6 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 
 	protected abstract T constructObject(ResultSet results) throws SQLException;
 
-	protected abstract T constructObject(int id, Object[] m);
+	protected abstract T constructObject(int id, HashMap<String, Object> m);
 
 }

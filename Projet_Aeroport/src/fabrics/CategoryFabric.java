@@ -3,18 +3,8 @@ package fabrics;
 import java.sql.*;
 import java.util.*;
 import domaine.*;
-import utils.Enums;
 
 public class CategoryFabric extends AbstractFabric<Category> {
-
-	private enum ColumnNames {
-		capacity, price, fk_idHotel, name
-	}
-
-	private static final int CAPACITY = ColumnNames.capacity.ordinal();
-	private static final int PRICE = ColumnNames.price.ordinal();
-	private static final int FK_ID_HOTEL = ColumnNames.fk_idHotel.ordinal();
-	private static final int NAME = ColumnNames.name.ordinal();
 
 	private static CategoryFabric singleton = null;
 
@@ -37,8 +27,9 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	}
 
 	@Override
-	protected Category constructObject(int id, Object[] m) {
-		return new Category(id, (String) m[NAME], (int) m[CAPACITY], (float) m[PRICE], (int) m[FK_ID_HOTEL]);
+	protected Category constructObject(int id, HashMap<String, Object> m) {
+		return new Category(id, (String) m.get("name"), (int) m.get("capacity"), (float) m.get("price"),
+				(int) m.get("fk_idHotel"));
 	}
 
 	@Override
@@ -58,13 +49,13 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	}
 
 	public Category createCategory(String name, int capacity, float price, Hotel ownerHotel) {
-		List<Object> parameters = new ArrayList<Object>();
-		parameters.add(capacity);
-		parameters.add(price);
-		parameters.add(ownerHotel.getId());
-		parameters.add(name);
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("capacity", capacity);
+		parameters.put("price", price);
+		parameters.put("fk_idHotel", ownerHotel.getId());
+		parameters.put("name", name);
 
-		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
+		return super.create(parameters);
 	}
 
 	public List<Category> getCategoriesOf(Hotel hotel) {

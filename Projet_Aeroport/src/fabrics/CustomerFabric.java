@@ -1,24 +1,11 @@
 package fabrics;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
-
-import domaine.City;
-import domaine.Customer;
-import utils.Enums;
+import domaine.*;
 
 public class CustomerFabric extends AbstractFabric<Customer> {
-
-	private enum ColumnNames {
-		firstName, lastName, birthdate, fk_idCity
-	}
-
-	private static final int FIRSTNAME = ColumnNames.firstName.ordinal();
-	private static final int LASTNAME = ColumnNames.lastName.ordinal();
-	private static final int BIRTHDATE = ColumnNames.birthdate.ordinal();
-	private static final int FK_ID_CITY = ColumnNames.fk_idCity.ordinal();
 
 	private static CustomerFabric singleton = null;
 
@@ -39,18 +26,19 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	}
 
 	@Override
-	protected Customer constructObject(int id, Object[] m) {
-		return new Customer(id, (String) m[FIRSTNAME], (String) m[LASTNAME], (Date) m[BIRTHDATE], (int) m[FK_ID_CITY]);
+	protected Customer constructObject(int id, HashMap<String, Object> m) {
+		return new Customer(id, (String) m.get("firstName"), (String) m.get("lastName"), (Date) m.get("birthdate"),
+				(int) m.get("fk_idCity"));
 	}
 
 	public Customer createCustomer(String firstname, String lastname, Date birthdate, City city) {
-		List<Object> parameters = new ArrayList<Object>();
-		parameters.add(firstname);
-		parameters.add(lastname);
-		parameters.add(birthdate);
-		parameters.add(city.getId());
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("firstName", firstname);
+		parameters.put("lastName", lastname);
+		parameters.put("birthdate", birthdate);
+		parameters.put("fk_idCity", city.getId());
 
-		return super.create(Enums.toStringArray(ColumnNames.values()), parameters.toArray());
+		return super.create(parameters);
 	}
 
 }
