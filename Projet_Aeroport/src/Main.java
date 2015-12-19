@@ -23,5 +23,10 @@ public class Main {
 		System.out.println(hr);
 		System.out.println(cus);
 
+		c.setName("Armentières");
+		h.setName("Hilton");
+
+		CityFabric.getInstanceOf().updateCity(c);
+		HotelFabric.getInstanceOf().updateHotel(h);
 	}
 }

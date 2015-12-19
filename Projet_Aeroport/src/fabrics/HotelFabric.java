@@ -36,7 +36,6 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	}
 
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
-
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("name", name);
 		parameters.put("resilationDayNumber", reservationDayNumber);
@@ -48,4 +47,14 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	public List<Hotel> getHotelsOf(City city) {
 		return super.getFromForeignKey("fk_idVille", city);
 	}
+
+	public void updateHotel(Hotel h) {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("name", h.getName());
+		parameters.put("resilationDayNumber", h.getReservationDayNumber());
+		parameters.put("fk_idCity", h.getCity().getId());
+
+		super.update(h, parameters);
+	}
+
 }

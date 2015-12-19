@@ -54,6 +54,39 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		}
 	}
 
+	protected void update(T item, HashMap<String, Object> parameters) {
+		try {
+
+			String requete = "UPDATE " + tableName + " SET ";
+
+			int i = 0;
+			for (String s : parameters.keySet()) {
+				requete += s + " = ?";
+				if (i < parameters.size() - 1)
+					requete += ", ";
+				i++;
+			}
+			requete += " WHERE " + primaryKeyName + " = ?";
+
+			PreparedStatement pr = co.prepareStatement(requete);
+
+			int k = 1;
+			for (Object param : parameters.values()) {
+				pr.setObject(k, param);
+				k++;
+			}
+			pr.setObject(k, item.getId());
+
+			if (pr.executeUpdate() != 1)
+				throw new InexistantDatabaseItemException(item);
+
+			this.addItem(item);
+			pr.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	protected T create(HashMap<String, Object> parameters) {
 		T ret = null;
 

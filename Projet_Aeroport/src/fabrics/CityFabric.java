@@ -10,7 +10,7 @@ public class CityFabric extends AbstractFabric<City> {
 	private static CityFabric singleton = null;
 
 	public CityFabric() {
-		super("City", "idVille");
+		super("City", "idCity");
 	}
 
 	public static CityFabric getInstanceOf() {
@@ -21,7 +21,7 @@ public class CityFabric extends AbstractFabric<City> {
 
 	@Override
 	protected City constructObject(ResultSet city) throws SQLException {
-		return new City(city.getInt("idVille"), city.getString("name"));
+		return new City(city.getInt("idCity"), city.getString("name"));
 	}
 
 	@Override
@@ -34,6 +34,13 @@ public class CityFabric extends AbstractFabric<City> {
 		parameters.put("name", name);
 
 		return super.create(parameters);
+	}
+
+	public void updateCity(City c) {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("name", c.getName());
+
+		super.update(c, parameters);
 	}
 
 }
