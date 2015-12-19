@@ -64,7 +64,7 @@ public class Customer extends DatabaseItem {
 
 	public List<Reservation> getReservations() {
 		if (reservations == null)
-			reservations = ReservationFabric.getInstanceOf().getReservationsByCustomerId(getId());
+			reservations = ReservationFabric.getInstanceOf().getReservationsByCustomer(this);
 		return reservations;
 	}
 

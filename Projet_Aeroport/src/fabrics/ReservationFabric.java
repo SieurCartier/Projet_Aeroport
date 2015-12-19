@@ -2,8 +2,7 @@ package fabrics;
 
 import java.sql.*;
 import java.util.*;
-
-import domaine.Reservation;
+import domaine.*;
 
 public class ReservationFabric extends AbstractFabric<Reservation> {
 	private static ReservationFabric singleton = null;
@@ -18,21 +17,20 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 		return singleton;
 	}
 
-	public List<Reservation> getReservationsByCustomerId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Reservation> getReservationsByCustomer(Customer c) {
+		return super.getFromForeignKey("fk_idCustomer", c);
 	}
 
 	@Override
-	protected Reservation constructObject(ResultSet results) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	protected Reservation constructObject(ResultSet reservs) throws SQLException {
+		return new Reservation(reservs.getInt("idReservation"), reservs.getInt("fk_idCustomer"),
+				reservs.getInt("fk_idFlight"), reservs.getInt("fk_idHotelRoom"));
 	}
 
 	@Override
 	protected Reservation constructObject(int id, HashMap<String, Object> m) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Reservation(id, (int) m.get("fk_idCustomer"), (int) m.get("fk_idFlight"),
+				(int) m.get("fk_idHotelRoom"));
 	}
 
 }

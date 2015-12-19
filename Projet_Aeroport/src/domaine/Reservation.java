@@ -15,8 +15,11 @@ public class Reservation extends DatabaseItem {
 
 	public Reservation(int id, Customer customer, Flight flight, HotelRoom room) {
 		super(id);
+		this.idCustomer = customer.getId();
 		this.customer = customer;
+		this.idFlight = flight.getId();
 		this.flight = flight;
+		this.idHotelRoom = room.getId();
 		this.room = room;
 	}
 

@@ -39,6 +39,21 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		return objects.get(id);
 	}
 
+	public void delete(T item) {
+		try {
+			String requete = "DELETE FROM " + tableName + " WHERE " + primaryKeyName + " = ?";
+			PreparedStatement pr = co.prepareStatement(requete);
+			pr.setInt(1, item.getId());
+			if (pr.executeUpdate() != 1)
+				throw new InexistantDatabaseItemException(item);
+
+			this.removeItem(item);
+			pr.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 	protected T create(HashMap<String, Object> parameters) {
 		T ret = null;
 
@@ -89,19 +104,26 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		return ret;
 	}
 
-	public void delete(T item) {
+	protected List<T> getFromForeignKey(String key, DatabaseItem item) {
+		List<T> ret = null;
 		try {
-			String requete = "DELETE FROM " + tableName + " WHERE " + primaryKeyName + " = ?";
+			String requete = "SELECT * FROM " + tableName + "WHERE " + key + " = ?";
 			PreparedStatement pr = co.prepareStatement(requete);
 			pr.setInt(1, item.getId());
-			if (pr.executeUpdate() != 1)
-				throw new InexistantDatabaseItemException(item);
+			ResultSet objectFromForeign = pr.executeQuery();
 
-			this.removeItem(item);
+			ret = new LinkedList<T>();
+			while (objectFromForeign.next()) {
+				T temp = constructObject(objectFromForeign);
+				addItem(temp);
+				ret.add(temp);
+			}
 			pr.close();
+			objectFromForeign.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return ret;
 	}
 
 	protected void removeItem(T item) {

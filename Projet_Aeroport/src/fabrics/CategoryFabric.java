@@ -8,8 +8,6 @@ public class CategoryFabric extends AbstractFabric<Category> {
 
 	private static CategoryFabric singleton = null;
 
-	private WeakHashMap<Hotel, List<Category>> lesCategories = new WeakHashMap<Hotel, List<Category>>();
-
 	public CategoryFabric() {
 		super("Categorie", "idCategorie");
 	}
@@ -32,22 +30,6 @@ public class CategoryFabric extends AbstractFabric<Category> {
 				(int) m.get("fk_idHotel"));
 	}
 
-	@Override
-	protected void addItem(Category c) {
-		super.addItem(c);
-		if (!lesCategories.containsKey(c.getOwnerHotel()))
-			lesCategories.put(c.getOwnerHotel(), new LinkedList<Category>());
-
-		lesCategories.get(c.getOwnerHotel()).add(c);
-	}
-
-	@Override
-	protected void removeItem(Category c) {
-		super.removeItem(c);
-		if (lesCategories.containsKey(c.getOwnerHotel()))
-			lesCategories.get(c.getOwnerHotel()).remove(c);
-	}
-
 	public Category createCategory(String name, int capacity, float price, Hotel ownerHotel) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("capacity", capacity);
@@ -59,23 +41,7 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	}
 
 	public List<Category> getCategoriesOf(Hotel hotel) {
-		if (!lesCategories.containsKey(hotel)) {
-			try {
-				String requete = "SELECT * " + "FROM Categorie " + "WHERE fk_idHotel = ?";
-				PreparedStatement pr = co.prepareStatement(requete);
-				pr.setInt(1, hotel.getId());
-				ResultSet categories = pr.executeQuery();
-
-				while (categories.next()) {
-					addItem(constructObject(categories));
-				}
-				pr.close();
-				categories.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return lesCategories.get(hotel);
+		return super.getFromForeignKey("fk_idHotel", hotel);
 	}
 
 }
