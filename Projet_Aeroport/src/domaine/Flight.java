@@ -1,18 +1,19 @@
 package domaine;
 
+import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
-
 import fabrics.CityFabric;
+import utils.DayOfWeek;
 
 public class Flight extends DatabaseItem {
 
+	private String flightNumber;
 	private int idDeparture;
 	private City departure = null;
 	private int idArrival;
 	private City arrival = null;
-	private Date departureDate;
-	private Date arrivalDate;
+	private DayOfWeek dayOfWeekDeparture;
+	private Time departureTime;
 	private Timestamp flightDuration;
 	private int nbFirstClassSits;
 	private float priceFirstClassSits;
@@ -20,35 +21,46 @@ public class Flight extends DatabaseItem {
 	private float priceSecondClassSits;
 	private int nbDayCancelling;
 
-	public Flight(int id, City departure, City arrival, Date departureDate, Date arrivalDate, int nbFirstClassSits,
-			float priceFirstClassSits, int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
+	public Flight(int id, String flightNumber, int idDeparture, int idArrival, DayOfWeek dayOfWeekDeparture,
+			Time departureTime, Timestamp flightDuration, int nbFirstClassSits, float priceFirstClassSits,
+			int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
 		super(id);
-		this.idDeparture = departure.getId();
-		this.departure = departure;
-		this.idArrival = arrival.getId();
-		this.arrival = arrival;
-		this.departureDate = departureDate;
-		this.arrivalDate = arrivalDate;
-		this.nbFirstClassSits = nbFirstClassSits;
-		this.priceFirstClassSits = priceFirstClassSits;
-		this.nbSecondClassSits = nbSecondClassSits;
-		this.priceSecondClassSits = priceSecondClassSits;
-		this.nbDayCancelling = nbDayCancelling;
-		updateDuration();
-	}
-
-	public Flight(int id, int idDeparture, int idArrival, Date departureDate, Date arrivalDate, int nbFirstClassSits,
-			float priceFirstClassSits, int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
-		super(id);
+		this.flightNumber = flightNumber;
 		this.idDeparture = idDeparture;
 		this.idArrival = idArrival;
-		this.departureDate = departureDate;
-		this.arrivalDate = arrivalDate;
+		this.dayOfWeekDeparture = dayOfWeekDeparture;
+		this.departureTime = departureTime;
+		this.flightDuration = flightDuration;
 		this.nbFirstClassSits = nbFirstClassSits;
 		this.priceFirstClassSits = priceFirstClassSits;
 		this.nbSecondClassSits = nbSecondClassSits;
 		this.priceSecondClassSits = priceSecondClassSits;
 		this.nbDayCancelling = nbDayCancelling;
+	}
+
+	public Flight(int id, String flightNumber, City departure, City arrival, DayOfWeek dayOfWeekDeparture,
+			Time departureTime, Timestamp flightDuration, int nbFirstClassSits, float priceFirstClassSits,
+			int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
+		super(id);
+		this.flightNumber = flightNumber;
+		this.departure = departure;
+		this.arrival = arrival;
+		this.dayOfWeekDeparture = dayOfWeekDeparture;
+		this.departureTime = departureTime;
+		this.flightDuration = flightDuration;
+		this.nbFirstClassSits = nbFirstClassSits;
+		this.priceFirstClassSits = priceFirstClassSits;
+		this.nbSecondClassSits = nbSecondClassSits;
+		this.priceSecondClassSits = priceSecondClassSits;
+		this.nbDayCancelling = nbDayCancelling;
+	}
+
+	public String getFlightNumber() {
+		return flightNumber;
+	}
+
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
 	}
 
 	public City getDeparture() {
@@ -59,6 +71,7 @@ public class Flight extends DatabaseItem {
 
 	public void setDeparture(City departure) {
 		this.departure = departure;
+		this.idDeparture = departure.getId();
 	}
 
 	public City getArrival() {
@@ -68,29 +81,32 @@ public class Flight extends DatabaseItem {
 	}
 
 	public void setArrival(City arrival) {
+		this.idArrival = arrival.getId();
 		this.arrival = arrival;
 	}
 
-	public Date getDepartureDate() {
-		return departureDate;
+	public DayOfWeek getDayOfWeekDeparture() {
+		return dayOfWeekDeparture;
 	}
 
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-		updateDuration();
+	public void setDayOfWeekDeparture(DayOfWeek dayOfWeekDeparture) {
+		this.dayOfWeekDeparture = dayOfWeekDeparture;
 	}
 
-	public Date getArrivalDate() {
-		return arrivalDate;
+	public Time getDepartureTime() {
+		return departureTime;
 	}
 
-	public void setArrivalDate(Date arrivalDate) {
-		this.arrivalDate = arrivalDate;
-		updateDuration();
+	public void setDepartureTime(Time departureTime) {
+		this.departureTime = departureTime;
 	}
 
 	public Timestamp getFlightDuration() {
 		return flightDuration;
+	}
+
+	public void setFlightDuration(Timestamp flightDuration) {
+		this.flightDuration = flightDuration;
 	}
 
 	public int getNbFirstClassSits() {
@@ -133,21 +149,14 @@ public class Flight extends DatabaseItem {
 		this.nbDayCancelling = nbDayCancelling;
 	}
 
-	public int getIdDeparture() {
-		return idDeparture;
-	}
-
-	public int getIdArrival() {
-		return idArrival;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((arrivalDate == null) ? 0 : arrivalDate.hashCode());
-		result = prime * result + ((departureDate == null) ? 0 : departureDate.hashCode());
+		result = prime * result + ((dayOfWeekDeparture == null) ? 0 : dayOfWeekDeparture.hashCode());
+		result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
 		result = prime * result + ((flightDuration == null) ? 0 : flightDuration.hashCode());
+		result = prime * result + ((flightNumber == null) ? 0 : flightNumber.hashCode());
 		result = prime * result + idArrival;
 		result = prime * result + idDeparture;
 		result = prime * result + nbDayCancelling;
@@ -167,20 +176,22 @@ public class Flight extends DatabaseItem {
 		if (getClass() != obj.getClass())
 			return false;
 		Flight other = (Flight) obj;
-		if (arrivalDate == null) {
-			if (other.arrivalDate != null)
-				return false;
-		} else if (!arrivalDate.equals(other.arrivalDate))
+		if (dayOfWeekDeparture != other.dayOfWeekDeparture)
 			return false;
-		if (departureDate == null) {
-			if (other.departureDate != null)
+		if (departureTime == null) {
+			if (other.departureTime != null)
 				return false;
-		} else if (!departureDate.equals(other.departureDate))
+		} else if (!departureTime.equals(other.departureTime))
 			return false;
 		if (flightDuration == null) {
 			if (other.flightDuration != null)
 				return false;
 		} else if (!flightDuration.equals(other.flightDuration))
+			return false;
+		if (flightNumber == null) {
+			if (other.flightNumber != null)
+				return false;
+		} else if (!flightNumber.equals(other.flightNumber))
 			return false;
 		if (idArrival != other.idArrival)
 			return false;
@@ -201,11 +212,6 @@ public class Flight extends DatabaseItem {
 
 	@Override
 	public String toString() {
-		return departure.toString() + " -> " + arrival.toString();
+		return flightNumber + " : " + departure.toString() + " -> " + arrival.toString();
 	}
-
-	private void updateDuration() {
-		flightDuration = new Timestamp(departureDate.getTime() - arrivalDate.getTime());
-	}
-
 }
