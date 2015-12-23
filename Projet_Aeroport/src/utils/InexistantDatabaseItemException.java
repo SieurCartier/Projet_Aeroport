@@ -2,6 +2,12 @@ package utils;
 
 import domaine.DatabaseItem;
 
+/**
+ * This exception is thrown when a {@link DatabaseItem} is not found in the
+ * <code>Database</code>.
+ * 
+ * @author Gaston Lemaire
+ */
 public class InexistantDatabaseItemException extends Exception {
 
 	private static final long serialVersionUID = 1L;

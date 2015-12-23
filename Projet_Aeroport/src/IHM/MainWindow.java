@@ -40,7 +40,6 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 
 	public MainWindow() {
 		initComponents();
-
 	}
 
 	private void initComponents() {

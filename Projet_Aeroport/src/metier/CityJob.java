@@ -14,12 +14,22 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 		fab = CityFabric.getInstanceOf();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see metier.AbstractJob#create(java.util.HashMap)
+	 */
 	@Override
 	public City create(HashMap<String, String> fields) {
 		String name = fields.get("name");
 		return fab.createCity(name);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
+	 */
 	@Override
 	public void remove(City t) {
 		fab.delete(t);
