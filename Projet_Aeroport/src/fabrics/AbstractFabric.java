@@ -3,7 +3,7 @@ package fabrics;
 import java.sql.*;
 import java.util.*;
 
-import domaine.DatabaseItem;
+import domain.DatabaseItem;
 import utils.InexistantDatabaseItemException;
 import utils.NotCreatedItemException;
 

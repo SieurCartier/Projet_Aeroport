@@ -1,6 +1,6 @@
 package utils;
 
-import domaine.DatabaseItem;
+import domain.DatabaseItem;
 
 /**
  * This exception is thrown when a {@link DatabaseItem} could not be created.

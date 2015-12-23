@@ -2,7 +2,8 @@ package fabrics;
 
 import java.sql.*;
 import java.util.*;
-import domaine.*;
+
+import domain.*;
 
 /**
  * This class is a <code>Fabric</code> of {@link Category}

@@ -2,7 +2,8 @@ package fabrics;
 
 import java.sql.*;
 import java.util.HashMap;
-import domaine.City;
+
+import domain.City;
 
 /**
  * This class is a <code>Fabric</code> of {@link City}

@@ -1,5 +1,5 @@
-import IHM.MainWindow;
 import fabrics.*;
+import ihm.MainWindow;
 
 public class Main {
 

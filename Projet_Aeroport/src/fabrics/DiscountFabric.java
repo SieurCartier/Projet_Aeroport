@@ -2,7 +2,8 @@ package fabrics;
 
 import java.sql.*;
 import java.util.HashMap;
-import domaine.AbstractDiscount;
+
+import domain.AbstractDiscount;
 
 /**
  * This class is a <code>Fabric</code> of {@link AbstractDiscount}
