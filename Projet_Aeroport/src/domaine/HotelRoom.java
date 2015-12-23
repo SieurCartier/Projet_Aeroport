@@ -1,13 +1,18 @@
 package domaine;
 
-import fabrics.CategoryFabric;
-import fabrics.HotelFabric;
+import fabrics.*;
 
+/**
+ * This class represents a <code>HotelRoom</code>
+ * 
+ * @author Shindro
+ *
+ */
 public class HotelRoom extends DatabaseItem {
 
 	private String roomNumber;
 	private int idCategory;
-	private Category cat = null;
+	private Category category = null;
 	private int idOwnerHotel;
 	private Hotel ownerHotel = null;
 
@@ -17,6 +22,56 @@ public class HotelRoom extends DatabaseItem {
 		this.idCategory = idCategory;
 		this.idOwnerHotel = idOwnerHotel;
 	}
+
+	public HotelRoom(int id, String roomNumber, Category category, Hotel ownerHotel) {
+		super(id);
+		this.roomNumber = roomNumber;
+		this.idCategory = category.getId();
+		this.category = category;
+		this.idOwnerHotel = ownerHotel.getId();
+		this.ownerHotel = ownerHotel;
+	}
+
+	/* Getters and Setters */
+
+	public String getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	/**
+	 * This method gets the {@link Category} of the <code>HotelRoom</code>. It
+	 * calls the {@link CategoryFabric#getById(int)} with {@link #idCategory}.
+	 * 
+	 * @return The {@link Category} of the <code>HotelRoom</code>.
+	 */
+	public Category getCategory() {
+		if (category == null)
+			category = CategoryFabric.getInstanceOf().getById(idCategory);
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	/**
+	 * This method gets the {@link Hotel} in which the <code>HotelRoom</code>
+	 * stands. It calls the {@link HotelFabric#getById(int)} with
+	 * {@link #idOwnerHotel}.
+	 * 
+	 * @return The {@link Hotel} of the <code>HotelRoom</code>.
+	 */
+	public Hotel getOwnerHotel() {
+		if (ownerHotel == null)
+			ownerHotel = HotelFabric.getInstanceOf().getById(idOwnerHotel);
+		return ownerHotel;
+	}
+
+	/* HashCode, Equals and toString */
 
 	@Override
 	public int hashCode() {
@@ -47,30 +102,6 @@ public class HotelRoom extends DatabaseItem {
 		} else if (!roomNumber.equals(other.roomNumber))
 			return false;
 		return true;
-	}
-
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-
-	public Category getCat() {
-		if (cat == null)
-			cat = CategoryFabric.getInstanceOf().getById(idCategory);
-		return cat;
-	}
-
-	public void setCat(Category cat) {
-		this.cat = cat;
-	}
-
-	public Hotel getOwnerHotel() {
-		if (ownerHotel == null)
-			ownerHotel = HotelFabric.getInstanceOf().getById(idOwnerHotel);
-		return ownerHotel;
 	}
 
 	@Override

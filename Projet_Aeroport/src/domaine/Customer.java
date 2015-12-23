@@ -1,11 +1,13 @@
 package domaine;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import fabrics.*;
 
-import fabrics.CityFabric;
-import fabrics.ReservationFabric;
-
+/**
+ * This class represents a <code>Customer</code>.
+ * 
+ * @author Shindro
+ */
 public class Customer extends DatabaseItem {
 
 	private String firstname;
@@ -32,6 +34,8 @@ public class Customer extends DatabaseItem {
 		this.city = city;
 	}
 
+	/* Getters and Setters */
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -56,17 +60,44 @@ public class Customer extends DatabaseItem {
 		this.birthdate = birthdate;
 	}
 
+	/**
+	 * This method gets the {@link City} of this <code>Customer</code>. It calls
+	 * the {@link CityFabric#getById(City)} with the {@link Customer#idCity}.
+	 * 
+	 * @return The {@link City} of the <code>Customer</code>.
+	 */
 	public City getCity() {
 		if (city == null)
 			city = CityFabric.getInstanceOf().getById(idCity);
 		return city;
 	}
 
+	/**
+	 * This method gets the {@link List} of {@link Reservation} of this
+	 * <code>Customer</code>. It calls the
+	 * {@link ReservationFabric#getReservationsOf(Customer)} with this.
+	 * 
+	 * @return The {@link List} of {@link Reservation} of this
+	 *         <code>Customer</code>.
+	 */
 	public List<Reservation> getReservations() {
 		if (reservations == null)
-			reservations = ReservationFabric.getInstanceOf().getReservationsByCustomer(this);
+			reservations = ReservationFabric.getInstanceOf().getReservationsOf(this);
 		return reservations;
 	}
+
+	/**
+	 * This method calculates the age of the <code>Customer</code> with its
+	 * {@link Customer#birthdate}.
+	 * 
+	 * @return The age of the <code>Customer</code>.
+	 */
+	@SuppressWarnings("deprecation")
+	public int getAge() {
+		return new Date(new Date().getTime() - birthdate.getTime()).getYear();
+	}
+
+	/* HashCode, Equals and toString */
 
 	@Override
 	public int hashCode() {
@@ -106,11 +137,6 @@ public class Customer extends DatabaseItem {
 		} else if (!lastname.equals(other.lastname))
 			return false;
 		return true;
-	}
-
-	@SuppressWarnings("deprecation")
-	public int getAge() {
-		return new Date(new Date().getTime() - birthdate.getTime()).getYear();
 	}
 
 	@Override

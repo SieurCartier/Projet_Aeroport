@@ -4,6 +4,11 @@ import java.util.List;
 
 import fabrics.HotelFabric;
 
+/**
+ * This class represents a <code>City</code>.
+ * 
+ * @author Shindro
+ */
 public class City extends DatabaseItem {
 
 	private String name;
@@ -12,6 +17,19 @@ public class City extends DatabaseItem {
 	public City(int id, String name) {
 		super(id);
 		this.name = name;
+	}
+
+	/**
+	 * This method gets the {@link List} of {@link Hotel} in this
+	 * <code>City</code>. It calls the {@link HotelFabric#getHotelsOf(City)}
+	 * with this.
+	 * 
+	 * @return The {@link List} of {@link Hotel} of this <code>City</code>
+	 */
+	public List<Hotel> getHotels() {
+		if (hotels == null)
+			hotels = HotelFabric.getInstanceOf().getHotelsOf(this);
+		return hotels;
 	}
 
 	@Override
@@ -50,12 +68,6 @@ public class City extends DatabaseItem {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Hotel> getHotels() {
-		if (hotels == null)
-			hotels = HotelFabric.getInstanceOf().getHotelsOf(this);
-		return hotels;
 	}
 
 }

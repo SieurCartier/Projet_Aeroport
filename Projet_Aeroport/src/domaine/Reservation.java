@@ -4,6 +4,12 @@ import fabrics.CustomerFabric;
 import fabrics.FlightFabric;
 import fabrics.HotelRoomFabric;
 
+/**
+ * This class represents a <code>Reservation</code>
+ * 
+ * @author Shindro
+ *
+ */
 public class Reservation extends DatabaseItem {
 
 	private int idCustomer;
@@ -12,6 +18,13 @@ public class Reservation extends DatabaseItem {
 	private Flight flight;
 	private int idHotelRoom;
 	private HotelRoom room;
+
+	public Reservation(int id, int idCustomer, int idFlight, int idHotelRoom) {
+		super(id);
+		this.idCustomer = idCustomer;
+		this.idFlight = idFlight;
+		this.idHotelRoom = idHotelRoom;
+	}
 
 	public Reservation(int id, Customer customer, Flight flight, HotelRoom room) {
 		super(id);
@@ -23,13 +36,15 @@ public class Reservation extends DatabaseItem {
 		this.room = room;
 	}
 
-	public Reservation(int id, int idCustomer, int idFlight, int idHotelRoom) {
-		super(id);
-		this.idCustomer = idCustomer;
-		this.idFlight = idFlight;
-		this.idHotelRoom = idHotelRoom;
-	}
+	/* Getters and Setters */
 
+	/**
+	 * This method gets the {@link Customer} that booked the
+	 * <code>Reservation</code>. It calls the
+	 * {@link CustomerFabric#getById(int)} with {@link #idCustomer}.
+	 * 
+	 * @return The {@link Customer} that booked the <code>Reservation</code>.
+	 */
 	public Customer getCustomer() {
 		if (customer == null)
 			customer = CustomerFabric.getInstanceOf().getById(idCustomer);
@@ -40,6 +55,13 @@ public class Reservation extends DatabaseItem {
 		this.customer = customer;
 	}
 
+	/**
+	 * This method gets the {@link Flight} concerned by the
+	 * <code>Reservation</code>. It calls the {@link FlightFabric#getById(int)}
+	 * with {@link #idFlight}.
+	 * 
+	 * @return The {@link Flight} concerned by the <code>Reservation</code>.
+	 */
 	public Flight getFlight() {
 		if (flight == null)
 			flight = FlightFabric.getInstanceOf().getById(idFlight);
@@ -50,15 +72,24 @@ public class Reservation extends DatabaseItem {
 		this.flight = flight;
 	}
 
+	/**
+	 * This method gets the {@link HotelRoom} concerned by the
+	 * <code>Reservation</code>. It calls the
+	 * {@link HotelRoomFabric#getById(int)} with {@link #idHotelRoom}.
+	 * 
+	 * @return The {@link HotelRoom} concerned by the <code>Reservation</code>.
+	 */
 	public HotelRoom getRoom() {
 		if (room == null)
-			room = HotelRoomFabric.getInstanceOf().getById(idFlight);
+			room = HotelRoomFabric.getInstanceOf().getById(idHotelRoom);
 		return room;
 	}
 
 	public void setRoom(HotelRoom room) {
 		this.room = room;
 	}
+
+	/* HashCode, Equals and toString */
 
 	@Override
 	public int hashCode() {

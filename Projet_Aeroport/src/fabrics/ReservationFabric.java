@@ -17,7 +17,7 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 		return singleton;
 	}
 
-	public List<Reservation> getReservationsByCustomer(Customer c) {
+	public List<Reservation> getReservationsOf(Customer c) {
 		return super.getFromForeignKey("fk_idCustomer", c);
 	}
 

@@ -1,9 +1,14 @@
 package domaine;
 
 import java.util.Date;
-
 import fabrics.CityFabric;
 
+/**
+ * This class represents a Discount which is based on the destination which is a
+ * {@link City}
+ * 
+ * @author Shindro
+ */
 public class CityDiscount extends AbstractDiscount {
 
 	private int idCity;
@@ -20,14 +25,51 @@ public class CityDiscount extends AbstractDiscount {
 		this.idCity = idCity;
 	}
 
+	/**
+	 * This method get the {@link City} on which the Discount is applicable. It
+	 * calls the {@link CityFabric#getById(int)} with the #idCity
+	 * 
+	 * @return The {@link City} of the Discount
+	 */
 	public City getCity() {
 		if (city == null)
 			city = CityFabric.getInstanceOf().getById(idCity);
 		return city;
 	}
 
-	public boolean isApplyable(City c) {
+	/**
+	 * This method determines if the Discount is available in this {@link City}
+	 * 
+	 * @param c
+	 *            The {@link City} to test
+	 * @return <code>True</code> if the {@link City} is available else
+	 *         <code>False</code>
+	 */
+	public boolean isApplicable(City c) {
 		return c.equals(getCity()) && new Date().after(startDate) && new Date().before(endDate);
 	}
 
+	/* HashCode and Equals */
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + idCity;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CityDiscount other = (CityDiscount) obj;
+		if (idCity != other.idCity)
+			return false;
+		return true;
+	}
 }

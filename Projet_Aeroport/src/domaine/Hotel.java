@@ -1,10 +1,14 @@
 package domaine;
 
 import java.util.List;
-import fabrics.CategoryFabric;
-import fabrics.CityFabric;
-import fabrics.HotelRoomFabric;
+import fabrics.*;
 
+/**
+ * This class represents a <code>Hotel</code>
+ * 
+ * @author Shindro
+ *
+ */
 public class Hotel extends DatabaseItem {
 
 	private String name;
@@ -29,10 +33,7 @@ public class Hotel extends DatabaseItem {
 		this.city = city;
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
+	/* Getters and Setters */
 
 	public String getName() {
 		return name;
@@ -50,23 +51,45 @@ public class Hotel extends DatabaseItem {
 		this.reservationDayNumber = reservationDayNumber;
 	}
 
+	/**
+	 * This method gets the {@link City} in which the <code>Hotel</code> stands.
+	 * It calls the {@link CityFabric#getById(int)} with {@link #idCity}.
+	 * 
+	 * @return The {@link City} of the <code>Hotel</code>.
+	 */
 	public City getCity() {
 		if (city == null)
 			city = CityFabric.getInstanceOf().getById(idCity);
 		return city;
 	}
 
+	/**
+	 * This method gets the {@link List} of {@link HotelRoom} of this
+	 * <code>Hotel</code>. It calls the
+	 * {@link HotelRoomFabric#getRoomsOf(Hotel)} with this.
+	 * 
+	 * @return The {@link List} of {@link HotelRoom} of this <code>Hotel</code>.
+	 */
 	public List<HotelRoom> getRooms() {
 		if (rooms == null)
 			rooms = HotelRoomFabric.getInstanceOf().getRoomsOf(this);
 		return rooms;
 	}
 
+	/**
+	 * This method gets the {@link List} of {@link Category} of this
+	 * <code>Hotel</code>. It calls the
+	 * {@link CategoryFabric#getCategoriesOf(Hotel)} with this.
+	 * 
+	 * @return The {@link List} of {@link Category} of this <code>Hotel</code>.
+	 */
 	public List<Category> getCategories() {
 		if (categories == null)
 			categories = CategoryFabric.getInstanceOf().getCategoriesOf(this);
 		return categories;
 	}
+
+	/* HashCode, Equals and toString */
 
 	@Override
 	public int hashCode() {
@@ -97,6 +120,11 @@ public class Hotel extends DatabaseItem {
 		if (reservationDayNumber != other.reservationDayNumber)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

@@ -2,6 +2,12 @@ package domaine;
 
 import java.util.Date;
 
+/**
+ * This class describes the basics of a discount
+ * 
+ * @author Shindro
+ */
+
 public abstract class AbstractDiscount extends DatabaseItem {
 
 	protected String name;
@@ -16,6 +22,8 @@ public abstract class AbstractDiscount extends DatabaseItem {
 		this.endDate = endDate;
 		this.percentage = percentage;
 	}
+
+	/* Getters and Setters */
 
 	public String getName() {
 		return name;
@@ -48,6 +56,8 @@ public abstract class AbstractDiscount extends DatabaseItem {
 	public void setPercentage(float percentage) {
 		this.percentage = percentage;
 	}
+
+	/* HashCode and Equals */
 
 	@Override
 	public int hashCode() {
@@ -99,8 +109,14 @@ public abstract class AbstractDiscount extends DatabaseItem {
 		return true;
 	}
 
+	/**
+	 * This method apply a discount to a price by simply multiplying it
+	 * 
+	 * @param p
+	 *            The price to apply a discount
+	 * @return The price multiplied by the discount
+	 */
 	public float apply(float p) {
 		return p * percentage;
 	}
-
 }

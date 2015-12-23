@@ -2,6 +2,11 @@ package domaine;
 
 import fabrics.HotelFabric;
 
+/**
+ * This class represents a category
+ * 
+ * @author Shindro
+ */
 public class Category extends DatabaseItem {
 
 	private String name;
@@ -27,6 +32,7 @@ public class Category extends DatabaseItem {
 		this.ownerHotel = ownerHotel;
 	}
 
+	/* Getters and Setters */
 	public String getName() {
 		return name;
 	}
@@ -51,12 +57,19 @@ public class Category extends DatabaseItem {
 		this.price = price;
 	}
 
+	/**
+	 * This method gets the {@link Hotel} which owns this Category. It calls the
+	 * {@link HotelFabric#getById(int)} with the #idOwnerHotel
+	 * 
+	 * @return The {@link Hotel} that own this Category
+	 */
 	public Hotel getOwnerHotel() {
 		if (ownerHotel == null)
 			ownerHotel = HotelFabric.getInstanceOf().getById(idOwnerHotel);
 		return ownerHotel;
 	}
 
+	/* HashCode, Equals and toString */
 	@Override
 	public int hashCode() {
 		final int prime = 31;

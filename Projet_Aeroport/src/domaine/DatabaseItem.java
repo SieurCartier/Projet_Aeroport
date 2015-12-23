@@ -1,5 +1,10 @@
 package domaine;
 
+/**
+ * This class represents a general <code>DatabaseItem</code>
+ * 
+ * @author Shindro
+ */
 public class DatabaseItem {
 	private int id;
 

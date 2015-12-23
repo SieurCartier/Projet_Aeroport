@@ -1,10 +1,14 @@
 package domaine;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.*;
 import fabrics.CityFabric;
 import utils.DayOfWeek;
 
+/**
+ * This class represents a <code>Flight</code>
+ * 
+ * @author Shindro
+ */
 public class Flight extends DatabaseItem {
 
 	private String flightNumber;
@@ -43,7 +47,9 @@ public class Flight extends DatabaseItem {
 			int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
 		super(id);
 		this.flightNumber = flightNumber;
+		this.idDeparture = departure.getId();
 		this.departure = departure;
+		this.idArrival = arrival.getId();
 		this.arrival = arrival;
 		this.dayOfWeekDeparture = dayOfWeekDeparture;
 		this.departureTime = departureTime;
@@ -55,6 +61,8 @@ public class Flight extends DatabaseItem {
 		this.nbDayCancelling = nbDayCancelling;
 	}
 
+	/* Getters and Setters */
+
 	public String getFlightNumber() {
 		return flightNumber;
 	}
@@ -63,32 +71,70 @@ public class Flight extends DatabaseItem {
 		this.flightNumber = flightNumber;
 	}
 
+	/**
+	 * This method gets the {@link City} of departure of this
+	 * <code>Flight</code>. It calls the {@link CityFabric#getById(int)} with
+	 * {@link #idDeparture}.
+	 * 
+	 * @return The {@link City} of departure.
+	 */
 	public City getDeparture() {
 		if (departure == null)
 			departure = CityFabric.getInstanceOf().getById(idDeparture);
 		return departure;
 	}
 
+	/**
+	 * This method set the {@link City} of departure and updates the
+	 * {@link #idDeparture}
+	 * 
+	 * @param departure
+	 *            The {@link City} of departure.
+	 */
 	public void setDeparture(City departure) {
 		this.departure = departure;
 		this.idDeparture = departure.getId();
 	}
 
+	/**
+	 * This method gets the {@link City} of arrival of this <code>Flight</code>.
+	 * It calls the {@link CityFabric#getById(int)} with {@link #idArrival}.
+	 * 
+	 * @return The {@link City} of departure.
+	 */
 	public City getArrival() {
 		if (arrival == null)
 			arrival = CityFabric.getInstanceOf().getById(idArrival);
 		return arrival;
 	}
 
+	/**
+	 * This method set the {@link City} of arrival and updates the
+	 * {@link #idArrival}
+	 * 
+	 * @param arrival
+	 *            The {@link City} of arrival.
+	 */
 	public void setArrival(City arrival) {
 		this.idArrival = arrival.getId();
 		this.arrival = arrival;
 	}
 
+	/**
+	 * This method gets the {@link DayOfWeek} of the departure.
+	 * 
+	 * @return The {@link DayOfWeek} of the departure
+	 */
 	public DayOfWeek getDayOfWeekDeparture() {
 		return dayOfWeekDeparture;
 	}
 
+	/**
+	 * This method sets the {@link DayOfWeek} of the departure.
+	 * 
+	 * @param dayOfWeekDeparture
+	 *            The {@link DayOfWeek} of the departure.
+	 */
 	public void setDayOfWeekDeparture(DayOfWeek dayOfWeekDeparture) {
 		this.dayOfWeekDeparture = dayOfWeekDeparture;
 	}
@@ -148,6 +194,8 @@ public class Flight extends DatabaseItem {
 	public void setNbDayCancelling(int nbDayCancelling) {
 		this.nbDayCancelling = nbDayCancelling;
 	}
+
+	/* HashCode, Equals and toString */
 
 	@Override
 	public int hashCode() {
