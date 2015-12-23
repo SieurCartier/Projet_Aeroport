@@ -51,7 +51,15 @@ public class Reservation extends DatabaseItem {
 		return customer;
 	}
 
+	/**
+	 * This method sets the {@link Customer} that booked the
+	 * <code>Reservation</code> and updates the {@link #idCustomer}
+	 * 
+	 * @param customer
+	 *            The {@link Customer} that booked the <code>Reservation</code>.
+	 */
 	public void setCustomer(Customer customer) {
+		this.idCustomer = customer.getId();
 		this.customer = customer;
 	}
 
@@ -68,7 +76,15 @@ public class Reservation extends DatabaseItem {
 		return flight;
 	}
 
+	/**
+	 * This method sets the {@link Flight} concerned by the
+	 * <code>Reservation</code> and updates the {@link #idFlight}
+	 * 
+	 * @param flight
+	 *            The {@link Flight} concerned by the <code>Reservation</code>.
+	 */
 	public void setFlight(Flight flight) {
+		this.idFlight = flight.getId();
 		this.flight = flight;
 	}
 
@@ -85,7 +101,16 @@ public class Reservation extends DatabaseItem {
 		return room;
 	}
 
+	/**
+	 * This method sets the {@link HotelRoom} concerned by the
+	 * <code>Reservation</code> and updates the {@link #idHotelRoom}
+	 * 
+	 * @param room
+	 *            The {@link HotelRoom} concerned by the
+	 *            <code>Reservation</code>.
+	 */
 	public void setRoom(HotelRoom room) {
+		this.idHotelRoom = room.getId();
 		this.room = room;
 	}
 

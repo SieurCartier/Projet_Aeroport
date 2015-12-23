@@ -85,7 +85,7 @@ public class Flight extends DatabaseItem {
 	}
 
 	/**
-	 * This method set the {@link City} of departure and updates the
+	 * This method sets the {@link City} of departure and updates the
 	 * {@link #idDeparture}
 	 * 
 	 * @param departure
