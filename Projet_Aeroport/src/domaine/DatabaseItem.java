@@ -3,7 +3,7 @@ package domaine;
 /**
  * This class represents a general <code>DatabaseItem</code>
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class DatabaseItem {
 	private int id;
@@ -16,6 +16,11 @@ public class DatabaseItem {
 		return id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -24,6 +29,11 @@ public class DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

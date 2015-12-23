@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * This class describes the basics of a discount
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 
 public abstract class AbstractDiscount extends DatabaseItem {
@@ -59,6 +59,11 @@ public abstract class AbstractDiscount extends DatabaseItem {
 
 	/* HashCode and Equals */
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +75,11 @@ public abstract class AbstractDiscount extends DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

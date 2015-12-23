@@ -7,7 +7,7 @@ import fabrics.HotelFabric;
 /**
  * This class represents a <code>City</code>.
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class City extends DatabaseItem {
 
@@ -18,6 +18,8 @@ public class City extends DatabaseItem {
 		super(id);
 		this.name = name;
 	}
+
+	/* Getters and Setters */
 
 	/**
 	 * This method gets the {@link List} of {@link Hotel} in this
@@ -32,6 +34,21 @@ public class City extends DatabaseItem {
 		return hotels;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/* HashCode, Equals and toString */
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,6 +57,11 @@ public class City extends DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,17 +79,14 @@ public class City extends DatabaseItem {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

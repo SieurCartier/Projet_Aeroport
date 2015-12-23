@@ -7,7 +7,7 @@ import utils.DayOfWeek;
 /**
  * This class represents a <code>Flight</code>
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class Flight extends DatabaseItem {
 
@@ -197,6 +197,11 @@ public class Flight extends DatabaseItem {
 
 	/* HashCode, Equals and toString */
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,6 +220,11 @@ public class Flight extends DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -258,6 +268,11 @@ public class Flight extends DatabaseItem {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return flightNumber + " : " + departure.toString() + " -> " + arrival.toString();

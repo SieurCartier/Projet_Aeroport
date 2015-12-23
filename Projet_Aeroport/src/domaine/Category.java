@@ -5,7 +5,7 @@ import fabrics.HotelFabric;
 /**
  * This class represents a category
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class Category extends DatabaseItem {
 
@@ -70,6 +70,12 @@ public class Category extends DatabaseItem {
 	}
 
 	/* HashCode, Equals and toString */
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,6 +86,11 @@ public class Category extends DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -108,6 +119,11 @@ public class Category extends DatabaseItem {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return name;

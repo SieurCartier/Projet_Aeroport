@@ -6,7 +6,7 @@ import fabrics.*;
 /**
  * This class represents a <code>Customer</code>.
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class Customer extends DatabaseItem {
 
@@ -99,6 +99,11 @@ public class Customer extends DatabaseItem {
 
 	/* HashCode, Equals and toString */
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -110,6 +115,11 @@ public class Customer extends DatabaseItem {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -139,6 +149,11 @@ public class Customer extends DatabaseItem {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return lastname + " " + firstname;

@@ -7,7 +7,7 @@ import fabrics.CityFabric;
  * This class represents a Discount which is based on the destination which is a
  * {@link City}
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class CityDiscount extends AbstractDiscount {
 
@@ -51,6 +51,11 @@ public class CityDiscount extends AbstractDiscount {
 
 	/* HashCode and Equals */
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.AbstractDiscount#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -59,6 +64,11 @@ public class CityDiscount extends AbstractDiscount {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domaine.AbstractDiscount#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

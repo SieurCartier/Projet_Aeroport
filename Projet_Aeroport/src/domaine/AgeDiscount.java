@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * A special kind of Discount which is based on the age of the {@link Customer}
  * 
- * @author Shindro
+ * @author Gaston Lemaire
  */
 public class AgeDiscount extends AbstractDiscount {
 
