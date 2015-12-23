@@ -1,7 +1,4 @@
-import java.util.Date;
-
 import IHM.MainWindow;
-import domaine.*;
 import fabrics.*;
 
 public class Main {
@@ -11,6 +8,14 @@ public class Main {
 		MySQLConnection conn = MySQLConnection.getInstanceOf();
 		// conn.setUp("webtp.fil.univ-lille1.fr","", "", "");
 		conn.setUp("localhost", "aeroport", "gaston", "gaston");
+
+		CategoryFabric category = CategoryFabric.getInstanceOf();
+		CityFabric city = CityFabric.getInstanceOf();
+		CustomerFabric customer = CustomerFabric.getInstanceOf();
+		FlightFabric.getInstanceOf();
+		HotelFabric.getInstanceOf();
+		HotelRoomFabric.getInstanceOf();
+		ReservationFabric.getInstanceOf();
 
 		new MainWindow().setVisible(true);
 
