@@ -2,10 +2,14 @@ package fabrics;
 
 import java.sql.*;
 import java.util.HashMap;
-
 import domaine.Flight;
 import utils.DayOfWeek;
 
+/**
+ * This class is a <code>Fabric</code> of {@link Flight}
+ * 
+ * @author Gaston Lemaire
+ */
 public class FlightFabric extends AbstractFabric<Flight> {
 
 	private static FlightFabric singleton = null;
@@ -20,6 +24,11 @@ public class FlightFabric extends AbstractFabric<Flight> {
 		return singleton;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fabrics.AbstractFabric#constructObject(java.sql.ResultSet)
+	 */
 	@Override
 	protected Flight constructObject(ResultSet flight) throws SQLException {
 		return new Flight(flight.getInt("idFlight"), flight.getString("flightNumber"), flight.getInt("departure"),
@@ -30,6 +39,11 @@ public class FlightFabric extends AbstractFabric<Flight> {
 				flight.getInt("nbDayCancelling"));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fabrics.AbstractFabric#constructObject(int, java.util.HashMap)
+	 */
 	@Override
 	protected Flight constructObject(int id, HashMap<String, Object> m) {
 		return new Flight(id, (String) m.get("flightNumber"), (int) m.get("departure"), (int) m.get("arrival"),

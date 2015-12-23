@@ -9,9 +9,9 @@ import utils.NotCreatedItemException;
 
 /**
  * This class represents a general <code>Fabric</code>. It is parameterized with
- * the item that it is going to manage. It has an internal buffer system such as
- * {@link DatabaseItem} are retrieved from the <code>Database</code> once and
- * stored in a {@link WeakHashMap}.
+ * the {@link DatabaseItem} that it is going to manage. It has an internal
+ * buffer system such as {@link DatabaseItem} are retrieved from the
+ * <code>Database</code> once and stored in a {@link WeakHashMap}.
  * 
  * @author Gaston Lemaire
  *

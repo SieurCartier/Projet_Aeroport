@@ -62,7 +62,7 @@ public class Customer extends DatabaseItem {
 
 	/**
 	 * This method gets the {@link City} of this <code>Customer</code>. It calls
-	 * the {@link CityFabric#getById(City)} with the {@link Customer#idCity}.
+	 * the {@link CityFabric#getById(int)} with the {@link #idCity} .
 	 * 
 	 * @return The {@link City} of the <code>Customer</code>.
 	 */
