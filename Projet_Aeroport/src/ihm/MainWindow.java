@@ -5,130 +5,152 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.*;
 
+/**
+ * This class represents the main window. On simply consist on a little menu bar
+ * with several items on it.
+ * 
+ * @author Gaston Lemaire
+ */
 public class MainWindow extends JFrame implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * A window map, you store a window referenced by the button that opens it
+	 */
 	@SuppressWarnings("rawtypes")
 	private HashMap<Object, AbstractWindow> windowsMap = new HashMap<Object, AbstractWindow>();
 
 	private JMenuBar menuBar = new JMenuBar();
 
-	private JMenu clients = new JMenu();
-	private JMenuItem rechercherClient = new JMenuItem();
-	private JMenuItem nouveauClient = new JMenuItem();
+	private JMenu customers = new JMenu();
+	private JMenuItem searchCustomer = new JMenuItem();
+	private JMenuItem newCustomer = new JMenuItem();
 
-	private JMenu vols = new JMenu();
-	private JMenuItem rechercherVol = new JMenuItem();
-	private JMenuItem nouveauVol = new JMenuItem();
+	private JMenu flights = new JMenu();
+	private JMenuItem searchFlight = new JMenuItem();
+	private JMenuItem newFlight = new JMenuItem();
 
 	private JMenu hotels = new JMenu();
-	private JMenuItem rechercherHotel = new JMenuItem();
-	private JMenuItem nouvelHotel = new JMenuItem();
+	private JMenuItem searchHotel = new JMenuItem();
+	private JMenuItem newHotel = new JMenuItem();
 
-	private JMenu villes = new JMenu();
-	private JMenuItem rechercherVille = new JMenuItem();
-	private JMenuItem nouvelleVille = new JMenuItem();
+	private JMenu cities = new JMenu();
+	private JMenuItem searchCity = new JMenuItem();
+	private JMenuItem newCity = new JMenuItem();
 
 	private JMenu reservations = new JMenu();
-	private JMenuItem rechercherReservation = new JMenuItem();
-	private JMenuItem nouvelleReservation = new JMenuItem();
+	private JMenuItem searchReservation = new JMenuItem();
+	private JMenuItem newReservation = new JMenuItem();
 
-	private JMenu promotions = new JMenu();
-	private JMenuItem gererPromos = new JMenuItem();
-	private JMenuItem nouvelPromo = new JMenuItem();
+	private JMenu discounts = new JMenu();
+	private JMenuItem manageDiscounts = new JMenuItem();
+	private JMenuItem newDiscount = new JMenuItem();
 
 	public MainWindow() {
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
 		initComponents();
 	}
 
+	/**
+	 * A method that sets up every components of the window.
+	 */
 	private void initComponents() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
+		/**
+		 * For each menu items, you set its properties and put it as a reference
+		 * to the proper window in the {@link #windowsMap}.
+		 */
 
-		clients.setText("Clients");
+		/* Customers */
 
-		rechercherClient.setText("Rechercher");
-		rechercherClient.addActionListener(this);
-		clients.add(rechercherClient);
-		windowsMap.put(rechercherClient, new SearchCustomerWindow());
+		customers.setText("Clients");
 
-		nouveauClient.setText("Nouveau");
-		nouveauClient.addActionListener(this);
-		clients.add(nouveauClient);
-		windowsMap.put(nouveauClient, new NewCustomerWindow());
+		searchCustomer.setText("Rechercher");
+		searchCustomer.addActionListener(this);
+		customers.add(searchCustomer);
+		windowsMap.put(searchCustomer, new SearchCustomerWindow());
 
-		menuBar.add(clients);
+		newCustomer.setText("Nouveau");
+		newCustomer.addActionListener(this);
+		customers.add(newCustomer);
+		windowsMap.put(newCustomer, new NewCustomerWindow());
+
+		menuBar.add(customers);
+
+		/* Reservations */
 
 		reservations.setText("Réservations");
 
-		rechercherReservation.setText("Rechercher");
-		rechercherReservation.addActionListener(this);
-		reservations.add(rechercherReservation);
-		windowsMap.put(rechercherReservation, new SearchReservationWindow());
+		searchReservation.setText("Rechercher");
+		searchReservation.addActionListener(this);
+		reservations.add(searchReservation);
+		windowsMap.put(searchReservation, new SearchReservationWindow());
 
-		nouvelleReservation.setText("Nouvelle");
-		nouvelleReservation.addActionListener(this);
-		reservations.add(nouvelleReservation);
-		windowsMap.put(nouvelleReservation, new NewReservationWindow());
+		newReservation.setText("Nouvelle");
+		newReservation.addActionListener(this);
+		reservations.add(newReservation);
+		windowsMap.put(newReservation, new NewReservationWindow());
 
 		menuBar.add(reservations);
 
-		vols.setText("Vols");
+		/* Flights */
 
-		rechercherVol.setText("Rechercher");
-		rechercherVol.addActionListener(this);
-		vols.add(rechercherVol);
-		windowsMap.put(rechercherVol, new SearchFlightWindow());
+		flights.setText("Vols");
 
-		nouveauVol.setText("Nouveau");
-		nouveauVol.addActionListener(this);
-		vols.add(nouveauVol);
-		windowsMap.put(nouveauVol, new NewFlightWindow());
+		searchFlight.setText("Rechercher");
+		searchFlight.addActionListener(this);
+		flights.add(searchFlight);
+		windowsMap.put(searchFlight, new SearchFlightWindow());
 
-		menuBar.add(vols);
+		newFlight.setText("Nouveau");
+		newFlight.addActionListener(this);
+		flights.add(newFlight);
+		windowsMap.put(newFlight, new NewFlightWindow());
+
+		menuBar.add(flights);
 
 		hotels.setText("Hotels");
 
-		rechercherHotel.setText("Rechercher");
-		rechercherHotel.addActionListener(this);
-		hotels.add(rechercherHotel);
-		windowsMap.put(rechercherHotel, new SearchHotelWindow());
+		searchHotel.setText("Rechercher");
+		searchHotel.addActionListener(this);
+		hotels.add(searchHotel);
+		windowsMap.put(searchHotel, new SearchHotelWindow());
 
-		nouvelHotel.setText("Nouveau");
-		nouvelHotel.addActionListener(this);
-		hotels.add(nouvelHotel);
-		windowsMap.put(nouvelHotel, new NewHotelWindow());
+		newHotel.setText("Nouveau");
+		newHotel.addActionListener(this);
+		hotels.add(newHotel);
+		windowsMap.put(newHotel, new NewHotelWindow());
 
 		menuBar.add(hotels);
 
-		villes.setText("Hotels");
+		cities.setText("Hotels");
 
-		rechercherVille.setText("Rechercher");
-		rechercherVille.addActionListener(this);
-		villes.add(rechercherVille);
-		windowsMap.put(rechercherVille, new SearchCityWindow());
+		searchCity.setText("Rechercher");
+		searchCity.addActionListener(this);
+		cities.add(searchCity);
+		windowsMap.put(searchCity, new SearchCityWindow());
 
-		nouvelleVille.setText("Nouvelle");
-		nouvelleVille.addActionListener(this);
-		villes.add(nouvelleVille);
-		windowsMap.put(nouvelleVille, new NewCityWindow());
+		newCity.setText("Nouvelle");
+		newCity.addActionListener(this);
+		cities.add(newCity);
+		windowsMap.put(newCity, new NewCityWindow());
 
-		menuBar.add(villes);
+		menuBar.add(cities);
 
-		promotions.setText("Promotions");
+		discounts.setText("Promotions");
 
-		gererPromos.setText("Gérer");
-		gererPromos.addActionListener(this);
-		promotions.add(gererPromos);
-		windowsMap.put(gererPromos, new ManageDiscountWindow());
+		manageDiscounts.setText("Gérer");
+		manageDiscounts.addActionListener(this);
+		discounts.add(manageDiscounts);
+		windowsMap.put(manageDiscounts, new ManageDiscountWindow());
 
-		nouvelPromo.setText("Nouvelle");
-		nouvelPromo.addActionListener(this);
-		promotions.add(nouvelPromo);
-		windowsMap.put(nouvelPromo, new NewDiscountWindow());
+		newDiscount.setText("Nouvelle");
+		newDiscount.addActionListener(this);
+		discounts.add(newDiscount);
+		windowsMap.put(newDiscount, new NewDiscountWindow());
 
-		menuBar.add(promotions);
+		menuBar.add(discounts);
 
 		setJMenuBar(menuBar);
 
