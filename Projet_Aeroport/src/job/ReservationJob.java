@@ -2,18 +2,18 @@ package job;
 
 import java.util.HashMap;
 
-import domain.Customer;
-import fabrics.CustomerFabric;
+import domain.Reservation;
+import fabrics.ReservationFabric;
 
-public class ReservationJob extends AbstractJob<Customer, CustomerFabric> {
+public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> {
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see metier.AbstractJob#create(java.util.HashMap)
+	 * @see job.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public Customer create(HashMap<String, String> fields) {
+	public Reservation create(HashMap<String, String> fields) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -21,10 +21,10 @@ public class ReservationJob extends AbstractJob<Customer, CustomerFabric> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
+	 * @see job.AbstractJob#remove(domain.DatabaseItem)
 	 */
 	@Override
-	public void remove(Customer t) {
+	public void remove(Reservation t) {
 		// TODO Auto-generated method stub
 
 	}

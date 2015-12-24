@@ -7,28 +7,37 @@ import domain.DatabaseItem;
 import job.AbstractJob;
 
 /**
- * This class is represents a generic Window parameterized by the
+ * This class represents a generic <code>Window</code> parameterized by the
  * {@link AbstractJob} that will manage the {@link DatabaseItem} concerned in
- * this window.
+ * this <code>Window</code>.
  * 
  * @author Gaston Lemaire
  *
  * @param <J>
- *            The {@link AbstractJob}
+ *            The {@link AbstractJob} that will manage the {@link DatabaseItem}.
  */
-@SuppressWarnings("rawtypes")
-public class AbstractWindow<J extends AbstractJob> extends JFrame {
+public abstract class AbstractWindow<J extends AbstractJob<?, ?>> extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public AbstractWindow() {
-		initComponents();
-	}
+	protected AbstractJob<?, ?> job;
 
-	private void initComponents() {
+	public AbstractWindow() {
+
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setType(Window.Type.UTILITY);
+
+		job = getJob();
 	}
+
+	/**
+	 * This method is called by {@link #AbstractWindow()}. It is used to get an
+	 * instance of the job that will manage the {@link DatabaseItem}.
+	 * 
+	 * @return The {@link AbstractJob} that will manage the {@link DatabaseItem}
+	 *         .
+	 */
+	protected abstract AbstractJob<?, ?> getJob();
 
 }

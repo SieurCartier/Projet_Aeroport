@@ -6,8 +6,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 /**
- * This class represents the main window. On simply consist on a little menu bar
- * with several items on it.
+ * This class represents the main <code>Window</code>. It simply consists on a
+ * little menu bar with several items on it.
  * 
  * @author Gaston Lemaire
  */
@@ -16,7 +16,8 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * A window map, you store a window referenced by the button that opens it
+	 * A window map, you store a <code>Window</code> referenced by the button
+	 * that opens it
 	 */
 	@SuppressWarnings("rawtypes")
 	private HashMap<Object, AbstractWindow> windowsMap = new HashMap<Object, AbstractWindow>();
@@ -110,6 +111,8 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 
 		menuBar.add(flights);
 
+		/* Hotels */
+
 		hotels.setText("Hotels");
 
 		searchHotel.setText("Rechercher");
@@ -124,7 +127,9 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 
 		menuBar.add(hotels);
 
-		cities.setText("Hotels");
+		/* Cities */
+
+		cities.setText("Villes");
 
 		searchCity.setText("Rechercher");
 		searchCity.addActionListener(this);
@@ -137,6 +142,8 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 		windowsMap.put(newCity, new NewCityWindow());
 
 		menuBar.add(cities);
+
+		/* Discounts */
 
 		discounts.setText("Promotions");
 
@@ -164,16 +171,29 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 		pack();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.
+	 * ListSelectionEvent)
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		AbstractWindow window = windowsMap.get(e);
+		AbstractWindow window = windowsMap.get(e.getSource());
 		window.setVisible(true);
 	}
 
