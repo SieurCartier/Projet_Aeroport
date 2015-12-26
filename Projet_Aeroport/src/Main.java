@@ -3,6 +3,7 @@ import ihm.MainWindow;
 
 public class Main {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		MySQLConnection conn = MySQLConnection.getInstanceOf();

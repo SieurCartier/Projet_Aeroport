@@ -9,7 +9,8 @@ import domain.AbstractDiscount;
  * 
  * @author Gaston Lemaire
  */
-public abstract class AbstractDiscountFabric<D extends AbstractDiscount> extends AbstractFabric<D> {
+public abstract class AbstractDiscountFabric<D extends AbstractDiscount>
+		extends AbstractFabric<D> {
 
 	protected AbstractDiscountFabric() {
 		super("Discount", "idDiscount");

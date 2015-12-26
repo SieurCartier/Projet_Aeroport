@@ -31,7 +31,8 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	 */
 	@Override
 	protected Category constructObject(ResultSet categ) throws SQLException {
-		return new Category(categ.getInt("idCategorie"), categ.getString("name"), categ.getInt("capacity"),
+		return new Category(categ.getInt("idCategorie"),
+				categ.getString("name"), categ.getInt("capacity"),
 				categ.getFloat("price"), categ.getInt("fk_idHotel"));
 	}
 
@@ -42,7 +43,8 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	 */
 	@Override
 	protected Category constructObject(int id, HashMap<String, Object> m) {
-		return new Category(id, (String) m.get("name"), (int) m.get("capacity"), (float) m.get("price"),
+		return new Category(id, (String) m.get("name"),
+				(int) m.get("capacity"), (float) m.get("price"),
 				(int) m.get("fk_idHotel"));
 	}
 
@@ -59,7 +61,8 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	 *            The {@link Hotel} of the {@link Category}.
 	 * @return The new {@link Category}.
 	 */
-	public Category createCategory(String name, int capacity, float price, Hotel ownerHotel) {
+	public Category createCategory(String name, int capacity, float price,
+			Hotel ownerHotel) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("capacity", capacity);
 		parameters.put("price", price);

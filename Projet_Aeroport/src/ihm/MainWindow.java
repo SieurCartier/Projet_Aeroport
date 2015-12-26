@@ -11,7 +11,8 @@ import javax.swing.event.*;
  * 
  * @author Gaston Lemaire
  */
-public class MainWindow extends JFrame implements ActionListener, ListSelectionListener {
+public class MainWindow extends JFrame implements ActionListener,
+		ListSelectionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -163,10 +164,10 @@ public class MainWindow extends JFrame implements ActionListener, ListSelectionL
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
+		layout.setHorizontalGroup(layout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
 
 		pack();
 	}

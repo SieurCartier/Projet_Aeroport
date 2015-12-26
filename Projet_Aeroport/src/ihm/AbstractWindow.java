@@ -16,7 +16,8 @@ import job.AbstractJob;
  * @param <J>
  *            The {@link AbstractJob} that will manage the {@link DatabaseItem}.
  */
-public abstract class AbstractWindow<J extends AbstractJob<?, ?>> extends JFrame {
+public abstract class AbstractWindow<J extends AbstractJob<?, ?>> extends
+		JFrame {
 
 	private static final long serialVersionUID = 1L;
 

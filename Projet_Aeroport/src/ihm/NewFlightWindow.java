@@ -5,7 +5,8 @@ import fabrics.FlightFabric;
 import job.AbstractJob;
 import job.FlightJob;
 
-public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight, FlightJob> {
+public class NewFlightWindow extends
+		AbstractNewDatabaseItemWindow<Flight, FlightJob> {
 
 	private static final long serialVersionUID = 1L;
 

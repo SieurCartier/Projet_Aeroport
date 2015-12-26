@@ -74,7 +74,8 @@ public class MySQLConnection {
 	 * 
 	 * @see java.sql.Connection#prepareStatement(String, int)
 	 */
-	public PreparedStatement prepareStatement(String sql, int returnGeneratedKeys) throws SQLException {
+	public PreparedStatement prepareStatement(String sql,
+			int returnGeneratedKeys) throws SQLException {
 		return conn.prepareStatement(sql, returnGeneratedKeys);
 	}
 }

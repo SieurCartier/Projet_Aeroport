@@ -7,6 +7,8 @@ import domain.City;
 import domain.CityDiscount;
 
 /**
+ * This class represents a <code>Fabric</code> of {@link CityDiscount}.
+ * 
  * @author Gaston Lemaire
  *
  */

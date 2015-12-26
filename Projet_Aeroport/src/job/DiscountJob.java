@@ -7,7 +7,8 @@ import fabrics.AbstractFabric;
 /*
  * This class will take care of the tenth use case : "Gestion des promotions"
  */
-public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<AbstractDiscount>> {
+public class DiscountJob extends
+		AbstractJob<AbstractDiscount, AbstractFabric<AbstractDiscount>> {
 
 	/*
 	 * (non-Javadoc)

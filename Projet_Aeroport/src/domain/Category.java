@@ -15,7 +15,8 @@ public class Category extends DatabaseItem {
 	private int idOwnerHotel;
 	private Hotel ownerHotel = null;
 
-	public Category(int id, String name, int capacity, float price, int idOwnerHotel) {
+	public Category(int id, String name, int capacity, float price,
+			int idOwnerHotel) {
 		super(id);
 		this.name = name;
 		this.capacity = capacity;
@@ -23,7 +24,8 @@ public class Category extends DatabaseItem {
 		this.idOwnerHotel = idOwnerHotel;
 	}
 
-	public Category(int id, String name, int capacity, float price, Hotel ownerHotel) {
+	public Category(int id, String name, int capacity, float price,
+			Hotel ownerHotel) {
 		super(id);
 		this.name = name;
 		this.capacity = capacity;

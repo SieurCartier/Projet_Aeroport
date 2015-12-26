@@ -14,13 +14,15 @@ public class CityDiscount extends AbstractDiscount implements IDiscount<City> {
 	private int idCity;
 	private City city = null;
 
-	public CityDiscount(int id, String name, Date startDate, Date endDate, float percentage, City city) {
+	public CityDiscount(int id, String name, Date startDate, Date endDate,
+			float percentage, City city) {
 		super(id, name, startDate, endDate, percentage);
 		this.idCity = city.getId();
 		this.city = city;
 	}
 
-	public CityDiscount(int id, String name, Date startDate, Date endDate, float percentage, int idCity) {
+	public CityDiscount(int id, String name, Date startDate, Date endDate,
+			float percentage, int idCity) {
 		super(id, name, startDate, endDate, percentage);
 		this.idCity = idCity;
 	}
@@ -78,6 +80,7 @@ public class CityDiscount extends AbstractDiscount implements IDiscount<City> {
 	 */
 	@Override
 	public boolean isApplicable(City c) {
-		return c.equals(getCity()) && new Date().after(startDate) && new Date().before(endDate);
+		return c.equals(getCity()) && new Date().after(startDate)
+				&& new Date().before(endDate);
 	}
 }

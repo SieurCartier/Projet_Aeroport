@@ -14,7 +14,8 @@ public abstract class AbstractDiscount extends DatabaseItem {
 	protected Date endDate;
 	protected float percentage;
 
-	public AbstractDiscount(int id, String name, Date startDate, Date endDate, float percentage) {
+	public AbstractDiscount(int id, String name, Date startDate, Date endDate,
+			float percentage) {
 		super(id);
 		this.name = name;
 		this.startDate = startDate;
@@ -65,7 +66,8 @@ public abstract class AbstractDiscount extends DatabaseItem {
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + Float.floatToIntBits(percentage);
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result
+				+ ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -88,7 +90,8 @@ public abstract class AbstractDiscount extends DatabaseItem {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (Float.floatToIntBits(percentage) != Float.floatToIntBits(other.percentage))
+		if (Float.floatToIntBits(percentage) != Float
+				.floatToIntBits(other.percentage))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)

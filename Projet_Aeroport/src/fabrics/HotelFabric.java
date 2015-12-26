@@ -31,8 +31,8 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	 */
 	@Override
 	protected Hotel constructObject(ResultSet hotel) throws SQLException {
-		return new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"), hotel.getInt("ResiliationDayNumber"),
-				hotel.getInt("idCity"));
+		return new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"),
+				hotel.getInt("ResiliationDayNumber"), hotel.getInt("idCity"));
 	}
 
 	/*
@@ -42,7 +42,8 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	 */
 	@Override
 	protected Hotel constructObject(int id, HashMap<String, Object> m) {
-		return new Hotel(id, (String) m.get("name"), (int) m.get("resilationDayNumber"), (int) m.get("fk_idCity"));
+		return new Hotel(id, (String) m.get("name"),
+				(int) m.get("resilationDayNumber"), (int) m.get("fk_idCity"));
 	}
 
 	/*

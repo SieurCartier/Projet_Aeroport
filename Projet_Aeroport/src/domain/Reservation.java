@@ -1,8 +1,6 @@
 package domain;
 
-import fabrics.CustomerFabric;
-import fabrics.FlightFabric;
-import fabrics.HotelRoomFabric;
+import fabrics.*;
 
 /**
  * This class represents a <code>Reservation</code>
@@ -161,7 +159,8 @@ public class Reservation extends DatabaseItem {
 	 */
 	@Override
 	public String toString() {
-		return customer.toString() + " : " + flight.toString() + " " + room.toString();
+		return customer.toString() + " : " + flight.toString() + " "
+				+ room.toString();
 	}
 
 }

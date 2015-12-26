@@ -7,9 +7,11 @@ import java.util.Date;
  * 
  * @author Gaston Lemaire
  */
-public class AgeDiscount extends AbstractDiscount implements IDiscount<Customer> {
+public class AgeDiscount extends AbstractDiscount implements
+		IDiscount<Customer> {
 
-	public AgeDiscount(int id, String name, Date startDate, Date endDate, float percentage) {
+	public AgeDiscount(int id, String name, Date startDate, Date endDate,
+			float percentage) {
 		super(id, name, startDate, endDate, percentage);
 	}
 
@@ -20,7 +22,8 @@ public class AgeDiscount extends AbstractDiscount implements IDiscount<Customer>
 	 */
 	@Override
 	public boolean isApplicable(Customer c) {
-		return c.getBirthdate().after(startDate) && c.getBirthdate().before(endDate);
+		return c.getBirthdate().after(startDate)
+				&& c.getBirthdate().before(endDate);
 	}
 
 }

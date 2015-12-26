@@ -3,7 +3,8 @@ package ihm;
 import domain.AbstractDiscount;
 import job.DiscountJob;
 
-public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDiscount, DiscountJob> {
+public class NewDiscountWindow extends
+		AbstractNewDatabaseItemWindow<AbstractDiscount, DiscountJob> {
 
 	private static final long serialVersionUID = 1L;
 

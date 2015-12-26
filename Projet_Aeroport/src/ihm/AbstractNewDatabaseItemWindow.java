@@ -64,7 +64,9 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 			for (JTextComponent field : fields) {
 				Document doc = field.getDocument();
 				try {
-					fieldMaps.put((String) field.getClientProperty("fieldName"), doc.getText(0, doc.getLength()));
+					fieldMaps.put(
+							(String) field.getClientProperty("fieldName"),
+							doc.getText(0, doc.getLength()));
 				} catch (BadLocationException e) {
 					System.out.println("Should never happen");
 				}
@@ -72,7 +74,8 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 
 			DatabaseItem item = job.create(fieldMaps);
 
-			String message = (item != null) ? item.toString() + " a bien été créé."
+			String message = (item != null) ? item.toString()
+					+ " a bien été créé."
 					: "Erreur, veuillez remplir correctment les champs";
 
 			JOptionPane.showMessageDialog(this, message);

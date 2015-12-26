@@ -23,7 +23,8 @@ public class HotelRoom extends DatabaseItem {
 		this.idOwnerHotel = idOwnerHotel;
 	}
 
-	public HotelRoom(int id, String roomNumber, Category category, Hotel ownerHotel) {
+	public HotelRoom(int id, String roomNumber, Category category,
+			Hotel ownerHotel) {
 		super(id);
 		this.roomNumber = roomNumber;
 		this.idCategory = category.getId();
@@ -84,7 +85,8 @@ public class HotelRoom extends DatabaseItem {
 		int result = super.hashCode();
 		result = prime * result + idCategory;
 		result = prime * result + idOwnerHotel;
-		result = prime * result + ((roomNumber == null) ? 0 : roomNumber.hashCode());
+		result = prime * result
+				+ ((roomNumber == null) ? 0 : roomNumber.hashCode());
 		return result;
 	}
 

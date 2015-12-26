@@ -5,7 +5,8 @@ import fabrics.HotelFabric;
 import job.AbstractJob;
 import job.HotelJob;
 
-public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
+public class NewHotelWindow extends
+		AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
 
 	private static final long serialVersionUID = 1L;
 

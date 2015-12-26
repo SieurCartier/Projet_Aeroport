@@ -32,7 +32,8 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	 */
 	@Override
 	protected HotelRoom constructObject(ResultSet rooms) throws SQLException {
-		return new HotelRoom(rooms.getInt("idHotelRoom"), rooms.getString("roomNumber"), rooms.getInt("idCategory"),
+		return new HotelRoom(rooms.getInt("idHotelRoom"),
+				rooms.getString("roomNumber"), rooms.getInt("idCategory"),
 				rooms.getInt("idHotel"));
 	}
 
@@ -43,8 +44,8 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	 */
 	@Override
 	protected HotelRoom constructObject(int id, HashMap<String, Object> m) {
-		return new HotelRoom(id, (String) m.get("roomNumber"), (int) m.get("fk_idCategorie"),
-				(int) m.get("fk_idHotel"));
+		return new HotelRoom(id, (String) m.get("roomNumber"),
+				(int) m.get("fk_idCategorie"), (int) m.get("fk_idHotel"));
 	}
 
 	/**
@@ -58,7 +59,8 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	 *            The {@link Hotel} of the {@link HotelRoom}.
 	 * @return The new {@link Customer}.
 	 */
-	public HotelRoom createHotelRoom(String roomNumber, Category category, Hotel ownerHotel) {
+	public HotelRoom createHotelRoom(String roomNumber, Category category,
+			Hotel ownerHotel) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("fk_idCategorie", category.getId());
 		parameters.put("fk_idHotel", ownerHotel.getId());

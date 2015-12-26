@@ -5,7 +5,8 @@ import fabrics.CustomerFabric;
 import job.AbstractJob;
 import job.CustomerJob;
 
-public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, CustomerJob> {
+public class NewCustomerWindow extends
+		AbstractNewDatabaseItemWindow<Customer, CustomerJob> {
 
 	private static final long serialVersionUID = 1L;
 
