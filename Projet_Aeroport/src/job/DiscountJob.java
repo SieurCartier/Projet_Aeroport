@@ -1,19 +1,18 @@
 package job;
 
 import java.util.HashMap;
-
 import domain.AbstractDiscount;
-import fabrics.DiscountFabric;
+import fabrics.AbstractFabric;
 
 /*
  * This class will take care of the tenth use case : "Gestion des promotions"
  */
-public class DiscountJob extends AbstractJob<AbstractDiscount, DiscountFabric> {
+public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<AbstractDiscount>> {
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see metier.AbstractJob#create(java.util.HashMap)
+	 * @see job.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
 	public AbstractDiscount create(HashMap<String, String> fields) {
@@ -24,7 +23,7 @@ public class DiscountJob extends AbstractJob<AbstractDiscount, DiscountFabric> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
+	 * @see job.AbstractJob#remove(domain.DatabaseItem)
 	 */
 	@Override
 	public void remove(AbstractDiscount t) {

@@ -1,8 +1,5 @@
 package ihm;
 
-import domain.AbstractDiscount;
-import fabrics.DiscountFabric;
-import job.AbstractJob;
 import job.DiscountJob;
 
 public class ManageDiscountWindow extends AbstractWindow<DiscountJob> {
@@ -15,7 +12,7 @@ public class ManageDiscountWindow extends AbstractWindow<DiscountJob> {
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<AbstractDiscount, DiscountFabric> getJob() {
+	protected DiscountJob getJob() {
 		return new DiscountJob();
 	}
 

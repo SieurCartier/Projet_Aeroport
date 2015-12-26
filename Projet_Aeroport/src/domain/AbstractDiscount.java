@@ -3,11 +3,10 @@ package domain;
 import java.util.Date;
 
 /**
- * This class describes the basics of a discount
+ * This class describes the basics of a <code>Discount</code>.
  * 
  * @author Gaston Lemaire
  */
-
 public abstract class AbstractDiscount extends DatabaseItem {
 
 	protected String name;
@@ -59,11 +58,6 @@ public abstract class AbstractDiscount extends DatabaseItem {
 
 	/* HashCode and Equals */
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see domaine.DatabaseItem#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,56 +69,39 @@ public abstract class AbstractDiscount extends DatabaseItem {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see domaine.DatabaseItem#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof AbstractDiscount)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		AbstractDiscount other = (AbstractDiscount) obj;
 		if (endDate == null) {
-			if (other.endDate != null) {
+			if (other.endDate != null)
 				return false;
-			}
-		} else if (!endDate.equals(other.endDate)) {
+		} else if (!endDate.equals(other.endDate))
 			return false;
-		}
 		if (name == null) {
-			if (other.name != null) {
+			if (other.name != null)
 				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!name.equals(other.name))
 			return false;
-		}
-		if (Float.floatToIntBits(percentage) != Float.floatToIntBits(other.percentage)) {
+		if (Float.floatToIntBits(percentage) != Float.floatToIntBits(other.percentage))
 			return false;
-		}
 		if (startDate == null) {
-			if (other.startDate != null) {
+			if (other.startDate != null)
 				return false;
-			}
-		} else if (!startDate.equals(other.startDate)) {
+		} else if (!startDate.equals(other.startDate))
 			return false;
-		}
 		return true;
 	}
 
-	/**
-	 * This method apply a discount to a price by simply multiplying it
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param p
-	 *            The price to apply a discount
-	 * @return The price multiplied by the discount
+	 * @see domain.IDiscount#apply(float)
 	 */
 	public float apply(float p) {
 		return p * percentage;

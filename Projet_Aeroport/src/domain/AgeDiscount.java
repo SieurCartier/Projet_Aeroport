@@ -7,22 +7,20 @@ import java.util.Date;
  * 
  * @author Gaston Lemaire
  */
-public class AgeDiscount extends AbstractDiscount {
+public class AgeDiscount extends AbstractDiscount implements IDiscount<Customer> {
 
 	public AgeDiscount(int id, String name, Date startDate, Date endDate, float percentage) {
 		super(id, name, startDate, endDate, percentage);
 	}
 
-	/**
-	 * This method determines if the {@link Customer} can pretend to the
-	 * Discount
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param c
-	 *            The customer to test
-	 * @return <code>True</code> if the customer can pretend to the discount
-	 *         else <code>False</code>
+	 * @see domain.IDiscount#isApplicable(domain.DatabaseItem)
 	 */
-	public boolean isApplyable(Customer c) {
+	@Override
+	public boolean isApplicable(Customer c) {
 		return c.getBirthdate().after(startDate) && c.getBirthdate().before(endDate);
 	}
+
 }

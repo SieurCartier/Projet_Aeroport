@@ -1,8 +1,6 @@
 package ihm;
 
 import domain.AbstractDiscount;
-import fabrics.DiscountFabric;
-import job.AbstractJob;
 import job.DiscountJob;
 
 public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDiscount, DiscountJob> {
@@ -15,8 +13,7 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<AbstractDiscount, DiscountFabric> getJob() {
-		// TODO Auto-generated method stub
+	protected DiscountJob getJob() {
 		return new DiscountJob();
 	}
 

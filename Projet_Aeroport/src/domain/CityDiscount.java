@@ -4,12 +4,12 @@ import java.util.Date;
 import fabrics.CityFabric;
 
 /**
- * This class represents a Discount which is based on the destination which is a
- * {@link City}
+ * This class represents a Discount which is based on the {@link City} of
+ * destination.
  * 
  * @author Gaston Lemaire
  */
-public class CityDiscount extends AbstractDiscount {
+public class CityDiscount extends AbstractDiscount implements IDiscount<City> {
 
 	private int idCity;
 	private City city = null;
@@ -26,7 +26,7 @@ public class CityDiscount extends AbstractDiscount {
 	}
 
 	/**
-	 * This method get the {@link City} on which the Discount is applicable. It
+	 * This method gets the {@link City} on which the Discount is applicable. It
 	 * calls the {@link CityFabric#getById(int)} with the #idCity
 	 * 
 	 * @return The {@link City} of the Discount
@@ -35,18 +35,6 @@ public class CityDiscount extends AbstractDiscount {
 		if (city == null)
 			city = CityFabric.getInstanceOf().getById(idCity);
 		return city;
-	}
-
-	/**
-	 * This method determines if the Discount is available in this {@link City}
-	 * 
-	 * @param c
-	 *            The {@link City} to test
-	 * @return <code>True</code> if the {@link City} is available else
-	 *         <code>False</code>
-	 */
-	public boolean isApplicable(City c) {
-		return c.equals(getCity()) && new Date().after(startDate) && new Date().before(endDate);
 	}
 
 	/* HashCode and Equals */
@@ -81,5 +69,15 @@ public class CityDiscount extends AbstractDiscount {
 		if (idCity != other.idCity)
 			return false;
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see domain.IDiscount#isApplicable(domain.DatabaseItem)
+	 */
+	@Override
+	public boolean isApplicable(City c) {
+		return c.equals(getCity()) && new Date().after(startDate) && new Date().before(endDate);
 	}
 }
