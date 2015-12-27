@@ -9,7 +9,7 @@ public class NewCityWindow extends AbstractNewDatabaseItemWindow<City, CityJob> 
 
 	private static final long serialVersionUID = 1L;
 
-	JTextField name = new JTextField();
+	JTextField name;
 
 	public NewCityWindow() {
 		super();
@@ -32,6 +32,7 @@ public class NewCityWindow extends AbstractNewDatabaseItemWindow<City, CityJob> 
 	 */
 	@Override
 	protected void initComponents() {
+		name = new JTextField();
 		name.putClientProperty("fieldName", "name");
 		fields.add(name);
 
