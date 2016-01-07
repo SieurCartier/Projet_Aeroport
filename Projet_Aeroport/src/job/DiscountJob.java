@@ -1,8 +1,9 @@
 package job;
 
-import java.util.HashMap;
-import domain.AbstractDiscount;
-import fabrics.AbstractFabric;
+import java.text.*;
+import java.util.*;
+import domain.*;
+import fabrics.*;
 
 /*
  * This class will take care of the tenth use case : "Gestion des promotions"
@@ -19,12 +20,23 @@ public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<Ab
 
 		AbstractDiscount ret = null;
 
-		// String name = (String) fields.get("firstname");
-		// Date startDate = (String) fields.get("firstname");
-		// Date endDate = (String) fields.get("firstname");
-		// float percentage = 1 - Float.parseFloat((String)
-		// fields.get("percentage")) / 100;
+		try {
+			String name = (String) fields.get("firstname");
 
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+			Date startDate = df.parse((String) fields.get("startDate"));
+			Date endDate = df.parse((String) fields.get("endDate"));
+
+			float percentage = 1 - (float) Float.parseFloat((String) fields.get("percentage")) / 100;
+			City city = (City) fields.get("city");
+
+			ret = (city != null)
+					? CityDiscountFabric.getInstanceOf().createCityDiscount(name, startDate, endDate, percentage, city)
+					: AgeDiscountFabric.getInstanceOf().createAgeDiscount(name, startDate, endDate, percentage);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return ret;
 	}
 

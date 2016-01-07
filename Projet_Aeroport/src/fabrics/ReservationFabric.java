@@ -41,11 +41,9 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 	 * @see fabrics.AbstractFabric#constructObject(java.sql.ResultSet)
 	 */
 	@Override
-	protected Reservation constructObject(ResultSet reservs)
-			throws SQLException {
-		return new Reservation(reservs.getInt("idReservation"),
-				reservs.getInt("fk_idCustomer"), reservs.getInt("fk_idFlight"),
-				reservs.getInt("fk_idHotelRoom"));
+	protected Reservation constructObject(ResultSet reservs) throws SQLException {
+		return new Reservation(reservs.getInt("idReservation"), reservs.getInt("fk_idCustomer"),
+				reservs.getInt("fk_idFlight"), reservs.getInt("fk_idHotelRoom"));
 	}
 
 	/*
@@ -55,8 +53,17 @@ public class ReservationFabric extends AbstractFabric<Reservation> {
 	 */
 	@Override
 	protected Reservation constructObject(int id, HashMap<String, Object> m) {
-		return new Reservation(id, (int) m.get("fk_idCustomer"),
-				(int) m.get("fk_idFlight"), (int) m.get("fk_idHotelRoom"));
+		return new Reservation(id, (int) m.get("fk_idCustomer"), (int) m.get("fk_idFlight"),
+				(int) m.get("fk_idHotelRoom"));
+	}
+
+	public Reservation createReservation(Customer customer, Flight flight, HotelRoom room) {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("fk_idCustomer", customer.getId());
+		parameters.put("fk_idHotelRoom", flight.getId());
+		parameters.put("fk_idFlight", room.getId());
+
+		return super.create(parameters);
 	}
 
 }

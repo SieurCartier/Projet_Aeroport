@@ -1,8 +1,7 @@
 package job;
 
 import java.util.HashMap;
-
-import domain.Reservation;
+import domain.*;
 import fabrics.ReservationFabric;
 
 public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> {
@@ -14,8 +13,17 @@ public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> 
 	 */
 	@Override
 	public Reservation create(HashMap<String, Object> fields) {
-		// TODO Auto-generated method stub
-		return null;
+		Reservation ret = null;
+		try {
+			Customer customer = (Customer) fields.get("customer");
+			Flight flight = (Flight) fields.get("flight");
+			HotelRoom room = (HotelRoom) fields.get("room");
+
+			ret = fab.createReservation(customer, flight, room);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 }
