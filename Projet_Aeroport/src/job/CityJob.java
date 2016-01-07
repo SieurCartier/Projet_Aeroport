@@ -1,7 +1,6 @@
 package job;
 
-import java.util.HashMap;
-
+import java.util.*;
 import domain.City;
 import fabrics.CityFabric;
 
@@ -23,6 +22,10 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 	public City create(HashMap<String, Object> fields) {
 		String name = (String) fields.get("name");
 		return fab.createCity(name);
+	}
+	
+	public List<City> getAll() {
+		return fab.getAll() ;
 	}
 
 }

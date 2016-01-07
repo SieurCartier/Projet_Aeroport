@@ -41,7 +41,7 @@ public class Flight extends DatabaseItem {
 		this.priceFirstClassSits = priceFirstClassSits;
 		this.nbSecondClassSits = nbSecondClassSits;
 		this.priceSecondClassSits = priceSecondClassSits;
-		this.nbDayCancelling = nbDayCancelling;
+		this.nbDayCancelling = nbDayCancelling;		
 	}
 
 	public Flight(int id, String flightNumber, City departure, City arrival,

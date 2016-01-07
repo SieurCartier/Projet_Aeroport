@@ -60,6 +60,26 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		return objects.get(id);
 	}
 
+	public List<T> getAll() {
+		List<T> ret = new LinkedList<T>();
+		try {
+			String requete = "SELECT * " + "FROM " + tableName;
+			PreparedStatement pr = co.prepareStatement(requete);
+			ResultSet results = pr.executeQuery();
+
+			while (results.next()) {
+				T t = constructObject(results);
+				objects.put(results.getInt(primaryKeyName), t);
+				ret.add(t);
+			}
+			pr.close();
+			results.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return ret;
+	}
+
 	/**
 	 * This method updates a {@link DatabaseItem} in the <code>Database</code>
 	 * and in its internal buffer. It uses {@link PreparedStatement} and
@@ -223,8 +243,6 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 		return ret;
 	}
 
-	
-	
 	protected List<T> getFromField(String fieldname, Object fieldValue) {
 		List<T> ret = null;
 		try {

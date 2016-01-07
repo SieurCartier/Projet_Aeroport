@@ -3,10 +3,11 @@ package ihm;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
-
+import domain.City;
 import domain.Hotel;
 import fabrics.HotelFabric;
 import job.AbstractJob;
+import job.CityJob;
 import job.HotelJob;
 
 public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
@@ -25,7 +26,8 @@ public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJo
 
 	private JTextField tfNomHotel;
 
-	private JComboBox<String> comboBoxVilles;
+	private DefaultComboBoxModel<City> cityModel;
+	private JComboBox<City> comboBoxVilles;
 
 	private JTextField tfDelai;
 
@@ -71,8 +73,10 @@ public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJo
 		tfDelai.setDocument(new PlainDocument());
 		fields.add(tfDelai);
 
-		String[] listeVilles = { "test1", "test2" };
-		comboBoxVilles = new JComboBox<String>(listeVilles);
+		cityModel = new DefaultComboBoxModel<City>();
+		comboBoxVilles = new JComboBox<City>(cityModel);
+		comboBoxVilles.putClientProperty("fieldName", "city");
+		comboBoxes.add(comboBoxVilles);
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -142,6 +146,19 @@ public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJo
 
 		add(panelAjoutHotel, gbc);
 
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(b);
+		populate();
+	}
+
+	private void populate() {
+		CityJob j = new CityJob();
+		for (City c : j.getAll()) {
+			cityModel.addElement(c);
+		}
 	}
 
 }

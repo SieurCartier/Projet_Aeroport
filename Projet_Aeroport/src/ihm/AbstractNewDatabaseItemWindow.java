@@ -30,6 +30,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 	protected JButton btnAnnuler = new JButton("Annuler");
 
 	protected List<JTextComponent> fields = new LinkedList<JTextComponent>();
+	protected List<JComboBox<? extends DatabaseItem>> comboBoxes = new LinkedList<JComboBox<? extends DatabaseItem>>();
 
 	public AbstractNewDatabaseItemWindow() {
 		super();
@@ -61,6 +62,10 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 				} catch (BadLocationException e) {
 					System.out.println("Should never happen");
 				}
+			}
+			for (JComboBox<? extends DatabaseItem> c : comboBoxes) {
+				DatabaseItem d = (DatabaseItem) c.getSelectedItem();
+				fieldMaps.put((String) c.getClientProperty("fieldName"), d);
 			}
 
 			DatabaseItem item = job.create(fieldMaps);
