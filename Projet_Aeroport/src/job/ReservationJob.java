@@ -13,20 +13,9 @@ public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> 
 	 * @see job.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public Reservation create(HashMap<String, String> fields) {
+	public Reservation create(HashMap<String, Object> fields) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see job.AbstractJob#remove(domain.DatabaseItem)
-	 */
-	@Override
-	public void remove(Reservation t) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

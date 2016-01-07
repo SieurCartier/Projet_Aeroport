@@ -28,7 +28,7 @@ public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabr
 	 *            referenced by their attribute name in the class.
 	 * @return The new {@link DatabaseItem}.
 	 */
-	public abstract T create(HashMap<String, String> fields);
+	public abstract T create(HashMap<String, Object> fields);
 
 	/**
 	 * This method removes a {@link DatabaseItem}.
@@ -36,6 +36,8 @@ public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabr
 	 * @param t
 	 *            The {@link DatabaseItem} to remove.
 	 */
-	public abstract void remove(T t);
+	public void remove(T t) {
+		fab.delete(t);
+	}
 
 }

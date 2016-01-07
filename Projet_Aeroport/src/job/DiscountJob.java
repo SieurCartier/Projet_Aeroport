@@ -7,8 +7,7 @@ import fabrics.AbstractFabric;
 /*
  * This class will take care of the tenth use case : "Gestion des promotions"
  */
-public class DiscountJob extends
-		AbstractJob<AbstractDiscount, AbstractFabric<AbstractDiscount>> {
+public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<AbstractDiscount>> {
 
 	/*
 	 * (non-Javadoc)
@@ -16,20 +15,17 @@ public class DiscountJob extends
 	 * @see job.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public AbstractDiscount create(HashMap<String, String> fields) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public AbstractDiscount create(HashMap<String, Object> fields) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see job.AbstractJob#remove(domain.DatabaseItem)
-	 */
-	@Override
-	public void remove(AbstractDiscount t) {
-		// TODO Auto-generated method stub
+		AbstractDiscount ret = null;
 
+		// String name = (String) fields.get("firstname");
+		// Date startDate = (String) fields.get("firstname");
+		// Date endDate = (String) fields.get("firstname");
+		// float percentage = 1 - Float.parseFloat((String)
+		// fields.get("percentage")) / 100;
+
+		return ret;
 	}
 
 }

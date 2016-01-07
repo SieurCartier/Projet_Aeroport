@@ -16,20 +16,11 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 	 * @see metier.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public Hotel create(HashMap<String, String> fields) {
+	public Hotel create(HashMap<String, Object> fields) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
-	 */
-	@Override
-	public void remove(Hotel t) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

@@ -16,20 +16,9 @@ public class FlightJob extends AbstractJob<Flight, FlightFabric> {
 	 * @see metier.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public Flight create(HashMap<String, String> fields) {
+	public Flight create(HashMap<String, Object> fields) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
-	 */
-	@Override
-	public void remove(Flight t) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

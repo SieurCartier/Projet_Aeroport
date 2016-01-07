@@ -53,7 +53,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == btnCreate) {
-			HashMap<String, String> fieldMaps = new HashMap<String, String>();
+			HashMap<String, Object> fieldMaps = new HashMap<String, Object>();
 			for (JTextComponent field : fields) {
 				Document doc = field.getDocument();
 				try {

@@ -106,7 +106,7 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		// Liste labels ajout
 		gbc2.anchor = GridBagConstraints.LINE_END;
 		gbc2.gridy++;
-		gbc2.insets = new Insets(20, 0, 0, 0);
+		gbc2.insets = new Insets(40, 0, 0, 0);
 
 		panelAjoutClient.add(labelNomClient, gbc2);
 		gbc2.insets = new Insets(10, 0, 0, 0);
@@ -124,7 +124,7 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		gbc2.gridx = 1;
 		gbc2.gridy = 1;
 		gbc2.anchor = GridBagConstraints.LINE_START;
-		gbc2.insets = new Insets(20, 20, 0, 0);
+		gbc2.insets = new Insets(40, 20, 0, 0);
 
 		panelAjoutClient.add(tfNom, gbc2);
 		gbc2.insets = new Insets(10, 20, 0, 0);
@@ -139,15 +139,16 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		panelAjoutClient.add(tfVille, gbc2);
 
 		gbc2.gridy++;
-		gbc2.gridx = 1;
+		gbc2.gridx = 0;
 		gbc2.anchor = GridBagConstraints.LINE_END;
-		gbc2.insets = new Insets(20, 0, 40, 0);
+		gbc2.insets = new Insets(20, 0,40, 0);
+		btnCreate.setPreferredSize(new Dimension(80, 20));
 		panelAjoutClient.add(btnCreate, gbc2);
 
-		gbc2.gridy++;
-		gbc2.gridx = 1;
+		gbc2.gridx++;
 		gbc2.anchor = GridBagConstraints.LINE_END;
 		gbc2.insets = new Insets(20, 0, 40, 0);
+		btnAnnuler.setPreferredSize(new Dimension(80, 20));
 		panelAjoutClient.add(btnAnnuler, gbc2);
 
 		add(panelAjoutClient, gbc);

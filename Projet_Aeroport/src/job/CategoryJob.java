@@ -1,8 +1,8 @@
 package job;
 
 import java.util.HashMap;
-
 import domain.Category;
+import domain.Hotel;
 import fabrics.CategoryFabric;
 
 /*
@@ -16,20 +16,21 @@ public class CategoryJob extends AbstractJob<Category, CategoryFabric> {
 	 * @see metier.AbstractJob#create(java.util.HashMap)
 	 */
 	@Override
-	public Category create(HashMap<String, String> fields) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Category create(HashMap<String, Object> fields) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see metier.AbstractJob#remove(domaine.DatabaseItem)
-	 */
-	@Override
-	public void remove(Category t) {
-		// TODO Auto-generated method stub
+		Category ret = null;
 
+		try {
+			String name = (String) fields.get("name");
+			int capacity = Integer.parseInt((String) fields.get("capacity"));
+			float price = Float.parseFloat((String) fields.get("price"));
+			Hotel ownerHotel = (Hotel) fields.get("ownerHotel");
+
+			ret = fab.createCategory(name, capacity, price, ownerHotel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 }
