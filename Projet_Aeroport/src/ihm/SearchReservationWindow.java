@@ -19,4 +19,15 @@ public class SearchReservationWindow extends AbstractWindow<ReservationJob> {
 		return new ReservationJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
+	 */
+	@Override
+	protected void build() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

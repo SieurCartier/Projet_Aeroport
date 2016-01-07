@@ -5,8 +5,7 @@ import fabrics.FlightFabric;
 import job.AbstractJob;
 import job.FlightJob;
 
-public class NewFlightWindow extends
-		AbstractNewDatabaseItemWindow<Flight, FlightJob> {
+public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight, FlightJob> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,10 +22,10 @@ public class NewFlightWindow extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ihm.AbstractNewDatabaseItemWindow#initComponents()
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
 	 */
 	@Override
-	protected void initComponents() {
+	protected void build() {
 		// TODO Auto-generated method stub
 
 	}

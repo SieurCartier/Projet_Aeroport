@@ -5,8 +5,7 @@ import fabrics.HotelFabric;
 import job.AbstractJob;
 import job.HotelJob;
 
-public class NewHotelWindow extends
-		AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
+public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,10 +23,10 @@ public class NewHotelWindow extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ihm.AbstractNewDatabaseItemWindow#initComponents()
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
 	 */
 	@Override
-	protected void initComponents() {
+	protected void build() {
 		// TODO Auto-generated method stub
 
 	}

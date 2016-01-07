@@ -19,4 +19,15 @@ public class SearchCityWindow extends AbstractWindow<CityJob> {
 		return new CityJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
+	 */
+	@Override
+	protected void build() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

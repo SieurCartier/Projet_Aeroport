@@ -5,8 +5,7 @@ import fabrics.ReservationFabric;
 import job.AbstractJob;
 import job.ReservationJob;
 
-public class NewReservationWindow extends
-		AbstractNewDatabaseItemWindow<Reservation, ReservationJob> {
+public class NewReservationWindow extends AbstractNewDatabaseItemWindow<Reservation, ReservationJob> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,10 +22,10 @@ public class NewReservationWindow extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ihm.AbstractNewDatabaseItemWindow#initComponents()
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
 	 */
 	@Override
-	protected void initComponents() {
+	protected void build() {
 		// TODO Auto-generated method stub
 
 	}

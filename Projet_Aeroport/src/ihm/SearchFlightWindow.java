@@ -19,4 +19,15 @@ public class SearchFlightWindow extends AbstractWindow<FlightJob> {
 		return new FlightJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
+	 */
+	@Override
+	protected void build() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -28,14 +28,13 @@ public class NewCityWindow extends AbstractNewDatabaseItemWindow<City, CityJob> 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see ihm.AbstractNewDatabaseItemWindow#initComponents()
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
 	 */
 	@Override
-	protected void initComponents() {
+	protected void build() {
 		name = new JTextField();
 		name.putClientProperty("fieldName", "name");
 		fields.add(name);
-
 	}
 
 }

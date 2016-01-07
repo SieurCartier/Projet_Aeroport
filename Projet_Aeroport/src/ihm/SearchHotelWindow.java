@@ -19,4 +19,15 @@ public class SearchHotelWindow extends AbstractWindow<HotelJob> {
 		return new HotelJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
+	 */
+	@Override
+	protected void build() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

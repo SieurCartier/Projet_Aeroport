@@ -16,4 +16,15 @@ public class ManageDiscountWindow extends AbstractWindow<DiscountJob> {
 		return new DiscountJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#build()
+	 */
+	@Override
+	protected void build() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
