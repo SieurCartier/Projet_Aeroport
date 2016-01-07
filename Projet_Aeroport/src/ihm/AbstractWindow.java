@@ -1,8 +1,6 @@
 package ihm;
 
 import java.awt.Window;
-import java.util.HashMap;
-
 import javax.swing.*;
 
 import domain.DatabaseItem;
@@ -23,7 +21,7 @@ public abstract class AbstractWindow<J extends AbstractJob<?, ?>> extends JFrame
 	private static final long serialVersionUID = 1L;
 
 	protected AbstractJob<?, ?> job;
-	
+
 	public AbstractWindow() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);

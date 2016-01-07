@@ -1,7 +1,7 @@
 package fabrics;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.*;
 
 import domain.City;
 
@@ -69,6 +69,27 @@ public class CityFabric extends AbstractFabric<City> {
 		parameters.put("name", c.getName());
 
 		super.update(c, parameters);
+	}
+
+	public List<City> getByName(String name) {
+
+		List<City> ret = null;
+		Set<City> temp = new HashSet<City>();
+
+		for (City c : objects.values()) {
+			if (c.getName().equals(name)) {
+				temp.add(c);
+			}
+		}
+
+		temp.addAll(super.getFromField("name", name));
+
+		if (!temp.isEmpty()) {
+			ret = new ArrayList<>();
+			ret.addAll(temp);
+		}
+
+		return ret;
 	}
 
 }

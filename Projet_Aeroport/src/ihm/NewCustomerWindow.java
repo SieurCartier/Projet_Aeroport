@@ -57,10 +57,10 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		panelAjoutClient = new JPanel(new GridBagLayout());
 
 		labelAjout = new JLabel("Ajouter un client");
-		labelNomClient = new JLabel("Nom du client");
-		labelPrenomClient = new JLabel("Prenom du client");
-		labelAgeClient = new JLabel("Age du client");
-		labelVilleClient = new JLabel("Ville du client");
+		labelNomClient = new JLabel("Nom : ");
+		labelPrenomClient = new JLabel("Prenom : ");
+		labelAgeClient = new JLabel("Date de naissance (dd/mm/yyy) : ");
+		labelVilleClient = new JLabel("Ville :");
 
 		tfNom = new JTextField(10);
 		tfNom.putClientProperty("fieldName", "lastname");

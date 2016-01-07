@@ -3,7 +3,6 @@ package ihm;
 import java.awt.event.*;
 import java.util.HashMap;
 import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * This class represents the main <code>Window</code>. It simply consists on a

@@ -1,8 +1,11 @@
 package job;
 
-import java.util.HashMap;
+import java.text.*;
+import java.util.*;
 
+import domain.City;
 import domain.Customer;
+import fabrics.CityFabric;
 import fabrics.CustomerFabric;
 
 /*
@@ -17,8 +20,21 @@ public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
 	 */
 	@Override
 	public Customer create(HashMap<String, String> fields) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer ret = null;
+		try {
+			String firstname = fields.get("firstname");
+			String lastname = fields.get("lastname");
+
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+			Date birthdate = df.parse(fields.get("birthdate"));
+
+			City city = CityFabric.getInstanceOf().getByName(fields.get("city")).get(0);
+
+			ret = fab.createCustomer(firstname, lastname, birthdate, city);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	/*
@@ -28,8 +44,7 @@ public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
 	 */
 	@Override
 	public void remove(Customer t) {
-		// TODO Auto-generated method stub
-
+		fab.delete(t);
 	}
 
 }
