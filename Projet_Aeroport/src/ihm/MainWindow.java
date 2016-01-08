@@ -80,7 +80,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
 		/* Reservations */
 
-		reservations.setText("Réservations");
+		reservations.setText("RÃ©servations");
 
 		searchReservation.setText("Rechercher");
 		searchReservation.addActionListener(this);
@@ -146,7 +146,7 @@ public class MainWindow extends JFrame implements ActionListener {
 
 		discounts.setText("Promotions");
 
-		manageDiscounts.setText("Gérer");
+		manageDiscounts.setText("GÃ©rer");
 		manageDiscounts.addActionListener(this);
 		discounts.add(manageDiscounts);
 		windowsMap.put(manageDiscounts, new ManageDiscountWindow());
@@ -162,10 +162,10 @@ public class MainWindow extends JFrame implements ActionListener {
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
-		layout.setVerticalGroup(
-				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
+		layout.setHorizontalGroup(layout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(
+				GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
 
 		pack();
 	}

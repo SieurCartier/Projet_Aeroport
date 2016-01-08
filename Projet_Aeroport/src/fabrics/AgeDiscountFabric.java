@@ -16,18 +16,24 @@ public class AgeDiscountFabric extends AbstractDiscountFabric<AgeDiscount> {
 	}
 
 	@Override
-	protected AgeDiscount constructObject(ResultSet results) throws SQLException {
-		return new AgeDiscount(results.getInt("idDiscount"), results.getString("name"), results.getDate("StartDate"),
+	protected AgeDiscount constructObject(ResultSet results)
+			throws SQLException {
+		return new AgeDiscount(results.getInt("idDiscount"),
+				results.getString("name"), results.getDate("StartDate"),
 				results.getDate("EndDate"), results.getFloat("percentage"));
 	}
 
 	@Override
-	protected AgeDiscount constructObject(int id, HashMap<String, Object> fieldMap) {
-		return new AgeDiscount(id, (String) fieldMap.get("name"), (Date) fieldMap.get("StartDate"),
-				(Date) fieldMap.get("EndDate"), (float) fieldMap.get("percentage"));
+	protected AgeDiscount constructObject(int id,
+			HashMap<String, Object> fieldMap) {
+		return new AgeDiscount(id, (String) fieldMap.get("name"),
+				(Date) fieldMap.get("StartDate"),
+				(Date) fieldMap.get("EndDate"),
+				(float) fieldMap.get("percentage"));
 	}
 
-	public AgeDiscount createAgeDiscount(String name, Date startDate, Date endDate, float percentage) {
+	public AgeDiscount createAgeDiscount(String name, Date startDate,
+			Date endDate, float percentage) {
 		return super.createDiscount(name, startDate, endDate, percentage, null);
 	}
 

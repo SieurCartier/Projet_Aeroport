@@ -14,7 +14,7 @@ import utils.NotCreatedItemException;
  * <code>Database</code> once and stored in a {@link WeakHashMap}.
  * 
  * @author Gaston Lemaire
- *
+ * 
  * @param <T>
  *            A {@link DatabaseItem} that the <code>Fabric</code> will manage.
  */
@@ -43,7 +43,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	public T getById(int id) {
 		if (!objects.containsKey(id)) {
 			try {
-				String requete = "SELECT * " + "FROM " + tableName + " WHERE " + primaryKeyName + " = ?";
+				String requete = "SELECT * " + "FROM " + tableName + " WHERE "
+						+ primaryKeyName + " = ?";
 				PreparedStatement pr = co.prepareStatement(requete);
 				pr.setInt(1, id);
 				ResultSet results = pr.executeQuery();
@@ -160,7 +161,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 			requete += ")";
 
 			int id;
-			PreparedStatement pr = co.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pr = co.prepareStatement(requete,
+					Statement.RETURN_GENERATED_KEYS);
 
 			int k = 1;
 			for (Object param : fieldMap.values()) {
@@ -196,7 +198,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	 */
 	public void delete(T item) {
 		try {
-			String requete = "DELETE FROM " + tableName + " WHERE " + primaryKeyName + " = ?";
+			String requete = "DELETE FROM " + tableName + " WHERE "
+					+ primaryKeyName + " = ?";
 			PreparedStatement pr = co.prepareStatement(requete);
 			pr.setInt(1, item.getId());
 			if (pr.executeUpdate() != 1)
@@ -224,7 +227,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	protected List<T> getFromForeignKey(String key, DatabaseItem item) {
 		List<T> ret = null;
 		try {
-			String requete = "SELECT * FROM " + tableName + " WHERE " + key + " = ?";
+			String requete = "SELECT * FROM " + tableName + " WHERE " + key
+					+ " = ?";
 			PreparedStatement pr = co.prepareStatement(requete);
 			pr.setInt(1, item.getId());
 			ResultSet objectFromForeign = pr.executeQuery();
@@ -246,7 +250,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	protected List<T> getFromField(String fieldname, Object fieldValue) {
 		List<T> ret = null;
 		try {
-			String requete = "SELECT * FROM " + tableName + " WHERE " + fieldname + " = ?";
+			String requete = "SELECT * FROM " + tableName + " WHERE "
+					+ fieldname + " = ?";
 			PreparedStatement pr = co.prepareStatement(requete);
 			pr.setObject(1, fieldValue);
 			ResultSet objectFromForeign = pr.executeQuery();
@@ -314,6 +319,7 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	 *            <code>Database</code>
 	 * @return The new {@link DatabaseItem}.
 	 */
-	protected abstract T constructObject(int id, HashMap<String, Object> fieldMap);
+	protected abstract T constructObject(int id,
+			HashMap<String, Object> fieldMap);
 
 }

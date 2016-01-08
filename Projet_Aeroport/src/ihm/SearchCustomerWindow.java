@@ -8,7 +8,8 @@ import fabrics.CustomerFabric;
 import job.AbstractJob;
 import job.CustomerJob;
 
-public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements ActionListener {
+public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
+		ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -110,7 +111,8 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 		model.addElement("three");
 		listeClients = new JList<String>(model);
 		listeClients.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPane.setBorder(BorderFactory.createTitledBorder("Liste des clients"));
+		scrollPane.setBorder(BorderFactory
+				.createTitledBorder("Liste des clients"));
 		add(scrollPane, gbc);
 
 		// Panneau Label

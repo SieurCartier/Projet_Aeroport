@@ -5,9 +5,12 @@ import domain.Category;
 import domain.Hotel;
 import fabrics.CategoryFabric;
 
-/*
- * This class will take care of the fifth use case : "Gestion des catégories chambres d'un hôtel"
+/**
+ * This class will take care of the fifth use case :
+ * "Gestion des catÃ©gories chambres d'un hÃ´tel"
+ * 
  */
+
 public class CategoryJob extends AbstractJob<Category, CategoryFabric> {
 
 	/*
@@ -31,6 +34,11 @@ public class CategoryJob extends AbstractJob<Category, CategoryFabric> {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	protected CategoryFabric getFabric() {
+		return CategoryFabric.getInstanceOf();
 	}
 
 }

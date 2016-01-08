@@ -6,8 +6,9 @@ import domain.Hotel;
 import domain.HotelRoom;
 import fabrics.HotelRoomFabric;
 
-/*
- * This class will take care of the sixth use case : "Gestion des chambres d'un hôtel"
+/**
+ * This class will take care of the sixth use case :
+ * "Gestion des chambres d'un hÃ´tel"
  */
 public class HotelRoomJob extends AbstractJob<HotelRoom, HotelRoomFabric> {
 
@@ -29,6 +30,11 @@ public class HotelRoomJob extends AbstractJob<HotelRoom, HotelRoomFabric> {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	protected HotelRoomFabric getFabric() {
+		return HotelRoomFabric.getInstanceOf();
 	}
 
 }

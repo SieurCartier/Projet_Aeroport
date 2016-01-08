@@ -16,7 +16,7 @@ public class HotelRoomFabric extends AbstractFabric<HotelRoom> {
 	private static HotelRoomFabric singleton = null;
 
 	private HotelRoomFabric() {
-		super("HotelRoom", "idHotelRoom");
+		super("hotelRoom", "idHotelRoom");
 	}
 
 	public static HotelRoomFabric getInstanceOf() {

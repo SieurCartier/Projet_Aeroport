@@ -16,7 +16,7 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	private static CustomerFabric singleton = null;
 
 	public CustomerFabric() {
-		super("Customer", "idCategorie");
+		super("customer", "idCategorie");
 	}
 
 	public static CustomerFabric getInstanceOf() {

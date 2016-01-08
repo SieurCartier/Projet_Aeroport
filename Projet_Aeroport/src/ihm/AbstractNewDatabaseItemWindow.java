@@ -14,7 +14,7 @@ import job.AbstractJob;
  * emptied.
  * 
  * @author Gaston Lemaire
- *
+ * 
  * @param <D>
  *            The {@link DatabaseItem} that will be managed in this
  *            <code>Window</code>.
@@ -26,7 +26,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 
 	private static final long serialVersionUID = 1L;
 
-	protected JButton btnCreate = new JButton("Créer");
+	protected JButton btnCreate = new JButton("CrÃ©er");
 	protected JButton btnAnnuler = new JButton("Annuler");
 
 	protected List<JTextComponent> fields = new LinkedList<JTextComponent>();
@@ -38,7 +38,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 		btnAnnuler.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				close();
 			}
 		});
 		build();
@@ -58,7 +58,9 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 			for (JTextComponent field : fields) {
 				Document doc = field.getDocument();
 				try {
-					fieldMaps.put((String) field.getClientProperty("fieldName"), doc.getText(0, doc.getLength()));
+					fieldMaps.put(
+							(String) field.getClientProperty("fieldName"),
+							doc.getText(0, doc.getLength()));
 				} catch (BadLocationException e) {
 					System.out.println("Should never happen");
 				}
@@ -70,7 +72,8 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 
 			DatabaseItem item = job.create(fieldMaps);
 
-			String message = (item != null) ? item.toString() + " a bien été créé."
+			String message = (item != null) ? item.toString()
+					+ " a bien Ã©tÃ© crÃ©Ã©."
 					: "Erreur, veuillez remplir correctment les champs";
 
 			JOptionPane.showMessageDialog(this, message);
@@ -81,6 +84,17 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 				}
 			}
 		}
+	}
+
+	public void close() {
+		for (JTextComponent field : fields) {
+			field.setDocument(new PlainDocument());
+		}
+		for (JComboBox<? extends DatabaseItem> c : comboBoxes) {
+			c.removeAllItems();
+		}
+
+		dispose();
 	}
 
 }

@@ -26,4 +26,9 @@ public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> 
 		return ret;
 	}
 
+	@Override
+	protected ReservationFabric getFabric() {
+		return ReservationFabric.getInstanceOf();
+	}
+
 }

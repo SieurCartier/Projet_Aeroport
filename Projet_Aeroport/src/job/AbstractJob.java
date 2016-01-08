@@ -10,7 +10,7 @@ import fabrics.AbstractFabric;
  * {@link DatabaseItem} it will manage and the related {@link AbstractFabric}.
  * 
  * @author Gaston Lemaire
- *
+ * 
  * @param <T>
  *            The {@link DatabaseItem} managed.
  * @param <F>
@@ -19,6 +19,10 @@ import fabrics.AbstractFabric;
 public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabric<T>> {
 
 	protected F fab;
+
+	public AbstractJob() {
+		fab = getFabric();
+	}
 
 	/**
 	 * This method creates a {@link DatabaseItem} given a field map.
@@ -39,5 +43,7 @@ public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabr
 	public void remove(T t) {
 		fab.delete(t);
 	}
+
+	protected abstract F getFabric();
 
 }

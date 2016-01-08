@@ -6,10 +6,15 @@ import domain.City;
 import domain.Customer;
 import fabrics.CustomerFabric;
 
-/*
- * This class will take care of the second use case : "Gestion de la liste des clients"
+/**
+ * This class will take care of the second use case :
+ * "Gestion de la liste des clients"
  */
 public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
+
+	public CustomerJob() {
+		super();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -33,6 +38,11 @@ public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	protected CustomerFabric getFabric() {
+		return CustomerFabric.getInstanceOf();
 	}
 
 }

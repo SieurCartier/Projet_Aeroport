@@ -5,8 +5,9 @@ import domain.City;
 import domain.Hotel;
 import fabrics.HotelFabric;
 
-/*
- * This class will take care of the fourth use case : "Gestion de la liste des hôtels d'une ville"
+/**
+ * This class will take care of the fourth use case :
+ * "Gestion de la liste des hÃ´tels d'une ville"
  */
 public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 
@@ -20,7 +21,8 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 		Hotel ret = null;
 		try {
 			String name = (String) fields.get("name");
-			int reservationDayNumber = Integer.parseInt((String) fields.get("reservationDayNumber"));
+			int reservationDayNumber = Integer.parseInt((String) fields
+					.get("reservationDayNumber"));
 			City city = (City) fields.get("city");
 
 			ret = fab.createHotel(city, name, reservationDayNumber);
@@ -28,6 +30,11 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	protected HotelFabric getFabric() {
+		return HotelFabric.getInstanceOf();
 	}
 
 }

@@ -4,8 +4,9 @@ import java.util.*;
 import domain.City;
 import fabrics.CityFabric;
 
-/*
- * This class will take care of the third use case : "Gestion de la liste des villes"
+/**
+ * This class will take care of the third use case :
+ * "Gestion de la liste des villes"
  */
 public class CityJob extends AbstractJob<City, CityFabric> {
 
@@ -23,9 +24,14 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 		String name = (String) fields.get("name");
 		return fab.createCity(name);
 	}
-	
+
 	public List<City> getAll() {
-		return fab.getAll() ;
+		return fab.getAll();
+	}
+
+	@Override
+	protected CityFabric getFabric() {
+		return CityFabric.getInstanceOf();
 	}
 
 }

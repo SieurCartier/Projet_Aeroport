@@ -4,12 +4,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
 
+import domain.City;
 import domain.Customer;
 import fabrics.CustomerFabric;
 import job.AbstractJob;
+import job.CityJob;
 import job.CustomerJob;
 
-public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, CustomerJob> {
+public class NewCustomerWindow extends
+		AbstractNewDatabaseItemWindow<Customer, CustomerJob> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +30,9 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 	private JTextField tfNom;
 	private JTextField tfPrenom;
 	private JTextField tfDateNaissance;
-	private JTextField tfVille;
+
+	private DefaultComboBoxModel<City> cityModel;
+	private JComboBox<City> comboBoxVilles;
 
 	/*
 	 * (non-Javadoc)
@@ -77,10 +82,10 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		tfDateNaissance.setDocument(new PlainDocument());
 		fields.add(tfDateNaissance);
 
-		tfVille = new JTextField(10);
-		tfVille.putClientProperty("fieldName", "city");
-		tfVille.setDocument(new PlainDocument());
-		fields.add(tfVille);
+		cityModel = new DefaultComboBoxModel<City>();
+		comboBoxVilles = new JComboBox<City>(cityModel);
+		comboBoxVilles.putClientProperty("fieldName", "city");
+		comboBoxes.add(comboBoxVilles);
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -136,12 +141,12 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		panelAjoutClient.add(tfDateNaissance, gbc2);
 		gbc2.gridy++;
 
-		panelAjoutClient.add(tfVille, gbc2);
+		panelAjoutClient.add(comboBoxVilles, gbc2);
 
 		gbc2.gridy++;
 		gbc2.gridx = 0;
 		gbc2.anchor = GridBagConstraints.LINE_END;
-		gbc2.insets = new Insets(20, 0,40, 0);
+		gbc2.insets = new Insets(20, 0, 40, 0);
 		btnCreate.setPreferredSize(new Dimension(80, 20));
 		panelAjoutClient.add(btnCreate, gbc2);
 
@@ -154,4 +159,16 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer, C
 		add(panelAjoutClient, gbc);
 	}
 
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(b);
+		populate();
+	}
+
+	private void populate() {
+		CityJob j = new CityJob();
+		for (City c : j.getAll()) {
+			cityModel.addElement(c);
+		}
+	}
 }

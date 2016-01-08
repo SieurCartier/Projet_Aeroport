@@ -10,7 +10,8 @@ import job.AbstractJob;
 import job.CityJob;
 import job.HotelJob;
 
-public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
+public class NewHotelWindow extends
+		AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
 
 	private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,7 @@ public class CategoryFabric extends AbstractFabric<Category> {
 	private static CategoryFabric singleton = null;
 
 	public CategoryFabric() {
-		super("Categorie", "idCategorie");
+		super("categorie", "idCategorie");
 	}
 
 	public static CategoryFabric getInstanceOf() {

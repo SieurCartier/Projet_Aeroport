@@ -15,7 +15,7 @@ public class CityFabric extends AbstractFabric<City> {
 	private static CityFabric singleton = null;
 
 	public CityFabric() {
-		super("City", "idCity");
+		super("city", "idCity");
 	}
 
 	public static CityFabric getInstanceOf() {

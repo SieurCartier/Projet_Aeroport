@@ -27,7 +27,7 @@ public class SearchHotelWindow extends AbstractWindow<HotelJob> {
 	@Override
 	protected void build() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

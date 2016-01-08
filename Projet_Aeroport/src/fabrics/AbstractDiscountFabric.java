@@ -11,10 +11,11 @@ import domain.City;
  * 
  * @author Gaston Lemaire
  */
-public abstract class AbstractDiscountFabric<D extends AbstractDiscount> extends AbstractFabric<D> {
+public abstract class AbstractDiscountFabric<D extends AbstractDiscount>
+		extends AbstractFabric<D> {
 
 	protected AbstractDiscountFabric() {
-		super("Discount", "idDiscount");
+		super("discount", "idDiscount");
 	}
 
 	/*
@@ -33,7 +34,8 @@ public abstract class AbstractDiscountFabric<D extends AbstractDiscount> extends
 	@Override
 	protected abstract D constructObject(int id, HashMap<String, Object> m);
 
-	protected D createDiscount(String name, Date startDate, Date endDate, float percentage, City city) {
+	protected D createDiscount(String name, Date startDate, Date endDate,
+			float percentage, City city) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("name", name);
 		parameters.put("startDate", startDate);

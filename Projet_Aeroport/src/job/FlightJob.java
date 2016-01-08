@@ -7,7 +7,7 @@ import domain.*;
 import fabrics.FlightFabric;
 import utils.DayOfWeek;
 
-/*
+/**
  * This class will take care of the first use case : "Gestion des voyages"
  */
 public class FlightJob extends AbstractJob<Flight, FlightFabric> {
@@ -27,29 +27,44 @@ public class FlightJob extends AbstractJob<Flight, FlightFabric> {
 			City departure = (City) fields.get("departure");
 			City arrival = (City) fields.get("arrival");
 
-			DayOfWeek dayOfWeekDeparture = (DayOfWeek) fields.get("dayOfWeekDeparture");
+			DayOfWeek dayOfWeekDeparture = (DayOfWeek) fields
+					.get("dayOfWeekDeparture");
 
 			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 
-			Time departureTime = new Time(df.parse((String) fields.get("departureTime")).getTime());
-			Timestamp flightDuration = new Timestamp(df.parse((String) fields.get("flightDuration")).getTime());
+			Time departureTime = new Time(df.parse(
+					(String) fields.get("departureTime")).getTime());
+			Timestamp flightDuration = new Timestamp(df.parse(
+					(String) fields.get("flightDuration")).getTime());
 
-			int nbFirstClassSits = Integer.parseInt((String) fields.get("nbFirstClassSits"));
+			int nbFirstClassSits = Integer.parseInt((String) fields
+					.get("nbFirstClassSits"));
 
-			float priceFirstClassSits = Float.parseFloat((String) fields.get("priceFirstClassSits"));
+			float priceFirstClassSits = Float.parseFloat((String) fields
+					.get("priceFirstClassSits"));
 
-			int nbSecondClassSits = Integer.parseInt((String) fields.get("nbSecondClassSits"));
+			int nbSecondClassSits = Integer.parseInt((String) fields
+					.get("nbSecondClassSits"));
 
-			float priceSecondClassSits = Float.parseFloat((String) fields.get("priceSecondClassSits"));
+			float priceSecondClassSits = Float.parseFloat((String) fields
+					.get("priceSecondClassSits"));
 
-			int nbDayCancelling = Integer.parseInt((String) fields.get("nbDayCancelling"));
+			int nbDayCancelling = Integer.parseInt((String) fields
+					.get("nbDayCancelling"));
 
-			ret = fab.createFlight(flightNumber, departure, arrival, dayOfWeekDeparture, departureTime, flightDuration,
-					nbFirstClassSits, priceFirstClassSits, nbSecondClassSits, priceSecondClassSits, nbDayCancelling);
+			ret = fab.createFlight(flightNumber, departure, arrival,
+					dayOfWeekDeparture, departureTime, flightDuration,
+					nbFirstClassSits, priceFirstClassSits, nbSecondClassSits,
+					priceSecondClassSits, nbDayCancelling);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+
+	@Override
+	protected FlightFabric getFabric() {
+		return FlightFabric.getInstanceOf();
 	}
 
 }

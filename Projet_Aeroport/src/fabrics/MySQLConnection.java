@@ -9,7 +9,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
  * {@link #setUp(String, String, String, String)} before using it.
  * 
  * @author Gaston Lemaire
- *
+ * 
  */
 public class MySQLConnection {
 
