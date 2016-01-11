@@ -7,8 +7,8 @@ public class Main {
 	public static void main(String[] args) {
 
 		MySQLConnection conn = MySQLConnection.getInstanceOf();
-		conn.setUp("webtp.fil.univ-lille1.fr", "routierp", "routierp", "az78qs45");
-		//conn.setUp("localhost", "aeroport", "gaston", "gaston");
+		//conn.setUp("webtp.fil.univ-lille1.fr", "routierp", "routierp", "az78qs45");
+		conn.setUp("localhost", "aeroport", "gaston", "gaston");
 
 		CategoryFabric category = CategoryFabric.getInstanceOf();
 		CityFabric city = CityFabric.getInstanceOf();
@@ -34,7 +34,7 @@ public class Main {
 		 * System.out.println(cat); System.out.println(hr);
 		 * System.out.println(cus);
 		 * 
-		 * c.setName("Armentiï¿½res"); h.setName("Hilton");
+		 * c.setName("Armentières"); h.setName("Hilton");
 		 * 
 		 * CityFabric.getInstanceOf().updateCity(c);
 		 * HotelFabric.getInstanceOf().updateHotel(h);

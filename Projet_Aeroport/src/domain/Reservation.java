@@ -12,25 +12,29 @@ public class Reservation extends DatabaseItem {
 
 	private int idCustomer;
 	private Customer customer;
-	private int idFlight;
-	private Flight flight;
+	private int idDepartureFlight;
+	private Flight departureFlight;
+	private int idReturnFlight;
+	private Flight returnFlight;
 	private int idHotelRoom;
 	private HotelRoom room;
 
-	public Reservation(int id, int idCustomer, int idFlight, int idHotelRoom) {
+	public Reservation(int id, int idCustomer, int idDepartureFlight, int idReturnFlight, int idHotelRoom) {
 		super(id);
 		this.idCustomer = idCustomer;
-		this.idFlight = idFlight;
+		this.idDepartureFlight = idDepartureFlight;
+		this.idReturnFlight = idReturnFlight;
 		this.idHotelRoom = idHotelRoom;
 	}
 
-	public Reservation(int id, Customer customer, Flight flight, HotelRoom room) {
+	public Reservation(int id, Customer customer, Flight departureFlight, Flight returnFlight, HotelRoom room) {
 		super(id);
 		this.idCustomer = customer.getId();
 		this.customer = customer;
-		this.idFlight = flight.getId();
-		this.flight = flight;
-		this.idHotelRoom = room.getId();
+		this.idDepartureFlight = departureFlight.getId();
+		this.departureFlight = departureFlight;
+		this.idReturnFlight = returnFlight.getId();
+		this.returnFlight = returnFlight;
 		this.room = room;
 	}
 
@@ -50,6 +54,41 @@ public class Reservation extends DatabaseItem {
 	}
 
 	/**
+	 * This method gets the {@link Flight} of departure concerned by the
+	 * <code>Reservation</code>. It calls the
+	 * {@link AbstractFabric#getById(int)} with {@link #idDepartureFlight}.
+	 * 
+	 * @return The {@link Flight} of departure concerned by the Reservation.
+	 */
+	public Flight getDepartureFlight() {
+		if (departureFlight == null)
+			departureFlight = FlightFabric.getInstanceOf().getById(idDepartureFlight);
+		return departureFlight;
+	}
+
+	public void setDepartureFlight(Flight departureFlight) {
+		this.idDepartureFlight = departureFlight.getId();
+		this.departureFlight = departureFlight;
+	}
+
+	/**
+	 * This method gets the {@link Flight} of return concerned by the
+	 * <code>Reservation</code>. It calls the
+	 * {@link AbstractFabric#getById(int)} with {@link #idReturnFlight}.
+	 * 
+	 * @return The {@link Flight} of return concerned by the Reservation.
+	 */
+	public Flight getReturnFlight() {
+		if (returnFlight == null)
+			returnFlight = FlightFabric.getInstanceOf().getById(idReturnFlight);
+		return returnFlight;
+	}
+
+	public void setReturnFlight(Flight returnFlight) {
+		this.returnFlight = returnFlight;
+	}
+
+	/**
 	 * This method sets the {@link Customer} that booked the
 	 * <code>Reservation</code> and updates the {@link #idCustomer}
 	 * 
@@ -59,31 +98,6 @@ public class Reservation extends DatabaseItem {
 	public void setCustomer(Customer customer) {
 		this.idCustomer = customer.getId();
 		this.customer = customer;
-	}
-
-	/**
-	 * This method gets the {@link Flight} concerned by the
-	 * <code>Reservation</code>. It calls the {@link FlightFabric#getById(int)}
-	 * with {@link #idFlight}.
-	 * 
-	 * @return The {@link Flight} concerned by the <code>Reservation</code>.
-	 */
-	public Flight getFlight() {
-		if (flight == null)
-			flight = FlightFabric.getInstanceOf().getById(idFlight);
-		return flight;
-	}
-
-	/**
-	 * This method sets the {@link Flight} concerned by the
-	 * <code>Reservation</code> and updates the {@link #idFlight}
-	 * 
-	 * @param flight
-	 *            The {@link Flight} concerned by the <code>Reservation</code>.
-	 */
-	public void setFlight(Flight flight) {
-		this.idFlight = flight.getId();
-		this.flight = flight;
 	}
 
 	/**
@@ -117,38 +131,48 @@ public class Reservation extends DatabaseItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see domaine.DatabaseItem#hashCode()
+	 * @see domain.DatabaseItem#hashCode()
 	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + idCustomer;
-		result = prime * result + idFlight;
+		result = prime * result + idDepartureFlight;
 		result = prime * result + idHotelRoom;
+		result = prime * result + idReturnFlight;
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see domaine.DatabaseItem#equals(java.lang.Object)
+	 * @see domain.DatabaseItem#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof Reservation)) {
 			return false;
+		}
 		Reservation other = (Reservation) obj;
-		if (idCustomer != other.idCustomer)
+		if (idCustomer != other.idCustomer) {
 			return false;
-		if (idFlight != other.idFlight)
+		}
+		if (idDepartureFlight != other.idDepartureFlight) {
 			return false;
-		if (idHotelRoom != other.idHotelRoom)
+		}
+		if (idHotelRoom != other.idHotelRoom) {
 			return false;
+		}
+		if (idReturnFlight != other.idReturnFlight) {
+			return false;
+		}
 		return true;
 	}
 
@@ -159,8 +183,7 @@ public class Reservation extends DatabaseItem {
 	 */
 	@Override
 	public String toString() {
-		return customer.toString() + " : " + flight.toString() + " "
-				+ room.toString();
+		return getCustomer().toString() + " : " + getDepartureFlight().toString() + " " + getRoom().toString();
 	}
 
 }
