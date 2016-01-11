@@ -36,6 +36,11 @@ public class CategoryJob extends AbstractJob<Category, CategoryFabric> {
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected CategoryFabric getFabric() {
 		return CategoryFabric.getInstanceOf();

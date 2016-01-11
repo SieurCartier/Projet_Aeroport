@@ -21,8 +21,7 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 		Hotel ret = null;
 		try {
 			String name = (String) fields.get("name");
-			int reservationDayNumber = Integer.parseInt((String) fields
-					.get("reservationDayNumber"));
+			int reservationDayNumber = Integer.parseInt((String) fields.get("reservationDayNumber"));
 			City city = (City) fields.get("city");
 
 			ret = fab.createHotel(city, name, reservationDayNumber);
@@ -32,6 +31,11 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected HotelFabric getFabric() {
 		return HotelFabric.getInstanceOf();

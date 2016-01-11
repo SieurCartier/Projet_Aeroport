@@ -24,7 +24,7 @@ public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<Ab
 			String name = (String) fields.get("firstname");
 
 			DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
-			
+
 			Date startDate = df.parse((String) fields.get("startDate"));
 			Date endDate = df.parse((String) fields.get("endDate"));
 
@@ -41,6 +41,11 @@ public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<Ab
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected AbstractFabric<AbstractDiscount> getFabric() {
 		return null;

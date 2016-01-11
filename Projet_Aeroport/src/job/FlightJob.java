@@ -52,6 +52,11 @@ public class FlightJob extends AbstractJob<Flight, FlightFabric> {
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected FlightFabric getFabric() {
 		return FlightFabric.getInstanceOf();

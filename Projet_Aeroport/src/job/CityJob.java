@@ -25,6 +25,11 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 		return fab.createCity(name);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected CityFabric getFabric() {
 		return CityFabric.getInstanceOf();

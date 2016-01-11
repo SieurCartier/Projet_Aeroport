@@ -32,6 +32,11 @@ public class HotelRoomJob extends AbstractJob<HotelRoom, HotelRoomFabric> {
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected HotelRoomFabric getFabric() {
 		return HotelRoomFabric.getInstanceOf();

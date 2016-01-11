@@ -40,6 +40,11 @@ public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected CustomerFabric getFabric() {
 		return CustomerFabric.getInstanceOf();

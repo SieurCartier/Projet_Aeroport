@@ -26,6 +26,11 @@ public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> 
 		return ret;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.AbstractJob#getFabric()
+	 */
 	@Override
 	protected ReservationFabric getFabric() {
 		return ReservationFabric.getInstanceOf();

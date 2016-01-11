@@ -45,10 +45,22 @@ public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabr
 		fab.delete(t);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#getAll()
+	 */
+	@Override
 	public List<T> getAll() {
 		return fab.getAll();
 	}
 
+	/**
+	 * This method is called in {@link #AbstractJob()} and is used to get an
+	 * instance of the fabric associated with the {@link DatabaseItem} managed.
+	 * 
+	 * @return The <code>Fabric</code> that manages this {@link DatabaseItem}.
+	 */
 	protected abstract F getFabric();
 
 }
