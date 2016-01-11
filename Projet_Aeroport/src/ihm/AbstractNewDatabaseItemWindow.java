@@ -5,7 +5,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.text.*;
 import domain.DatabaseItem;
-import job.AbstractJob;
+import job.IJob;
 
 /**
  * This class provides to the user a <code>Window</code> with a create and a
@@ -18,11 +18,9 @@ import job.AbstractJob;
  * @param <D>
  *            The {@link DatabaseItem} that will be managed in this
  *            <code>Window</code>.
- * @param <J>
- *            The {@link AbstractJob} that will manage the {@link DatabaseItem}.
  */
-public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J extends AbstractJob<?, ?>>
-		extends AbstractWindow<J> implements ActionListener {
+public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> extends AbstractWindow<D>
+		implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,9 +56,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 			for (JTextComponent field : fields) {
 				Document doc = field.getDocument();
 				try {
-					fieldMaps.put(
-							(String) field.getClientProperty("fieldName"),
-							doc.getText(0, doc.getLength()));
+					fieldMaps.put((String) field.getClientProperty("fieldName"), doc.getText(0, doc.getLength()));
 				} catch (BadLocationException e) {
 					System.out.println("Should never happen");
 				}
@@ -70,10 +66,11 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 				fieldMaps.put((String) c.getClientProperty("fieldName"), d);
 			}
 
+			addSpecificValues(fieldMaps);
+
 			DatabaseItem item = job.create(fieldMaps);
 
-			String message = (item != null) ? item.toString()
-					+ " a bien été créé."
+			String message = (item != null) ? item.toString() + " a bien été créé."
 					: "Erreur, veuillez remplir correctment les champs";
 
 			JOptionPane.showMessageDialog(this, message);
@@ -86,6 +83,25 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 		}
 	}
 
+	/**
+	 * A method that allows subclasses to add specific values to the
+	 * {@link HashMap} before it is sent to the {@link IJob}.
+	 * 
+	 * @param fieldMaps
+	 *            The {@link HashMap} that will be sent to the {@link IJob}.
+	 *            <code>Keys</code> are the {@link DatabaseItem} attributes
+	 *            names. <code>Values</code> are their values.
+	 */
+	protected void addSpecificValues(HashMap<String, Object> fieldMaps) {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#close()
+	 */
+	@Override
 	public void close() {
 		for (JTextComponent field : fields) {
 			field.setDocument(new PlainDocument());
@@ -93,8 +109,7 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem, J ex
 		for (JComboBox<? extends DatabaseItem> c : comboBoxes) {
 			c.removeAllItems();
 		}
-
-		dispose();
+		super.close();
 	}
 
 }

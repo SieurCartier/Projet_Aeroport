@@ -3,22 +3,16 @@ package ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
 import domain.Customer;
-import fabrics.CustomerFabric;
-import job.AbstractJob;
-import job.CustomerJob;
+import job.*;
 
-public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
-		ActionListener {
+public class SearchCustomerWindow extends AbstractSearchWindow<Customer> {
 
 	private static final long serialVersionUID = 1L;
 
 	private GridBagConstraints gbc;
 	private GridBagConstraints gbc2;
-
-	private DefaultListModel<String> model;
-	private JList<String> listeClients;
-	private JScrollPane scrollPane;
 
 	private JPanel panLabels;
 
@@ -44,7 +38,6 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 
 	public SearchCustomerWindow() {
 		super();
-		build();
 	}
 
 	/*
@@ -53,23 +46,24 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Customer, CustomerFabric> getJob() {
+	protected CustomerJob getJob() {
 		return new CustomerJob();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#build()
+	 */
 	@Override
 	protected void build() {
 		setSize(700, 350);
-		setLocationRelativeTo(null);
+
 		setTitle("Rechercher un client");
 		setLayout(new GridBagLayout());
 
 		gbc = new GridBagConstraints();
 		gbc2 = new GridBagConstraints();
-
-		model = new DefaultListModel<String>();
-		listeClients = new JList<String>(model);
-		scrollPane = new JScrollPane(listeClients);
 
 		panLabels = new JPanel(new GridBagLayout());
 
@@ -77,10 +71,10 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 		labelPrenom = new JLabel("Prenom : ");
 		labelAge = new JLabel("Age : ");
 		labelVille = new JLabel("Ville : ");
-		setLabelNom = new JLabel("");
+		setLabelNom = new JLabel();
 		setLabelPrenom = new JLabel();
 		setLabelAge = new JLabel();
-		setLabelVille = new JLabel("");
+		setLabelVille = new JLabel();
 
 		panelRecherche = new JPanel(new GridBagLayout());
 
@@ -102,17 +96,8 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
-		/*
-		 * DefaultListModel<Customer> model = new DefaultListModel<Customer>();
-		 * JList<Customer> listeClients = new JList<Customer>(model);
-		 */
-		model.addElement("one");
-		model.addElement("two");
-		model.addElement("three");
-		listeClients = new JList<String>(model);
-		listeClients.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPane.setBorder(BorderFactory
-				.createTitledBorder("Liste des clients"));
+		liste.setFont(new Font("Serif", Font.ITALIC, 14));
+		scrollPane.setBorder(BorderFactory.createTitledBorder("Liste des clients"));
 		add(scrollPane, gbc);
 
 		// Panneau Label
@@ -178,6 +163,12 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 		gbc2.gridx++;
 		gbc2.insets = new Insets(10, 5, 0, 0);
 		recherche.setPreferredSize(new Dimension(50, 20));
+		recherche.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onSearchClick();
+			}
+		});
 		panelRecherche.add(recherche, gbc2);
 
 		add(panelRecherche, gbc);
@@ -189,6 +180,18 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 		gbc.insets = new Insets(-45, -50, 0, 0);
 		btnSupp.setPreferredSize(new Dimension(100, 20));
 		btnModif.setPreferredSize(new Dimension(90, 20));
+		btnSupp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onDeleteClick();
+			}
+		});
+		btnModif.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onEditClick();
+			}
+		});
 		gbc2.gridx = 0;
 		gbc2.gridy = 0;
 		panelChange.add(btnModif, gbc2);
@@ -200,9 +203,88 @@ public class SearchCustomerWindow extends AbstractWindow<CustomerJob> implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.
+	 * ListSelectionEvent)
+	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void valueChanged(ListSelectionEvent e) {
+		Customer selected = liste.getSelectedValue();
+		if (selected != null)
+			showDetails(selected);
+	}
 
+	/**
+	 * A method that shows a {@link Customer}'s details in the {@link JLabel}s.
+	 * 
+	 * @param selectedValue
+	 *            The selected {@link Customer} .
+	 */
+	private void showDetails(Customer selectedValue) {
+		setLabelNom.setText(selectedValue.getLastname());
+		setLabelPrenom.setText(selectedValue.getFirstname());
+		setLabelAge.setText(String.valueOf(selectedValue.getAge()));
+		setLabelVille.setText(String.valueOf(selectedValue.getCity()));
+	}
+
+	/**
+	 * A method that resets the details' {@link JLabel}s'.
+	 */
+	private void resetDetails() {
+		setLabelNom.setText("");
+		setLabelPrenom.setText("");
+		setLabelAge.setText("");
+		setLabelVille.setText("");
+	}
+
+	/**
+	 * A method called every time the user clicks on the {@link #btnModif}.
+	 */
+	protected void onEditClick() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * A method called every time the user clicks on the {@link #btnSupp}.
+	 */
+	protected void onDeleteClick() {
+		Customer c = liste.getSelectedValue();
+		if (c != null) {
+
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int choix = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer : " + c.toString() + " ?",
+					"Attention", dialogButton);
+
+			if (choix == 0) { // OUI
+				job.remove(c);
+				model.removeElement(c);
+				resetDetails();
+			}
+		}
+
+	}
+
+	/**
+	 * A method called every time the user clicks on the {@link #recherche}.
+	 */
+	protected void onSearchClick() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractSearchWindow#close()
+	 */
+	@Override
+	public void close() {
+		resetDetails();
+		super.close();
 	}
 
 }

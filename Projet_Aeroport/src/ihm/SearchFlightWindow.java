@@ -1,11 +1,9 @@
 package ihm;
 
 import domain.Flight;
-import fabrics.FlightFabric;
-import job.AbstractJob;
 import job.FlightJob;
 
-public class SearchFlightWindow extends AbstractWindow<FlightJob> {
+public class SearchFlightWindow extends AbstractWindow<Flight> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +13,7 @@ public class SearchFlightWindow extends AbstractWindow<FlightJob> {
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Flight, FlightFabric> getJob() {
+	protected FlightJob getJob() {
 		return new FlightJob();
 	}
 

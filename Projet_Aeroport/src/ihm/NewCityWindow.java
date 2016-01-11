@@ -3,12 +3,10 @@ package ihm;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
-
 import domain.City;
-import fabrics.CityFabric;
 import job.*;
 
-public class NewCityWindow extends AbstractNewDatabaseItemWindow<City, CityJob> {
+public class NewCityWindow extends AbstractNewDatabaseItemWindow<City> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +30,7 @@ public class NewCityWindow extends AbstractNewDatabaseItemWindow<City, CityJob> 
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<City, CityFabric> getJob() {
+	protected CityJob getJob() {
 		return new CityJob();
 	}
 

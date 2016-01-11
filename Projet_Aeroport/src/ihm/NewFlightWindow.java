@@ -1,15 +1,14 @@
 package ihm;
 
 import java.awt.*;
+import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import utils.DayOfWeek;
 import domain.*;
-import fabrics.FlightFabric;
 import job.*;
 
-public class NewFlightWindow extends
-		AbstractNewDatabaseItemWindow<Flight, FlightJob> {
+public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,7 +51,7 @@ public class NewFlightWindow extends
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Flight, FlightFabric> getJob() {
+	protected FlightJob getJob() {
 		return new FlightJob();
 	}
 
@@ -215,7 +214,6 @@ public class NewFlightWindow extends
 		comboBoxJours = new JComboBox<DayOfWeek>(listeJours);
 		comboBoxJours.setPreferredSize(new Dimension(110, 20));
 		comboBoxJours.putClientProperty("fieldName", "dayOfWeekDeparture");
-		comboBoxes.add(comboBoxVillesDep);
 		panelAjoutVol.add(comboBoxJours, gbc2);
 		gbc2.gridy++;
 
@@ -257,17 +255,30 @@ public class NewFlightWindow extends
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#populate()
+	 */
 	@Override
-	public void setVisible(boolean b) {
-		super.setVisible(b);
-		populate();
-	}
-
-	private void populate() {
+	protected void populate() {
 		CityJob j = new CityJob();
 		for (City c : j.getAll()) {
 			cityModel.addElement(c);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ihm.AbstractNewDatabaseItemWindow#addSpecificValues(java.util.HashMap)
+	 */
+	@Override
+	protected void addSpecificValues(HashMap<String, Object> fieldMaps) {
+		super.addSpecificValues(fieldMaps);
+		DayOfWeek d = (DayOfWeek) comboBoxJours.getSelectedItem();
+		fieldMaps.put((String) comboBoxJours.getClientProperty("fieldName"), d);
 	}
 
 }

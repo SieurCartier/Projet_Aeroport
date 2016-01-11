@@ -1,11 +1,9 @@
 package ihm;
 
 import domain.City;
-import fabrics.CityFabric;
-import job.AbstractJob;
 import job.CityJob;
 
-public class SearchCityWindow extends AbstractWindow<CityJob> {
+public class SearchCityWindow extends AbstractWindow<City> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +13,7 @@ public class SearchCityWindow extends AbstractWindow<CityJob> {
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<City, CityFabric> getJob() {
+	protected CityJob getJob() {
 		return new CityJob();
 	}
 

@@ -3,11 +3,9 @@ package ihm;
 import java.awt.*;
 import javax.swing.*;
 import domain.Reservation;
-import fabrics.ReservationFabric;
 import job.*;
 
-public class NewReservationWindow extends
-		AbstractNewDatabaseItemWindow<Reservation, ReservationJob> {
+public class NewReservationWindow extends AbstractNewDatabaseItemWindow<Reservation> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +33,7 @@ public class NewReservationWindow extends
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Reservation, ReservationFabric> getJob() {
+	protected ReservationJob getJob() {
 		return new ReservationJob();
 	}
 
@@ -79,8 +77,7 @@ public class NewReservationWindow extends
 		modelClients.addElement("two");
 		listeClients = new JList<String>(modelClients);
 		listeClients.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPaneClients.setBorder(BorderFactory
-				.createTitledBorder("Liste des clients"));
+		scrollPaneClients.setBorder(BorderFactory.createTitledBorder("Liste des clients"));
 		add(scrollPaneClients, gbc);
 		gbc.gridx++;
 
@@ -88,8 +85,7 @@ public class NewReservationWindow extends
 		modelVols.addElement("two");
 		listeVols = new JList<String>(modelVols);
 		listeVols.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPaneVols.setBorder(BorderFactory
-				.createTitledBorder("Liste des vols"));
+		scrollPaneVols.setBorder(BorderFactory.createTitledBorder("Liste des vols"));
 		add(scrollPaneVols, gbc);
 		gbc.gridx++;
 
@@ -97,8 +93,7 @@ public class NewReservationWindow extends
 		modelHotels.addElement("two");
 		listeHotels = new JList<String>(modelHotels);
 		listeHotels.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPaneHotels.setBorder(BorderFactory
-				.createTitledBorder("Liste des hotels"));
+		scrollPaneHotels.setBorder(BorderFactory.createTitledBorder("Liste des hotels"));
 		add(scrollPaneHotels, gbc);
 		gbc.gridx++;
 
@@ -106,8 +101,7 @@ public class NewReservationWindow extends
 		modelChambres.addElement("two");
 		listeChambres = new JList<String>(modelChambres);
 		listeChambres.setFont(new Font("Serif", Font.ITALIC, 14));
-		scrollPaneChambres.setBorder(BorderFactory
-				.createTitledBorder("Liste des chambres"));
+		scrollPaneChambres.setBorder(BorderFactory.createTitledBorder("Liste des chambres"));
 		add(scrollPaneChambres, gbc);
 		gbc.gridx++;
 

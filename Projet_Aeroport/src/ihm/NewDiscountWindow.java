@@ -6,8 +6,7 @@ import javax.swing.text.PlainDocument;
 import domain.AbstractDiscount;
 import job.DiscountJob;
 
-public class NewDiscountWindow extends
-		AbstractNewDatabaseItemWindow<AbstractDiscount, DiscountJob> {
+public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDiscount> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,25 +21,23 @@ public class NewDiscountWindow extends
 	private JLabel labelValeur;
 	private JLabel labelDebut;
 	private JLabel labelFin;
-	/*
-	 * private JLabel labelAgeMini; private JLabel labelAgeMaxi; private JLabel
-	 * labelVille;
-	 */
+
+	private JLabel labelAgeMini;
+	private JLabel labelAgeMaxi;
+	private JLabel labelVille;
 
 	private JTextField tfNomPromo;
 	private JTextField tfType;
 	private JTextField tfDebut;
 	private JTextField tfFin;
 	private JTextField tfValeur;
-	/*
-	 * private JTextField tfAgeMini; private JTextField tfAgeMaxi; private
-	 * City[] listeVilles;
-	 */
+
+	private JTextField tfAgeMini;
+	private JTextField tfAgeMaxi;
+
 	private JComboBox<String> comboBoxType;
 
-	/*
-	 * private JComboBox<String> comboBoxVilles;
-	 */
+	private JComboBox<String> comboBoxVilles;
 
 	/*
 	 * (non-Javadoc)
@@ -75,10 +72,10 @@ public class NewDiscountWindow extends
 		labelFin = new JLabel("Date de Fin");
 		labelType = new JLabel("Type de promotion");
 		labelValeur = new JLabel("Valeur de la promotion");
-		/*
-		 * labelAgeMini = new JLabel("Age minimale"); labelAgeMaxi = new
-		 * JLabel("Age minimale"); labelVille = new JLabel("Choix de la ville");
-		 */
+
+		labelAgeMini = new JLabel("Age minimale");
+		labelAgeMaxi = new JLabel("Age minimale");
+		labelVille = new JLabel("Choix de la ville");
 
 		tfNomPromo = new JTextField(10);
 		tfNomPromo.putClientProperty("fieldName", "name");
@@ -171,43 +168,52 @@ public class NewDiscountWindow extends
 		panelAjoutPromo.add(comboBoxType, gbc2);
 		gbc2.gridy = 6;
 
-		/*
-		 * tfAgeMini = new JTextField(10);
-		 * tfAgeMini.putClientProperty("fieldName", "AgeMiniPromo");
-		 * tfAgeMini.setDocument(new PlainDocument()); gbc2.insets = new
-		 * Insets(10, 20, 0, 0); fields.add(tfAgeMini);
-		 * 
-		 * gbc2.insets = new Insets(10, 0, 0, 0); tfAgeMaxi = new
-		 * JTextField(10); tfAgeMaxi.putClientProperty("fieldName",
-		 * "AgeMaxiPromo"); tfAgeMaxi.setDocument(new PlainDocument());
-		 * fields.add(tfAgeMaxi);
-		 * 
-		 * 
-		 * Dans le cas ou type = Age. gbc2.insets = new Insets(10, 0, 0, 0);
-		 * gbc2.anchor = GridBagConstraints.LINE_END; gbc2.gridx = 0;
-		 * panelAjoutPromo.add(labelAgeMini, gbc2); gbc2.gridx = 1; gbc2.insets
-		 * = new Insets(10, 20, 0, 0); gbc2.anchor =
-		 * GridBagConstraints.LINE_START; panelAjoutPromo.add(tfAgeMini, gbc2);
-		 * gbc2.gridy = 7;
-		 * 
-		 * gbc2.insets = new Insets(10, 0, 0, 0); gbc2.anchor =
-		 * GridBagConstraints.LINE_END; gbc2.gridx = 0;
-		 * panelAjoutPromo.add(labelAgeMaxi, gbc2); gbc2.gridx = 1; gbc2.insets
-		 * = new Insets(10, 20, 0, 0); gbc2.anchor =
-		 * GridBagConstraints.LINE_START; panelAjoutPromo.add(tfAgeMaxi, gbc2);
-		 * gbc2.gridy = 8;
-		 */
+		tfAgeMini = new JTextField(10);
+		tfAgeMini.putClientProperty("fieldName", "AgeMiniPromo");
+		tfAgeMini.setDocument(new PlainDocument());
+		gbc2.insets = new Insets(10, 20, 0, 0);
+		fields.add(tfAgeMini);
 
-		/*
-		 * Dans le cas ou type = Ville gbc2.insets = new Insets(10, 0, 0, 0);
-		 * gbc2.anchor = GridBagConstraints.LINE_END; gbc2.gridx = 0;
-		 * panelAjoutPromo.add(labelVille, gbc2); gbc2.gridx = 1; gbc2.insets =
-		 * new Insets(10, 20, 0, 0); gbc2.anchor =
-		 * GridBagConstraints.LINE_START; String[] listeVilles = { "Atlanta",
-		 * "New-York" }; comboBoxVilles = new JComboBox<String>(listeVilles);
-		 * comboBoxVilles.setPreferredSize(new Dimension(110, 20));
-		 * panelAjoutPromo.add(comboBoxVilles, gbc2); gbc2.gridy = 7;
-		 */
+		gbc2.insets = new Insets(10, 0, 0, 0);
+		tfAgeMaxi = new JTextField(10);
+		tfAgeMaxi.putClientProperty("fieldName", "AgeMaxiPromo");
+		tfAgeMaxi.setDocument(new PlainDocument());
+		fields.add(tfAgeMaxi);
+
+		// Dans le cas ou type = Age.
+		gbc2.insets = new Insets(10, 0, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_END;
+		gbc2.gridx = 0;
+		panelAjoutPromo.add(labelAgeMini, gbc2);
+		gbc2.gridx = 1;
+		gbc2.insets = new Insets(10, 20, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_START;
+		panelAjoutPromo.add(tfAgeMini, gbc2);
+		gbc2.gridy = 7;
+
+		gbc2.insets = new Insets(10, 0, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_END;
+		gbc2.gridx = 0;
+		panelAjoutPromo.add(labelAgeMaxi, gbc2);
+		gbc2.gridx = 1;
+		gbc2.insets = new Insets(10, 20, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_START;
+		panelAjoutPromo.add(tfAgeMaxi, gbc2);
+		gbc2.gridy = 8;
+
+		// Dans le cas ou type = Ville
+		gbc2.insets = new Insets(10, 0, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_END;
+		gbc2.gridx = 0;
+		panelAjoutPromo.add(labelVille, gbc2);
+		gbc2.gridx = 1;
+		gbc2.insets = new Insets(10, 20, 0, 0);
+		gbc2.anchor = GridBagConstraints.LINE_START;
+		String[] listeVilles = { "Atlanta", "New-York" };
+		comboBoxVilles = new JComboBox<String>(listeVilles);
+		comboBoxVilles.setPreferredSize(new Dimension(110, 20));
+		panelAjoutPromo.add(comboBoxVilles, gbc2);
+		gbc2.gridy = 7;
 
 		gbc2.gridy++;
 		gbc2.gridx = 0;

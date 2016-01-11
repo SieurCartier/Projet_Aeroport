@@ -1,11 +1,9 @@
 package ihm;
 
 import domain.Hotel;
-import fabrics.HotelFabric;
-import job.AbstractJob;
 import job.HotelJob;
 
-public class SearchHotelWindow extends AbstractWindow<HotelJob> {
+public class SearchHotelWindow extends AbstractWindow<Hotel> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,7 +13,7 @@ public class SearchHotelWindow extends AbstractWindow<HotelJob> {
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Hotel, HotelFabric> getJob() {
+	protected HotelJob getJob() {
 		return new HotelJob();
 	}
 

@@ -16,7 +16,7 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	private static CustomerFabric singleton = null;
 
 	public CustomerFabric() {
-		super("customer", "idCategorie");
+		super("customer", "idCustomer");
 	}
 
 	public static CustomerFabric getInstanceOf() {
@@ -32,10 +32,8 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	 */
 	@Override
 	protected Customer constructObject(ResultSet customer) throws SQLException {
-		return new Customer(customer.getInt("idCustomer"),
-				customer.getString("firstname"),
-				customer.getString("lastname"), customer.getDate("birthdate"),
-				customer.getInt("fk_idCity"));
+		return new Customer(customer.getInt("idCustomer"), customer.getString("firstname"),
+				customer.getString("lastname"), customer.getDate("birthdate"), customer.getInt("fk_idCity"));
 	}
 
 	/*
@@ -45,8 +43,7 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	 */
 	@Override
 	protected Customer constructObject(int id, HashMap<String, Object> m) {
-		return new Customer(id, (String) m.get("firstName"),
-				(String) m.get("lastName"), (Date) m.get("birthdate"),
+		return new Customer(id, (String) m.get("firstName"), (String) m.get("lastName"), (Date) m.get("birthdate"),
 				(int) m.get("fk_idCity"));
 	}
 
@@ -63,8 +60,7 @@ public class CustomerFabric extends AbstractFabric<Customer> {
 	 *            The {@link City} of the {@link Customer}.
 	 * @return The new {@link Customer}.
 	 */
-	public Customer createCustomer(String firstname, String lastname,
-			Date birthdate, City city) {
+	public Customer createCustomer(String firstname, String lastname, Date birthdate, City city) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("firstName", firstname);
 		parameters.put("lastName", lastname);

@@ -1,6 +1,7 @@
 package job;
 
 import java.util.HashMap;
+import java.util.List;
 
 import domain.DatabaseItem;
 import fabrics.AbstractFabric;
@@ -16,7 +17,7 @@ import fabrics.AbstractFabric;
  * @param <F>
  *            The related {@link AbstractFabric}.
  */
-public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabric<T>> {
+public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabric<T>> implements IJob<T> {
 
 	protected F fab;
 
@@ -42,6 +43,10 @@ public abstract class AbstractJob<T extends DatabaseItem, F extends AbstractFabr
 	 */
 	public void remove(T t) {
 		fab.delete(t);
+	}
+
+	public List<T> getAll() {
+		return fab.getAll();
 	}
 
 	protected abstract F getFabric();

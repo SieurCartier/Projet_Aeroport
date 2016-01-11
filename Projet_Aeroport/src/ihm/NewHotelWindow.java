@@ -5,13 +5,10 @@ import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import domain.City;
 import domain.Hotel;
-import fabrics.HotelFabric;
-import job.AbstractJob;
 import job.CityJob;
 import job.HotelJob;
 
-public class NewHotelWindow extends
-		AbstractNewDatabaseItemWindow<Hotel, HotelJob> {
+public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +35,7 @@ public class NewHotelWindow extends
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Hotel, HotelFabric> getJob() {
+	protected HotelJob getJob() {
 		return new HotelJob();
 	}
 
@@ -65,12 +62,12 @@ public class NewHotelWindow extends
 		labelDelai = new JLabel("Delai max avant annul.");
 
 		tfNomHotel = new JTextField(10);
-		tfNomHotel.putClientProperty("fieldName", "nomHotel");
+		tfNomHotel.putClientProperty("fieldName", "name");
 		tfNomHotel.setDocument(new PlainDocument());
 		fields.add(tfNomHotel);
 
 		tfDelai = new JTextField(10);
-		tfDelai.putClientProperty("fieldName", "delaiHotel");
+		tfDelai.putClientProperty("fieldName", "reservationDayNumber");
 		tfDelai.setDocument(new PlainDocument());
 		fields.add(tfDelai);
 
@@ -149,13 +146,13 @@ public class NewHotelWindow extends
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#populate()
+	 */
 	@Override
-	public void setVisible(boolean b) {
-		super.setVisible(b);
-		populate();
-	}
-
-	private void populate() {
+	protected void populate() {
 		CityJob j = new CityJob();
 		for (City c : j.getAll()) {
 			cityModel.addElement(c);

@@ -3,16 +3,10 @@ package ihm;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
+import domain.*;
+import job.*;
 
-import domain.City;
-import domain.Customer;
-import fabrics.CustomerFabric;
-import job.AbstractJob;
-import job.CityJob;
-import job.CustomerJob;
-
-public class NewCustomerWindow extends
-		AbstractNewDatabaseItemWindow<Customer, CustomerJob> {
+public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +34,7 @@ public class NewCustomerWindow extends
 	 * @see ihm.AbstractWindow#getJob()
 	 */
 	@Override
-	protected AbstractJob<Customer, CustomerFabric> getJob() {
+	protected CustomerJob getJob() {
 		return new CustomerJob();
 	}
 
@@ -159,13 +153,13 @@ public class NewCustomerWindow extends
 		add(panelAjoutClient, gbc);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#populate()
+	 */
 	@Override
-	public void setVisible(boolean b) {
-		super.setVisible(b);
-		populate();
-	}
-
-	private void populate() {
+	protected void populate() {
 		CityJob j = new CityJob();
 		for (City c : j.getAll()) {
 			cityModel.addElement(c);

@@ -17,8 +17,7 @@ public class Customer extends DatabaseItem {
 	private City city = null;
 	private List<Reservation> reservations = null;
 
-	public Customer(int id, String firstname, String lastname, Date birthdate,
-			int idCity) {
+	public Customer(int id, String firstname, String lastname, Date birthdate, int idCity) {
 		super(id);
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -26,8 +25,7 @@ public class Customer extends DatabaseItem {
 		this.idCity = idCity;
 	}
 
-	public Customer(int id, String firstname, String lastname, Date birthdate,
-			City city) {
+	public Customer(int id, String firstname, String lastname, Date birthdate, City city) {
 		super(id);
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -84,8 +82,7 @@ public class Customer extends DatabaseItem {
 	 */
 	public List<Reservation> getReservations() {
 		if (reservations == null)
-			reservations = ReservationFabric.getInstanceOf().getReservationsOf(
-					this);
+			reservations = ReservationFabric.getInstanceOf().getReservationsOf(this);
 		return reservations;
 	}
 
@@ -95,9 +92,16 @@ public class Customer extends DatabaseItem {
 	 * 
 	 * @return The age of the <code>Customer</code>.
 	 */
-	@SuppressWarnings("deprecation")
 	public int getAge() {
-		return new Date(new Date().getTime() - birthdate.getTime()).getYear();
+		Calendar calend = new GregorianCalendar();
+		calend.set(Calendar.HOUR_OF_DAY, 0);
+		calend.set(Calendar.MINUTE, 0);
+		calend.set(Calendar.SECOND, 0);
+		calend.set(Calendar.MILLISECOND, 0);
+
+		calend.setTimeInMillis(Calendar.getInstance().getTime().getTime() - birthdate.getTime());
+
+		return calend.get(Calendar.YEAR) - 1970 + calend.get(Calendar.MONTH) / 12;
 	}
 
 	/* HashCode, Equals and toString */
@@ -111,13 +115,10 @@ public class Customer extends DatabaseItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((birthdate == null) ? 0 : birthdate.hashCode());
-		result = prime * result
-				+ ((firstname == null) ? 0 : firstname.hashCode());
+		result = prime * result + ((birthdate == null) ? 0 : birthdate.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + idCity;
-		result = prime * result
-				+ ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		return result;
 	}
 

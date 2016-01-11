@@ -25,10 +25,6 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 		return fab.createCity(name);
 	}
 
-	public List<City> getAll() {
-		return fab.getAll();
-	}
-
 	@Override
 	protected CityFabric getFabric() {
 		return CityFabric.getInstanceOf();

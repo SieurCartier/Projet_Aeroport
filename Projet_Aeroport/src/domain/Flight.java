@@ -18,18 +18,16 @@ public class Flight extends DatabaseItem {
 	private City arrival = null;
 	private DayOfWeek dayOfWeekDeparture;
 	private Time departureTime;
-	private Timestamp flightDuration;
+	private Time flightDuration;
 	private int nbFirstClassSits;
 	private float priceFirstClassSits;
 	private int nbSecondClassSits;
 	private float priceSecondClassSits;
 	private int nbDayCancelling;
 
-	public Flight(int id, String flightNumber, int idDeparture, int idArrival,
-			DayOfWeek dayOfWeekDeparture, Time departureTime,
-			Timestamp flightDuration, int nbFirstClassSits,
-			float priceFirstClassSits, int nbSecondClassSits,
-			float priceSecondClassSits, int nbDayCancelling) {
+	public Flight(int id, String flightNumber, int idDeparture, int idArrival, DayOfWeek dayOfWeekDeparture,
+			Time departureTime, Time flightDuration, int nbFirstClassSits, float priceFirstClassSits,
+			int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
 		super(id);
 		this.flightNumber = flightNumber;
 		this.idDeparture = idDeparture;
@@ -41,14 +39,12 @@ public class Flight extends DatabaseItem {
 		this.priceFirstClassSits = priceFirstClassSits;
 		this.nbSecondClassSits = nbSecondClassSits;
 		this.priceSecondClassSits = priceSecondClassSits;
-		this.nbDayCancelling = nbDayCancelling;		
+		this.nbDayCancelling = nbDayCancelling;
 	}
 
-	public Flight(int id, String flightNumber, City departure, City arrival,
-			DayOfWeek dayOfWeekDeparture, Time departureTime,
-			Timestamp flightDuration, int nbFirstClassSits,
-			float priceFirstClassSits, int nbSecondClassSits,
-			float priceSecondClassSits, int nbDayCancelling) {
+	public Flight(int id, String flightNumber, City departure, City arrival, DayOfWeek dayOfWeekDeparture,
+			Time departureTime, Time flightDuration, int nbFirstClassSits, float priceFirstClassSits,
+			int nbSecondClassSits, float priceSecondClassSits, int nbDayCancelling) {
 		super(id);
 		this.flightNumber = flightNumber;
 		this.idDeparture = departure.getId();
@@ -151,11 +147,11 @@ public class Flight extends DatabaseItem {
 		this.departureTime = departureTime;
 	}
 
-	public Timestamp getFlightDuration() {
+	public Time getFlightDuration() {
 		return flightDuration;
 	}
 
-	public void setFlightDuration(Timestamp flightDuration) {
+	public void setFlightDuration(Time flightDuration) {
 		this.flightDuration = flightDuration;
 	}
 
@@ -210,16 +206,10 @@ public class Flight extends DatabaseItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((dayOfWeekDeparture == null) ? 0 : dayOfWeekDeparture
-						.hashCode());
-		result = prime * result
-				+ ((departureTime == null) ? 0 : departureTime.hashCode());
-		result = prime * result
-				+ ((flightDuration == null) ? 0 : flightDuration.hashCode());
-		result = prime * result
-				+ ((flightNumber == null) ? 0 : flightNumber.hashCode());
+		result = prime * result + ((dayOfWeekDeparture == null) ? 0 : dayOfWeekDeparture.hashCode());
+		result = prime * result + ((departureTime == null) ? 0 : departureTime.hashCode());
+		result = prime * result + ((flightDuration == null) ? 0 : flightDuration.hashCode());
+		result = prime * result + ((flightNumber == null) ? 0 : flightNumber.hashCode());
 		result = prime * result + idArrival;
 		result = prime * result + idDeparture;
 		result = prime * result + nbDayCancelling;
@@ -271,11 +261,9 @@ public class Flight extends DatabaseItem {
 			return false;
 		if (nbSecondClassSits != other.nbSecondClassSits)
 			return false;
-		if (Float.floatToIntBits(priceFirstClassSits) != Float
-				.floatToIntBits(other.priceFirstClassSits))
+		if (Float.floatToIntBits(priceFirstClassSits) != Float.floatToIntBits(other.priceFirstClassSits))
 			return false;
-		if (Float.floatToIntBits(priceSecondClassSits) != Float
-				.floatToIntBits(other.priceSecondClassSits))
+		if (Float.floatToIntBits(priceSecondClassSits) != Float.floatToIntBits(other.priceSecondClassSits))
 			return false;
 		return true;
 	}
@@ -287,7 +275,6 @@ public class Flight extends DatabaseItem {
 	 */
 	@Override
 	public String toString() {
-		return flightNumber + " : " + departure.toString() + " -> "
-				+ arrival.toString();
+		return flightNumber + " : " + getDeparture().toString() + " -> " + getArrival().toString();
 	}
 }
