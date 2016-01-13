@@ -146,6 +146,11 @@ public class NewCategoryWindow extends AbstractNewDatabaseItemWindow<Category> {
 		add(panelAjoutCateg, gbc);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#populate()
+	 */
 	@Override
 	protected void populate() {
 		HotelJob i = new HotelJob();
