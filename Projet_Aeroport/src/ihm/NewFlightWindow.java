@@ -5,6 +5,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import utils.DayOfWeek;
+import utils.Formatter;
 import domain.*;
 import job.*;
 
@@ -47,6 +48,37 @@ public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight> {
 	private JComboBox<City> comboBoxVillesDep;
 	private DefaultComboBoxModel<City> cityArrivalModel;
 	private JComboBox<City> comboBoxVillesDest;
+
+	public NewFlightWindow() {
+		super();
+	}
+
+	public NewFlightWindow(Flight f) {
+		super();
+		try {
+
+			tfNumVol.getDocument().insertString(0, f.getFlightNumber(), null);
+			tfHeureDepart.getDocument().insertString(0, Formatter.timeToString(f.getDepartureTime()), null);
+			tfDuree.getDocument().insertString(0, Formatter.timeToString(f.getFlightDuration()), null);
+			tfNbFC.getDocument().insertString(0, Integer.toString(f.getNbFirstClassSits()), null);
+			tfPrixFC.getDocument().insertString(0, Float.toString(f.getPriceFirstClassSits()), null);
+			tfNbSC.getDocument().insertString(0, Integer.toString(f.getNbSecondClassSits()), null);
+			tfPrixSC.getDocument().insertString(0, Float.toString(f.getPriceSecondClassSits()), null);
+			tfDelai.getDocument().insertString(0, Integer.toString(f.getNbDayCancelling()), null);
+			comboBoxJours.setSelectedItem(f.getDayOfWeekDeparture());
+			cityDepartureModel.setSelectedItem(f.getDeparture());
+			cityArrivalModel.setSelectedItem(f.getArrival());
+
+			editing = true;
+			object = f;
+			btnCreate.setText("Modifier");
+			setTitle("Modifier un Vol");
+			labelAjout.setText("Modifier un Vol");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/*
 	 * (non-Javadoc)

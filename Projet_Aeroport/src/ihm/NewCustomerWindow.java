@@ -42,6 +42,9 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer> {
 			comboBoxVilles.setSelectedItem(c.getCity());
 			editing = true;
 			object = c;
+			btnCreate.setText("Modifier");
+			setTitle("Modifier un client");
+			labelAjout.setText("Modifier un client");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

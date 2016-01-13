@@ -32,9 +32,14 @@ public interface IJob<T extends DatabaseItem> {
 	public List<T> getAll();
 
 	/**
+	 * This method updates a {@link DatabaseItem} in the <code>Database</code> .
 	 * 
-	 * @param fieldMaps
-	 * @return
+	 * @param item
+	 *            The {@link DatabaseItem} to update.
+	 * @param fieldsmap
+	 *            A {@link HashMap} containing the values of the windows' fields
+	 *            referenced by their attribute name in the class.
+	 * @return The newly updated item, else null
 	 */
 	public T update(T item, HashMap<String, Object> fieldsmap);
 

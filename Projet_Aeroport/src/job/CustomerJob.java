@@ -58,17 +58,25 @@ public class CustomerJob extends AbstractJob<Customer, CustomerFabric> {
 			Date birthdate = Formatter.stringToDate((String) fields.get("birthdate"));
 			City city = (City) fields.get("city");
 
-			if (!firstname.equals(item.getFirstname()))
+			if (!firstname.equals(item.getFirstname())) {
 				updateMap.put("firstname", firstname);
+				item.setFirstname(firstname);
+			}
 
-			if (!lastname.equals(item.getLastname()))
+			if (!lastname.equals(item.getLastname())) {
 				updateMap.put("lastname", lastname);
+				item.setLastname(lastname);
+			}
 
-			if (!birthdate.equals(item.getBirthdate()))
+			if (!birthdate.equals(item.getBirthdate())) {
 				updateMap.put("birthdate", birthdate);
+				item.setBirthdate(birthdate);
+			}
 
-			if (!city.equals(item.getCity()))
+			if (!city.equals(item.getCity())) {
 				updateMap.put("city", firstname);
+				item.setCity(city);
+			}
 
 			ret = fab.update(item, updateMap);
 		} catch (Exception e) {

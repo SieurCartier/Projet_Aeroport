@@ -49,6 +49,9 @@ public class MainWindow extends JFrame implements ActionListener {
 	private JMenuItem manageDiscounts = new JMenuItem();
 	private JMenuItem newDiscount = new JMenuItem();
 
+	private JMenu consult = new JMenu();
+	private JMenuItem consultation = new JMenuItem();
+
 	public MainWindow() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -169,6 +172,17 @@ public class MainWindow extends JFrame implements ActionListener {
 		windowsMap.put(newDiscount, new NewDiscountWindow());
 
 		menuBar.add(discounts);
+
+		/* Consultation */
+
+		consult.setText("Gestion");
+
+		consultation.setText("Consultation");
+		consultation.addActionListener(this);
+		consult.add(consultation);
+		windowsMap.put(consultation, new ConsultWindow());
+
+		menuBar.add(consult);
 
 		setJMenuBar(menuBar);
 

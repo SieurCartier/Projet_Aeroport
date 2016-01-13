@@ -1,8 +1,7 @@
 package job;
 
-import java.util.HashMap;
-import domain.City;
-import domain.Hotel;
+import java.util.*;
+import domain.*;
 import fabrics.HotelFabric;
 
 /**

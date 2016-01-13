@@ -2,6 +2,7 @@ package domain;
 
 import java.util.List;
 
+import fabrics.FlightFabric;
 import fabrics.HotelFabric;
 
 /**
@@ -13,6 +14,7 @@ public class City extends DatabaseItem {
 
 	private String name;
 	private List<Hotel> hotels = null;
+	private List<Flight> departingFlights = null;
 
 	public City(int id, String name) {
 		super(id);
@@ -32,6 +34,19 @@ public class City extends DatabaseItem {
 		if (hotels == null)
 			hotels = HotelFabric.getInstanceOf().getHotelsOf(this);
 		return hotels;
+	}
+
+	/**
+	 * This method gets the {@link List} of {@link Hotel} in this
+	 * <code>City</code>. It calls the {@link HotelFabric#getHotelsOf(City)}
+	 * with this.
+	 * 
+	 * @return The {@link List} of {@link Hotel} of this <code>City</code>
+	 */
+	public List<Flight> getDepartingFlights() {
+		if (departingFlights == null)
+			departingFlights = FlightFabric.getInstanceOf().getDepartingFlightsOf(this);
+		return departingFlights;
 	}
 
 	public String getName() {

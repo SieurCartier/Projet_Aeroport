@@ -258,10 +258,8 @@ public class SearchCustomerWindow extends AbstractSearchWindow<Customer> {
 	protected void onDeleteClick() {
 		Customer c = liste.getSelectedValue();
 		if (c != null) {
-
-			int dialogButton = JOptionPane.YES_NO_OPTION;
 			int choix = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer : " + c.toString() + " ?",
-					"Attention", dialogButton);
+					"Attention", JOptionPane.YES_NO_OPTION);
 
 			if (choix == 0) { // OUI
 				job.remove(c);

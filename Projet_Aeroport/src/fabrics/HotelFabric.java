@@ -100,7 +100,7 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	 * @return A {@link List} of {@link Hotel}.
 	 */
 	public List<Hotel> getHotelsOf(City city) {
-		return super.getFromForeignKey("fk_idVille", city);
+		return super.getFromForeignKey("fk_idCity", city);
 	}
 
 }

@@ -72,6 +72,10 @@ public class Customer extends DatabaseItem {
 		return city;
 	}
 
+	public void setCity(City city) {
+		this.city = city;
+	}
+
 	/**
 	 * This method gets the {@link List} of {@link Reservation} of this
 	 * <code>Customer</code>. It calls the

@@ -58,8 +58,6 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 		});
 		build();
 		pack();
-		editing = true;
-		object = d;
 	}
 
 	/*

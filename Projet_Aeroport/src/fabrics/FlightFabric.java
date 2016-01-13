@@ -2,6 +2,8 @@ package fabrics;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
+
 import domain.City;
 import domain.Flight;
 import utils.DayOfWeek;
@@ -72,6 +74,10 @@ public class FlightFabric extends AbstractFabric<Flight> {
 		parameters.put("nbDayCancelling", nbDayCancelling);
 
 		return super.create(parameters);
+	}
+
+	public List<Flight> getDepartingFlightsOf(City city) {
+		return super.getFromForeignKey("fk_idDepartureCity", city);
 	}
 
 }

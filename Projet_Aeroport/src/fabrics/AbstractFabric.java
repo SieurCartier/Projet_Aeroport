@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import domain.DatabaseItem;
+import utils.DayOfWeek;
 import utils.InexistantDatabaseItemException;
 import utils.NotCreatedItemException;
 
@@ -111,7 +112,11 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 
 			int k = 1;
 			for (Object param : parameters.values()) {
-				pr.setObject(k, param);
+				if (param instanceof DayOfWeek) {
+					pr.setString(k, ((DayOfWeek)param).toString());
+				} else {
+					pr.setObject(k, param);
+				}
 				k++;
 			}
 
