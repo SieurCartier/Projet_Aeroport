@@ -46,4 +46,10 @@ public class CategoryJob extends AbstractJob<Category, CategoryFabric> {
 		return CategoryFabric.getInstanceOf();
 	}
 
+	@Override
+	public Category update(Category item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

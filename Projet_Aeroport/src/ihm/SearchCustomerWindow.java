@@ -244,7 +244,11 @@ public class SearchCustomerWindow extends AbstractSearchWindow<Customer> {
 	 * A method called every time the user clicks on the {@link #btnModif}.
 	 */
 	protected void onEditClick() {
-		// TODO Auto-generated method stub
+		Customer c = liste.getSelectedValue();
+		if (c != null) {
+			NewCustomerWindow w = new NewCustomerWindow(c);
+			w.setVisible(true);
+		}
 
 	}
 

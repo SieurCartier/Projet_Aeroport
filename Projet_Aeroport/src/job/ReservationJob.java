@@ -36,4 +36,15 @@ public class ReservationJob extends AbstractJob<Reservation, ReservationFabric> 
 		return ReservationFabric.getInstanceOf();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#update(domain.DatabaseItem, java.util.HashMap)
+	 */
+	@Override
+	public Reservation update(Reservation item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

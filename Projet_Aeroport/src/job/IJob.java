@@ -31,4 +31,11 @@ public interface IJob<T extends DatabaseItem> {
 	 */
 	public List<T> getAll();
 
+	/**
+	 * 
+	 * @param fieldMaps
+	 * @return
+	 */
+	public T update(T item, HashMap<String, Object> fieldsmap);
+
 }

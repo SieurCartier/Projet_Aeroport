@@ -35,4 +35,15 @@ public class CityJob extends AbstractJob<City, CityFabric> {
 		return CityFabric.getInstanceOf();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#update(domain.DatabaseItem, java.util.HashMap)
+	 */
+	@Override
+	public City update(City item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

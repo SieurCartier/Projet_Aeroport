@@ -62,4 +62,15 @@ public class FlightJob extends AbstractJob<Flight, FlightFabric> {
 		return FlightFabric.getInstanceOf();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#update(domain.DatabaseItem, java.util.HashMap)
+	 */
+	@Override
+	public Flight update(Flight item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

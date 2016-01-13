@@ -30,6 +30,10 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 	protected List<JTextComponent> fields = new LinkedList<JTextComponent>();
 	protected List<JComboBox<? extends DatabaseItem>> comboBoxes = new LinkedList<JComboBox<? extends DatabaseItem>>();
 
+	protected boolean editing = false;
+
+	protected D object = null;
+
 	public AbstractNewDatabaseItemWindow() {
 		super();
 		btnCreate.addActionListener(this);
@@ -43,6 +47,21 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 		pack();
 	}
 
+	public AbstractNewDatabaseItemWindow(D d) {
+		super();
+		btnCreate.addActionListener(this);
+		btnAnnuler.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
+		build();
+		pack();
+		editing = true;
+		object = d;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -52,6 +71,8 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getSource() == btnCreate) {
+			DatabaseItem item = null;
+
 			HashMap<String, Object> fieldMaps = new HashMap<String, Object>();
 			for (JTextComponent field : fields) {
 				Document doc = field.getDocument();
@@ -68,9 +89,9 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 
 			addSpecificValues(fieldMaps);
 
-			DatabaseItem item = job.create(fieldMaps);
+			item = (editing) ? job.update(object, fieldMaps) : job.create(fieldMaps);
 
-			String message = (item != null) ? item.toString() + " a bien été créé."
+			String message = (item != null) ? item.toString() + " a bien été" + ((editing) ? " modifié" : " créé") + "."
 					: "Erreur, veuillez remplir correctment les champs";
 
 			JOptionPane.showMessageDialog(this, message);
@@ -78,6 +99,11 @@ public abstract class AbstractNewDatabaseItemWindow<D extends DatabaseItem> exte
 			if (item != null) {
 				for (JTextComponent field : fields) {
 					field.setDocument(new PlainDocument());
+				}
+				if (editing) {
+					editing = false;
+					object = null;
+					close();
 				}
 			}
 		}

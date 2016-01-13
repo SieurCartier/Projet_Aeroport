@@ -42,4 +42,15 @@ public class HotelRoomJob extends AbstractJob<HotelRoom, HotelRoomFabric> {
 		return HotelRoomFabric.getInstanceOf();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#update(domain.DatabaseItem, java.util.HashMap)
+	 */
+	@Override
+	public HotelRoom update(HotelRoom item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -51,4 +51,15 @@ public class DiscountJob extends AbstractJob<AbstractDiscount, AbstractFabric<Ab
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see job.IJob#update(domain.DatabaseItem, java.util.HashMap)
+	 */
+	@Override
+	public AbstractDiscount update(AbstractDiscount item, HashMap<String, Object> fieldsmap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

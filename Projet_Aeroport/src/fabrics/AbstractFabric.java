@@ -93,7 +93,8 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 	 *            update referenced by their field name in the
 	 *            <code>Database</code>.
 	 */
-	protected void update(T item, HashMap<String, Object> parameters) {
+	public T update(T item, HashMap<String, Object> parameters) {
+		T ret = null;
 		try {
 			String requete = "UPDATE " + tableName + " SET ";
 
@@ -113,16 +114,19 @@ public abstract class AbstractFabric<T extends DatabaseItem> {
 				pr.setObject(k, param);
 				k++;
 			}
-			pr.setObject(k, item.getId());
+
+			pr.setInt(k, item.getId());
 
 			if (pr.executeUpdate() != 1)
 				throw new InexistantDatabaseItemException(item);
 
-			this.addItem(item);
+			ret = item;
+
 			pr.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return ret;
 	}
 
 	/**

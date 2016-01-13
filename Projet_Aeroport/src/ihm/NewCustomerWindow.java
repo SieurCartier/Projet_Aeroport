@@ -2,9 +2,10 @@ package ihm;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.PlainDocument;
+import javax.swing.text.*;
 import domain.*;
 import job.*;
+import utils.Formatter;
 
 public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer> {
 
@@ -27,6 +28,25 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer> {
 
 	private DefaultComboBoxModel<City> cityModel;
 	private JComboBox<City> comboBoxVilles;
+
+	public NewCustomerWindow() {
+		super();
+	}
+
+	public NewCustomerWindow(Customer c) {
+		super();
+		try {
+			tfNom.getDocument().insertString(0, c.getLastname(), null);
+			tfPrenom.getDocument().insertString(0, c.getFirstname(), null);
+			tfDateNaissance.getDocument().insertString(0, Formatter.dateToString(c.getBirthdate()), null);
+			comboBoxVilles.setSelectedItem(c.getCity());
+			editing = true;
+			object = c;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/*
 	 * (non-Javadoc)
