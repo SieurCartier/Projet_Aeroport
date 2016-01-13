@@ -31,8 +31,8 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	 */
 	@Override
 	protected Hotel constructObject(ResultSet hotel) throws SQLException {
-		return new Hotel(hotel.getInt("idHotel"), hotel.getString("Name"),
-				hotel.getInt("ResiliationDayNumber"), hotel.getInt("idCity"));
+		return new Hotel(hotel.getInt("idHotel"), hotel.getString("name"), hotel.getInt("resiliationDayNumber"),
+				hotel.getInt("fk_idCity"));
 	}
 
 	/*
@@ -42,8 +42,7 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	 */
 	@Override
 	protected Hotel constructObject(int id, HashMap<String, Object> m) {
-		return new Hotel(id, (String) m.get("name"),
-				(int) m.get("resilationDayNumber"), (int) m.get("fk_idCity"));
+		return new Hotel(id, (String) m.get("name"), (int) m.get("resiliationDayNumber"), (int) m.get("fk_idCity"));
 	}
 
 	/*
@@ -72,7 +71,7 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	public Hotel createHotel(City c, String name, int reservationDayNumber) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("name", name);
-		parameters.put("resilationDayNumber", reservationDayNumber);
+		parameters.put("resiliationDayNumber", reservationDayNumber);
 		parameters.put("fk_idCity", c.getId());
 
 		return super.create(parameters);
@@ -87,7 +86,7 @@ public class HotelFabric extends AbstractFabric<Hotel> {
 	public void updateHotel(Hotel h) {
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("name", h.getName());
-		parameters.put("resilationDayNumber", h.getReservationDayNumber());
+		parameters.put("resiliationDayNumber", h.getReservationDayNumber());
 		parameters.put("fk_idCity", h.getCity().getId());
 
 		super.update(h, parameters);

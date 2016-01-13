@@ -21,7 +21,7 @@ public class HotelJob extends AbstractJob<Hotel, HotelFabric> {
 		Hotel ret = null;
 		try {
 			String name = (String) fields.get("name");
-			int reservationDayNumber = Integer.parseInt((String) fields.get("reservationDayNumber"));
+			int reservationDayNumber = Integer.parseInt((String) fields.get("resiliationDayNumber"));
 			City city = (City) fields.get("city");
 
 			ret = fab.createHotel(city, name, reservationDayNumber);

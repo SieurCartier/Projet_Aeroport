@@ -1,11 +1,11 @@
 package job;
 
 import java.sql.*;
-import java.text.*;
 import java.util.*;
 import domain.*;
 import fabrics.FlightFabric;
 import utils.DayOfWeek;
+import utils.Formatter;
 
 /**
  * This class will take care of the first use case : "Gestion des voyages"
@@ -29,10 +29,8 @@ public class FlightJob extends AbstractJob<Flight, FlightFabric> {
 
 			DayOfWeek dayOfWeekDeparture = (DayOfWeek) fields.get("dayOfWeekDeparture");
 
-			SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-
-			Time departureTime = new Time(df.parse((String) fields.get("departureTime")).getTime());
-			Time flightDuration = new Time(df.parse((String) fields.get("flightDuration")).getTime());
+			Time departureTime = new Time(Formatter.stringToDate((String) fields.get("departureTime")).getTime());
+			Time flightDuration = new Time(Formatter.stringToDate((String) fields.get("flightDuration")).getTime());
 
 			int nbFirstClassSits = Integer.parseInt((String) fields.get("nbFirstClassSits"));
 

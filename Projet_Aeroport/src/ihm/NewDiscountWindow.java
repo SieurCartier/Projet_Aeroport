@@ -1,10 +1,13 @@
 package ihm;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import domain.AbstractDiscount;
-import job.DiscountJob;
+import domain.City;
+import job.*;
 
 public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDiscount> {
 
@@ -12,8 +15,11 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 
 	private GridBagConstraints gbc;
 	private GridBagConstraints gbc2;
+	private GridBagConstraints gbc3;
 
 	private JPanel panelAjoutPromo;
+	private JPanel panePromoAge;
+	private JPanel panePromoVille;
 
 	private JLabel labelAjout;
 	private JLabel labelNomPromo;
@@ -37,7 +43,8 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 
 	private JComboBox<String> comboBoxType;
 
-	private JComboBox<String> comboBoxVilles;
+	private DefaultComboBoxModel<City> cityModel;
+	private JComboBox<City> comboBoxVilles;
 
 	/*
 	 * (non-Javadoc)
@@ -63,8 +70,11 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 
 		gbc = new GridBagConstraints();
 		gbc2 = new GridBagConstraints();
+		gbc3 = new GridBagConstraints();
 
 		panelAjoutPromo = new JPanel(new GridBagLayout());
+		panePromoAge = new JPanel(new GridBagLayout());
+		panePromoVille = new JPanel(new GridBagLayout());
 
 		labelAjout = new JLabel("Ajouter une promotion");
 		labelNomPromo = new JLabel("Nom de la promo");
@@ -76,6 +86,16 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 		labelAgeMini = new JLabel("Age minimale");
 		labelAgeMaxi = new JLabel("Age minimale");
 		labelVille = new JLabel("Choix de la ville");
+
+		cityModel = new DefaultComboBoxModel<City>();
+		comboBoxVilles = new JComboBox<City>(cityModel);
+		comboBoxVilles.putClientProperty("fieldName", "city");
+		comboBoxes.add(comboBoxVilles);
+
+		String[] listeType = { "Age", "Ville" };
+		comboBoxType = new JComboBox<String>(listeType);
+		comboBoxType.setPreferredSize(new Dimension(110, 20));
+		comboBoxType.addActionListener(this);
 
 		tfNomPromo = new JTextField(10);
 		tfNomPromo.putClientProperty("fieldName", "name");
@@ -101,6 +121,17 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 		tfValeur.setDocument(new PlainDocument());
 		fields.add(tfValeur);
 
+		tfAgeMini = new JTextField(10);
+		tfAgeMini.putClientProperty("fieldName", "AgeMiniPromo");
+		tfAgeMini.setDocument(new PlainDocument());
+		gbc2.insets = new Insets(10, 20, 0, 0);
+		fields.add(tfAgeMini);
+
+		tfAgeMaxi = new JTextField(10);
+		tfAgeMaxi.putClientProperty("fieldName", "AgeMaxiPromo");
+		tfAgeMaxi.setDocument(new PlainDocument());
+		fields.add(tfAgeMaxi);
+
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
@@ -118,6 +149,10 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 		gbc2.insets = new Insets(0, 0, 0, 0);
 		gbc2.gridx = 0;
 		gbc2.gridy = 0;
+
+		gbc3.insets = new Insets(0, 0, 0, 0);
+		gbc3.gridx = 0;
+		gbc3.gridy = 0;
 
 		labelAjout.setFont(new Font("Serif", Font.BOLD, 18));
 		panelAjoutPromo.add(labelAjout, gbc2);
@@ -162,58 +197,39 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 		panelAjoutPromo.add(tfValeur, gbc2);
 		gbc2.gridy = 5;
 
-		String[] listeType = { "Age", "Ville" };
-		comboBoxType = new JComboBox<String>(listeType);
-		comboBoxType.setPreferredSize(new Dimension(110, 20));
 		panelAjoutPromo.add(comboBoxType, gbc2);
 		gbc2.gridy = 6;
 
-		tfAgeMini = new JTextField(10);
-		tfAgeMini.putClientProperty("fieldName", "AgeMiniPromo");
-		tfAgeMini.setDocument(new PlainDocument());
-		gbc2.insets = new Insets(10, 20, 0, 0);
-		fields.add(tfAgeMini);
-
-		gbc2.insets = new Insets(10, 0, 0, 0);
-		tfAgeMaxi = new JTextField(10);
-		tfAgeMaxi.putClientProperty("fieldName", "AgeMaxiPromo");
-		tfAgeMaxi.setDocument(new PlainDocument());
-		fields.add(tfAgeMaxi);
-
 		// Dans le cas ou type = Age.
-		gbc2.insets = new Insets(10, 0, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_END;
-		gbc2.gridx = 0;
-		panelAjoutPromo.add(labelAgeMini, gbc2);
-		gbc2.gridx = 1;
-		gbc2.insets = new Insets(10, 20, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_START;
-		panelAjoutPromo.add(tfAgeMini, gbc2);
-		gbc2.gridy = 7;
 
-		gbc2.insets = new Insets(10, 0, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_END;
-		gbc2.gridx = 0;
-		panelAjoutPromo.add(labelAgeMaxi, gbc2);
-		gbc2.gridx = 1;
-		gbc2.insets = new Insets(10, 20, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_START;
-		panelAjoutPromo.add(tfAgeMaxi, gbc2);
-		gbc2.gridy = 8;
+		gbc3.insets = new Insets(10, 20, 0, 0);
+		panePromoAge.add(labelAgeMini, gbc3);
+		gbc3.gridy = 1;
+		panePromoAge.add(labelAgeMaxi, gbc3);
 
-		// Dans le cas ou type = Ville
-		gbc2.insets = new Insets(10, 0, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_END;
-		gbc2.gridx = 0;
-		panelAjoutPromo.add(labelVille, gbc2);
-		gbc2.gridx = 1;
-		gbc2.insets = new Insets(10, 20, 0, 0);
-		gbc2.anchor = GridBagConstraints.LINE_START;
-		String[] listeVilles = { "Atlanta", "New-York" };
-		comboBoxVilles = new JComboBox<String>(listeVilles);
-		comboBoxVilles.setPreferredSize(new Dimension(110, 20));
-		panelAjoutPromo.add(comboBoxVilles, gbc2);
-		gbc2.gridy = 7;
+		gbc3.gridx = 1;
+		gbc3.gridy = 0;
+		gbc3.insets = new Insets(10, 40, 0, 0);
+		panePromoAge.add(tfAgeMini, gbc3);
+		gbc3.gridy = 1;
+		panePromoAge.add(tfAgeMaxi, gbc3);
+
+		gbc2.insets = new Insets(0, -115, 0, 0);
+		panelAjoutPromo.add(panePromoAge, gbc2);
+		panePromoAge.setVisible(true);
+
+		// Dans le cas type Ville
+		gbc3.gridx = 0;
+		gbc3.gridy = 0;
+		gbc3.insets = new Insets(10, 20, 0, 0);
+		panePromoVille.add(labelVille, gbc3);
+		gbc3.insets = new Insets(10, 30, 0, 0);
+		gbc3.gridx = 1;
+		panePromoVille.add(comboBoxVilles, gbc3);
+
+		gbc2.insets = new Insets(0, -115, 0, 0);
+		panelAjoutPromo.add(panePromoVille, gbc2);
+		panePromoVille.setVisible(false);
 
 		gbc2.gridy++;
 		gbc2.gridx = 0;
@@ -229,6 +245,51 @@ public class NewDiscountWindow extends AbstractNewDatabaseItemWindow<AbstractDis
 		panelAjoutPromo.add(btnAnnuler, gbc2);
 
 		add(panelAjoutPromo, gbc);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractWindow#populate()
+	 */
+	@Override
+	protected void populate() {
+		CityJob j = new CityJob();
+		for (City c : j.getAll()) {
+			cityModel.addElement(c);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see ihm.AbstractNewDatabaseItemWindow#actionPerformed(java.awt.event.
+	 * ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if (evt.getSource() == comboBoxType) {
+			String selected = (String) comboBoxType.getSelectedItem();
+			if (selected != null)
+				showDiscountPanel(selected);
+		}
+	}
+
+	/**
+	 * 
+	 * @param selected
+	 */
+	private void showDiscountPanel(String selected) {
+		panePromoAge.setVisible(false);
+		panePromoVille.setVisible(false);
+
+		if (selected.equals("Age")) {
+			panePromoAge.setVisible(true);
+			panePromoVille.setVisible(false);
+		} else {
+			panePromoAge.setVisible(false);
+			panePromoVille.setVisible(true);
+		}
 
 	}
 

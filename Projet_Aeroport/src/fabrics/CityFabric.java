@@ -72,7 +72,6 @@ public class CityFabric extends AbstractFabric<City> {
 	}
 
 	public List<City> getByName(String name) {
-
 		List<City> ret = null;
 		Set<City> temp = new HashSet<City>();
 

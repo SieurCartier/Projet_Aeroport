@@ -34,6 +34,8 @@ public class MainWindow extends JFrame implements ActionListener {
 	private JMenu hotels = new JMenu();
 	private JMenuItem searchHotel = new JMenuItem();
 	private JMenuItem newHotel = new JMenuItem();
+	private JMenuItem newCategorie = new JMenuItem();
+	private JMenuItem newChambre = new JMenuItem();
 
 	private JMenu cities = new JMenu();
 	private JMenuItem searchCity = new JMenuItem();
@@ -124,6 +126,16 @@ public class MainWindow extends JFrame implements ActionListener {
 		hotels.add(newHotel);
 		windowsMap.put(newHotel, new NewHotelWindow());
 
+		newCategorie.setText("Categorie");
+		newCategorie.addActionListener(this);
+		hotels.add(newCategorie);
+		windowsMap.put(newCategorie, new NewCategoryWindow());
+
+		newChambre.setText("Chambre");
+		newChambre.addActionListener(this);
+		hotels.add(newChambre);
+		windowsMap.put(newChambre, new NewHotelRoomWindow());
+
 		menuBar.add(hotels);
 
 		/* Cities */
@@ -162,10 +174,10 @@ public class MainWindow extends JFrame implements ActionListener {
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 278, Short.MAX_VALUE));
+		layout.setVerticalGroup(
+				layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 0, Short.MAX_VALUE));
 
 		pack();
 	}

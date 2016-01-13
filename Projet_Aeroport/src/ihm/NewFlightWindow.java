@@ -1,7 +1,7 @@
 package ihm;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import utils.DayOfWeek;
@@ -39,10 +39,13 @@ public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight> {
 	private JTextField tfPrixSC;
 	private JTextField tfDelai;
 
-	private DefaultComboBoxModel<City> cityModel;
 	private DayOfWeek[] listeJours;
 	private JComboBox<DayOfWeek> comboBoxJours;
+
+	private java.util.List<City> cityList;
+	private DefaultComboBoxModel<City> cityDepartureModel;
 	private JComboBox<City> comboBoxVillesDep;
+	private DefaultComboBoxModel<City> cityArrivalModel;
 	private JComboBox<City> comboBoxVillesDest;
 
 	/*
@@ -195,15 +198,16 @@ public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight> {
 		gbc2.insets = new Insets(10, 20, 0, 0);
 		gbc2.gridy++;
 
-		cityModel = new DefaultComboBoxModel<City>();
-		comboBoxVillesDep = new JComboBox<City>(cityModel);
+		cityDepartureModel = new DefaultComboBoxModel<City>();
+		comboBoxVillesDep = new JComboBox<City>(cityDepartureModel);
 		comboBoxVillesDep.setPreferredSize(new Dimension(110, 20));
 		comboBoxVillesDep.putClientProperty("fieldName", "departure");
 		comboBoxes.add(comboBoxVillesDep);
 		panelAjoutVol.add(comboBoxVillesDep, gbc2);
 		gbc2.gridy++;
 
-		comboBoxVillesDest = new JComboBox<City>(cityModel);
+		cityArrivalModel = new DefaultComboBoxModel<City>();
+		comboBoxVillesDest = new JComboBox<City>(cityArrivalModel);
 		comboBoxVillesDest.setPreferredSize(new Dimension(110, 20));
 		comboBoxVillesDest.putClientProperty("fieldName", "arrival");
 		comboBoxes.add(comboBoxVillesDest);
@@ -263,8 +267,11 @@ public class NewFlightWindow extends AbstractNewDatabaseItemWindow<Flight> {
 	@Override
 	protected void populate() {
 		CityJob j = new CityJob();
-		for (City c : j.getAll()) {
-			cityModel.addElement(c);
+		cityList = j.getAll();
+
+		for (City c : cityList) {
+			cityDepartureModel.addElement(c);
+			cityArrivalModel.addElement(c);
 		}
 	}
 

@@ -67,7 +67,7 @@ public class NewHotelWindow extends AbstractNewDatabaseItemWindow<Hotel> {
 		fields.add(tfNomHotel);
 
 		tfDelai = new JTextField(10);
-		tfDelai.putClientProperty("fieldName", "reservationDayNumber");
+		tfDelai.putClientProperty("fieldName", "resiliationDayNumber");
 		tfDelai.setDocument(new PlainDocument());
 		fields.add(tfDelai);
 
