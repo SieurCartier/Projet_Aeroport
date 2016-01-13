@@ -54,6 +54,11 @@ public class ConsultWindow extends AbstractWindow<Hotel> {
 	private JLabel setLabelCategChambre;
 	private JLabel setLabelPrixChambre;
 
+	public ConsultWindow() {
+		super();
+		build();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
