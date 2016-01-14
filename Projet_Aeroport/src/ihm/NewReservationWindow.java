@@ -42,6 +42,28 @@ public class NewReservationWindow extends AbstractNewDatabaseItemWindow<Reservat
 	private JLabel setLabelNomChambre;
 	private JLabel setLabelPrixChambre;
 
+	public NewReservationWindow() {
+		super();
+	}
+
+	public NewReservationWindow(Reservation r) {
+		super();
+		try {
+			listeClients.setSelectedValue(r.getCustomer(), true);
+			listeVols.setSelectedValue(r.getDepartureFlight(), true);
+			listeVolsRetour.setSelectedValue(r.getReturnFlight(), true);
+			listeHotels.setSelectedValue(r.getRoom().getOwnerHotel(), true);
+			listeCategories.setSelectedValue(r.getRoom().getCategory(), true);
+
+			editing = true;
+			object = r;
+			btnCreate.setText("Modifier");
+			setTitle("Modifier une réservation");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

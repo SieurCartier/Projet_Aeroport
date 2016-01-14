@@ -48,7 +48,6 @@ public class NewCustomerWindow extends AbstractNewDatabaseItemWindow<Customer> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/*
